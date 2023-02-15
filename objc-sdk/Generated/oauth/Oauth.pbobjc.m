@@ -35,7 +35,7 @@
     GPB_DEBUG_CHECK_RUNTIME_VERSIONS();
     registry = [[GPBExtensionRegistry alloc] init];
     // Merge in the imports (direct or indirect) that defined extensions.
-    [registry addExtensions:[SENValidateRoot extensionRegistry]];
+    [registry addExtensions:[ValidateRoot extensionRegistry]];
   }
   return registry;
 }

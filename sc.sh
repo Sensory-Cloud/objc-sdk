@@ -30,7 +30,7 @@ PROTO_PATH='./proto'
 GEN_PATH='./objc-sdk/Generated'
 PROTOC_PATH='./Example/Pods/!ProtoCompiler'
 PLUGIN='./Example/Pods/!ProtoCompiler-gRPCPlugin/grpc_objective_c_plugin'
-DESCRIPTOR_FILE='${PROTOC_PATH}/google/protobuf/descriptor.proto'
+DESCRIPTOR_FILE="${PROTOC_PATH}/google/protobuf/descriptor.proto"
 
 # --- Helper Functions ---------------------------------------------
 
@@ -54,7 +54,7 @@ gen_proto() {
   ${PROTOC_PATH}/protoc \
     --objc_out=${GEN_PATH} \
     --proto_path=${PROTOC_PATH} \
-    ${DESCRIPTOR_FILE}
+    ${DESCRIPTOR_FILE};
 }
 
 # Fixes the import paths in the generated protobuf files

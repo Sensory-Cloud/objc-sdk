@@ -28,38 +28,38 @@
 // Forward declarations of Objective C classes that we can use as
 // static values in struct initializers.
 // We don't use [Foo class] because it is not a static value.
+GPBObjCClassDeclaration(AnyRules);
+GPBObjCClassDeclaration(BoolRules);
+GPBObjCClassDeclaration(BytesRules);
+GPBObjCClassDeclaration(DoubleRules);
+GPBObjCClassDeclaration(DurationRules);
+GPBObjCClassDeclaration(EnumRules);
+GPBObjCClassDeclaration(FieldRules);
+GPBObjCClassDeclaration(Fixed32Rules);
+GPBObjCClassDeclaration(Fixed64Rules);
+GPBObjCClassDeclaration(FloatRules);
 GPBObjCClassDeclaration(GPBDuration);
 GPBObjCClassDeclaration(GPBFieldOptions);
 GPBObjCClassDeclaration(GPBMessageOptions);
 GPBObjCClassDeclaration(GPBOneofOptions);
 GPBObjCClassDeclaration(GPBTimestamp);
-GPBObjCClassDeclaration(SENAnyRules);
-GPBObjCClassDeclaration(SENBoolRules);
-GPBObjCClassDeclaration(SENBytesRules);
-GPBObjCClassDeclaration(SENDoubleRules);
-GPBObjCClassDeclaration(SENDurationRules);
-GPBObjCClassDeclaration(SENEnumRules);
-GPBObjCClassDeclaration(SENFieldRules);
-GPBObjCClassDeclaration(SENFixed32Rules);
-GPBObjCClassDeclaration(SENFixed64Rules);
-GPBObjCClassDeclaration(SENFloatRules);
-GPBObjCClassDeclaration(SENInt32Rules);
-GPBObjCClassDeclaration(SENInt64Rules);
-GPBObjCClassDeclaration(SENMapRules);
-GPBObjCClassDeclaration(SENMessageRules);
-GPBObjCClassDeclaration(SENRepeatedRules);
-GPBObjCClassDeclaration(SENSFixed32Rules);
-GPBObjCClassDeclaration(SENSFixed64Rules);
-GPBObjCClassDeclaration(SENSInt32Rules);
-GPBObjCClassDeclaration(SENSInt64Rules);
-GPBObjCClassDeclaration(SENStringRules);
-GPBObjCClassDeclaration(SENTimestampRules);
-GPBObjCClassDeclaration(SENUInt32Rules);
-GPBObjCClassDeclaration(SENUInt64Rules);
+GPBObjCClassDeclaration(Int32Rules);
+GPBObjCClassDeclaration(Int64Rules);
+GPBObjCClassDeclaration(MapRules);
+GPBObjCClassDeclaration(MessageRules);
+GPBObjCClassDeclaration(RepeatedRules);
+GPBObjCClassDeclaration(SFixed32Rules);
+GPBObjCClassDeclaration(SFixed64Rules);
+GPBObjCClassDeclaration(SInt32Rules);
+GPBObjCClassDeclaration(SInt64Rules);
+GPBObjCClassDeclaration(StringRules);
+GPBObjCClassDeclaration(TimestampRules);
+GPBObjCClassDeclaration(UInt32Rules);
+GPBObjCClassDeclaration(UInt64Rules);
 
-#pragma mark - SENValidateRoot
+#pragma mark - ValidateRoot
 
-@implementation SENValidateRoot
+@implementation ValidateRoot
 
 + (GPBExtensionRegistry*)extensionRegistry {
   // This is called by +initialize so there is no need to worry
@@ -71,7 +71,7 @@ GPBObjCClassDeclaration(SENUInt64Rules);
     static GPBExtensionDescription descriptions[] = {
       {
         .defaultValue.valueBool = NO,
-        .singletonName = GPBStringifySymbol(SENValidateRoot_disabled),
+        .singletonName = GPBStringifySymbol(ValidateRoot_disabled),
         .extendedClass.clazz = GPBObjCClass(GPBMessageOptions),
         .messageOrGroupClass.clazz = Nil,
         .enumDescriptorFunc = NULL,
@@ -81,7 +81,7 @@ GPBObjCClassDeclaration(SENUInt64Rules);
       },
       {
         .defaultValue.valueBool = NO,
-        .singletonName = GPBStringifySymbol(SENValidateRoot_required),
+        .singletonName = GPBStringifySymbol(ValidateRoot_required),
         .extendedClass.clazz = GPBObjCClass(GPBOneofOptions),
         .messageOrGroupClass.clazz = Nil,
         .enumDescriptorFunc = NULL,
@@ -91,9 +91,9 @@ GPBObjCClassDeclaration(SENUInt64Rules);
       },
       {
         .defaultValue.valueMessage = nil,
-        .singletonName = GPBStringifySymbol(SENValidateRoot_rules),
+        .singletonName = GPBStringifySymbol(ValidateRoot_rules),
         .extendedClass.clazz = GPBObjCClass(GPBFieldOptions),
-        .messageOrGroupClass.clazz = GPBObjCClass(SENFieldRules),
+        .messageOrGroupClass.clazz = GPBObjCClass(FieldRules),
         .enumDescriptorFunc = NULL,
         .fieldNumber = 1071,
         .dataType = GPBDataTypeMessage,
@@ -116,40 +116,39 @@ GPBObjCClassDeclaration(SENUInt64Rules);
 
 @end
 
-#pragma mark - SENValidateRoot_FileDescriptor
+#pragma mark - ValidateRoot_FileDescriptor
 
-static GPBFileDescriptor *SENValidateRoot_FileDescriptor(void) {
+static GPBFileDescriptor *ValidateRoot_FileDescriptor(void) {
   // This is called by +initialize so there is no need to worry
   // about thread safety of the singleton.
   static GPBFileDescriptor *descriptor = NULL;
   if (!descriptor) {
     GPB_DEBUG_CHECK_RUNTIME_VERSIONS();
     descriptor = [[GPBFileDescriptor alloc] initWithPackage:@"validate"
-                                                 objcPrefix:@"SEN"
                                                      syntax:GPBFileSyntaxProto2];
   }
   return descriptor;
 }
 
-#pragma mark - Enum SENKnownRegex
+#pragma mark - Enum KnownRegex
 
-GPBEnumDescriptor *SENKnownRegex_EnumDescriptor(void) {
+GPBEnumDescriptor *KnownRegex_EnumDescriptor(void) {
   static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
         "Unknown\000HTTPHeaderName\000HTTPHeaderValue\000";
     static const int32_t values[] = {
-        SENKnownRegex_Unknown,
-        SENKnownRegex_HTTPHeaderName,
-        SENKnownRegex_HTTPHeaderValue,
+        KnownRegex_Unknown,
+        KnownRegex_HTTPHeaderName,
+        KnownRegex_HTTPHeaderValue,
     };
     static const char *extraTextFormatInfo = "\002\001\004\346\344\000\002\004\346\345\000";
     GPBEnumDescriptor *worker =
-        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(SENKnownRegex)
+        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(KnownRegex)
                                        valueNames:valueNames
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
-                                     enumVerifier:SENKnownRegex_IsValidValue
+                                     enumVerifier:KnownRegex_IsValidValue
                               extraTextFormatInfo:extraTextFormatInfo];
     GPBEnumDescriptor *expected = nil;
     if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
@@ -159,20 +158,20 @@ GPBEnumDescriptor *SENKnownRegex_EnumDescriptor(void) {
   return descriptor;
 }
 
-BOOL SENKnownRegex_IsValidValue(int32_t value__) {
+BOOL KnownRegex_IsValidValue(int32_t value__) {
   switch (value__) {
-    case SENKnownRegex_Unknown:
-    case SENKnownRegex_HTTPHeaderName:
-    case SENKnownRegex_HTTPHeaderValue:
+    case KnownRegex_Unknown:
+    case KnownRegex_HTTPHeaderName:
+    case KnownRegex_HTTPHeaderValue:
       return YES;
     default:
       return NO;
   }
 }
 
-#pragma mark - SENFieldRules
+#pragma mark - FieldRules
 
-@implementation SENFieldRules
+@implementation FieldRules
 
 @dynamic typeOneOfCase;
 @dynamic hasMessage, message;
@@ -198,31 +197,31 @@ BOOL SENKnownRegex_IsValidValue(int32_t value__) {
 @dynamic duration;
 @dynamic timestamp;
 
-typedef struct SENFieldRules__storage_ {
+typedef struct FieldRules__storage_ {
   uint32_t _has_storage_[2];
-  SENFloatRules *float_p;
-  SENDoubleRules *double_p;
-  SENInt32Rules *int32;
-  SENInt64Rules *int64;
-  SENUInt32Rules *uint32;
-  SENUInt64Rules *uint64;
-  SENSInt32Rules *sint32;
-  SENSInt64Rules *sint64;
-  SENFixed32Rules *fixed32;
-  SENFixed64Rules *fixed64;
-  SENSFixed32Rules *sfixed32;
-  SENSFixed64Rules *sfixed64;
-  SENBoolRules *bool_p;
-  SENStringRules *string;
-  SENBytesRules *bytes;
-  SENEnumRules *enum_p;
-  SENMessageRules *message;
-  SENRepeatedRules *repeated;
-  SENMapRules *map;
-  SENAnyRules *any;
-  SENDurationRules *duration;
-  SENTimestampRules *timestamp;
-} SENFieldRules__storage_;
+  FloatRules *float_p;
+  DoubleRules *double_p;
+  Int32Rules *int32;
+  Int64Rules *int64;
+  UInt32Rules *uint32;
+  UInt64Rules *uint64;
+  SInt32Rules *sint32;
+  SInt64Rules *sint64;
+  Fixed32Rules *fixed32;
+  Fixed64Rules *fixed64;
+  SFixed32Rules *sfixed32;
+  SFixed64Rules *sfixed64;
+  BoolRules *bool_p;
+  StringRules *string;
+  BytesRules *bytes;
+  EnumRules *enum_p;
+  MessageRules *message;
+  RepeatedRules *repeated;
+  MapRules *map;
+  AnyRules *any;
+  DurationRules *duration;
+  TimestampRules *timestamp;
+} FieldRules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -232,210 +231,210 @@ typedef struct SENFieldRules__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "float_p",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENFloatRules),
-        .number = SENFieldRules_FieldNumber_Float_p,
+        .dataTypeSpecific.clazz = GPBObjCClass(FloatRules),
+        .number = FieldRules_FieldNumber_Float_p,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, float_p),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, float_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "double_p",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENDoubleRules),
-        .number = SENFieldRules_FieldNumber_Double_p,
+        .dataTypeSpecific.clazz = GPBObjCClass(DoubleRules),
+        .number = FieldRules_FieldNumber_Double_p,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, double_p),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, double_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "int32",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENInt32Rules),
-        .number = SENFieldRules_FieldNumber_Int32,
+        .dataTypeSpecific.clazz = GPBObjCClass(Int32Rules),
+        .number = FieldRules_FieldNumber_Int32,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, int32),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, int32),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "int64",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENInt64Rules),
-        .number = SENFieldRules_FieldNumber_Int64,
+        .dataTypeSpecific.clazz = GPBObjCClass(Int64Rules),
+        .number = FieldRules_FieldNumber_Int64,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, int64),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, int64),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "uint32",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENUInt32Rules),
-        .number = SENFieldRules_FieldNumber_Uint32,
+        .dataTypeSpecific.clazz = GPBObjCClass(UInt32Rules),
+        .number = FieldRules_FieldNumber_Uint32,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, uint32),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, uint32),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "uint64",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENUInt64Rules),
-        .number = SENFieldRules_FieldNumber_Uint64,
+        .dataTypeSpecific.clazz = GPBObjCClass(UInt64Rules),
+        .number = FieldRules_FieldNumber_Uint64,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, uint64),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, uint64),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "sint32",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENSInt32Rules),
-        .number = SENFieldRules_FieldNumber_Sint32,
+        .dataTypeSpecific.clazz = GPBObjCClass(SInt32Rules),
+        .number = FieldRules_FieldNumber_Sint32,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, sint32),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, sint32),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "sint64",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENSInt64Rules),
-        .number = SENFieldRules_FieldNumber_Sint64,
+        .dataTypeSpecific.clazz = GPBObjCClass(SInt64Rules),
+        .number = FieldRules_FieldNumber_Sint64,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, sint64),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, sint64),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "fixed32",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENFixed32Rules),
-        .number = SENFieldRules_FieldNumber_Fixed32,
+        .dataTypeSpecific.clazz = GPBObjCClass(Fixed32Rules),
+        .number = FieldRules_FieldNumber_Fixed32,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, fixed32),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, fixed32),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "fixed64",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENFixed64Rules),
-        .number = SENFieldRules_FieldNumber_Fixed64,
+        .dataTypeSpecific.clazz = GPBObjCClass(Fixed64Rules),
+        .number = FieldRules_FieldNumber_Fixed64,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, fixed64),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, fixed64),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "sfixed32",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENSFixed32Rules),
-        .number = SENFieldRules_FieldNumber_Sfixed32,
+        .dataTypeSpecific.clazz = GPBObjCClass(SFixed32Rules),
+        .number = FieldRules_FieldNumber_Sfixed32,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, sfixed32),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, sfixed32),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "sfixed64",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENSFixed64Rules),
-        .number = SENFieldRules_FieldNumber_Sfixed64,
+        .dataTypeSpecific.clazz = GPBObjCClass(SFixed64Rules),
+        .number = FieldRules_FieldNumber_Sfixed64,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, sfixed64),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, sfixed64),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "bool_p",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENBoolRules),
-        .number = SENFieldRules_FieldNumber_Bool_p,
+        .dataTypeSpecific.clazz = GPBObjCClass(BoolRules),
+        .number = FieldRules_FieldNumber_Bool_p,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, bool_p),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, bool_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "string",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENStringRules),
-        .number = SENFieldRules_FieldNumber_String,
+        .dataTypeSpecific.clazz = GPBObjCClass(StringRules),
+        .number = FieldRules_FieldNumber_String,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, string),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, string),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "bytes",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENBytesRules),
-        .number = SENFieldRules_FieldNumber_Bytes,
+        .dataTypeSpecific.clazz = GPBObjCClass(BytesRules),
+        .number = FieldRules_FieldNumber_Bytes,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, bytes),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, bytes),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "enum_p",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENEnumRules),
-        .number = SENFieldRules_FieldNumber_Enum_p,
+        .dataTypeSpecific.clazz = GPBObjCClass(EnumRules),
+        .number = FieldRules_FieldNumber_Enum_p,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, enum_p),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, enum_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "message",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENMessageRules),
-        .number = SENFieldRules_FieldNumber_Message,
+        .dataTypeSpecific.clazz = GPBObjCClass(MessageRules),
+        .number = FieldRules_FieldNumber_Message,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, message),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, message),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "repeated",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENRepeatedRules),
-        .number = SENFieldRules_FieldNumber_Repeated,
+        .dataTypeSpecific.clazz = GPBObjCClass(RepeatedRules),
+        .number = FieldRules_FieldNumber_Repeated,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, repeated),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, repeated),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "map",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENMapRules),
-        .number = SENFieldRules_FieldNumber_Map,
+        .dataTypeSpecific.clazz = GPBObjCClass(MapRules),
+        .number = FieldRules_FieldNumber_Map,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, map),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, map),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "any",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENAnyRules),
-        .number = SENFieldRules_FieldNumber_Any,
+        .dataTypeSpecific.clazz = GPBObjCClass(AnyRules),
+        .number = FieldRules_FieldNumber_Any,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, any),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, any),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "duration",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENDurationRules),
-        .number = SENFieldRules_FieldNumber_Duration,
+        .dataTypeSpecific.clazz = GPBObjCClass(DurationRules),
+        .number = FieldRules_FieldNumber_Duration,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, duration),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, duration),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "timestamp",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENTimestampRules),
-        .number = SENFieldRules_FieldNumber_Timestamp,
+        .dataTypeSpecific.clazz = GPBObjCClass(TimestampRules),
+        .number = FieldRules_FieldNumber_Timestamp,
         .hasIndex = -1,
-        .offset = (uint32_t)offsetof(SENFieldRules__storage_, timestamp),
+        .offset = (uint32_t)offsetof(FieldRules__storage_, timestamp),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENFieldRules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[FieldRules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENFieldRules__storage_)
+                                   storageSize:sizeof(FieldRules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     static const char *oneofs[] = {
       "type",
@@ -453,14 +452,14 @@ typedef struct SENFieldRules__storage_ {
 
 @end
 
-void SENFieldRules_ClearTypeOneOfCase(SENFieldRules *message) {
-  GPBDescriptor *descriptor = [SENFieldRules descriptor];
+void FieldRules_ClearTypeOneOfCase(FieldRules *message) {
+  GPBDescriptor *descriptor = [FieldRules descriptor];
   GPBOneofDescriptor *oneof = [descriptor.oneofs objectAtIndex:0];
   GPBClearOneof(message, oneof);
 }
-#pragma mark - SENFloatRules
+#pragma mark - FloatRules
 
-@implementation SENFloatRules
+@implementation FloatRules
 
 @dynamic hasConst_p, const_p;
 @dynamic hasLt, lt;
@@ -470,7 +469,7 @@ void SENFieldRules_ClearTypeOneOfCase(SENFieldRules *message) {
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
 
-typedef struct SENFloatRules__storage_ {
+typedef struct FloatRules__storage_ {
   uint32_t _has_storage_[1];
   float const_p;
   float lt;
@@ -479,7 +478,7 @@ typedef struct SENFloatRules__storage_ {
   float gte;
   GPBFloatArray *inArray;
   GPBFloatArray *notInArray;
-} SENFloatRules__storage_;
+} FloatRules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -490,74 +489,74 @@ typedef struct SENFloatRules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFloatRules_FieldNumber_Const_p,
+        .number = FloatRules_FieldNumber_Const_p,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENFloatRules__storage_, const_p),
+        .offset = (uint32_t)offsetof(FloatRules__storage_, const_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeFloat,
       },
       {
         .name = "lt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFloatRules_FieldNumber_Lt,
+        .number = FloatRules_FieldNumber_Lt,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(SENFloatRules__storage_, lt),
+        .offset = (uint32_t)offsetof(FloatRules__storage_, lt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeFloat,
       },
       {
         .name = "lte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFloatRules_FieldNumber_Lte,
+        .number = FloatRules_FieldNumber_Lte,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(SENFloatRules__storage_, lte),
+        .offset = (uint32_t)offsetof(FloatRules__storage_, lte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeFloat,
       },
       {
         .name = "gt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFloatRules_FieldNumber_Gt,
+        .number = FloatRules_FieldNumber_Gt,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(SENFloatRules__storage_, gt),
+        .offset = (uint32_t)offsetof(FloatRules__storage_, gt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeFloat,
       },
       {
         .name = "gte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFloatRules_FieldNumber_Gte,
+        .number = FloatRules_FieldNumber_Gte,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENFloatRules__storage_, gte),
+        .offset = (uint32_t)offsetof(FloatRules__storage_, gte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeFloat,
       },
       {
         .name = "inArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFloatRules_FieldNumber_InArray,
+        .number = FloatRules_FieldNumber_InArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENFloatRules__storage_, inArray),
+        .offset = (uint32_t)offsetof(FloatRules__storage_, inArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeFloat,
       },
       {
         .name = "notInArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFloatRules_FieldNumber_NotInArray,
+        .number = FloatRules_FieldNumber_NotInArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENFloatRules__storage_, notInArray),
+        .offset = (uint32_t)offsetof(FloatRules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeFloat,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENFloatRules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[FloatRules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENFloatRules__storage_)
+                                   storageSize:sizeof(FloatRules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -569,9 +568,9 @@ typedef struct SENFloatRules__storage_ {
 
 @end
 
-#pragma mark - SENDoubleRules
+#pragma mark - DoubleRules
 
-@implementation SENDoubleRules
+@implementation DoubleRules
 
 @dynamic hasConst_p, const_p;
 @dynamic hasLt, lt;
@@ -581,7 +580,7 @@ typedef struct SENFloatRules__storage_ {
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
 
-typedef struct SENDoubleRules__storage_ {
+typedef struct DoubleRules__storage_ {
   uint32_t _has_storage_[1];
   GPBDoubleArray *inArray;
   GPBDoubleArray *notInArray;
@@ -590,7 +589,7 @@ typedef struct SENDoubleRules__storage_ {
   double lte;
   double gt;
   double gte;
-} SENDoubleRules__storage_;
+} DoubleRules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -601,74 +600,74 @@ typedef struct SENDoubleRules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENDoubleRules_FieldNumber_Const_p,
+        .number = DoubleRules_FieldNumber_Const_p,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENDoubleRules__storage_, const_p),
+        .offset = (uint32_t)offsetof(DoubleRules__storage_, const_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeDouble,
       },
       {
         .name = "lt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENDoubleRules_FieldNumber_Lt,
+        .number = DoubleRules_FieldNumber_Lt,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(SENDoubleRules__storage_, lt),
+        .offset = (uint32_t)offsetof(DoubleRules__storage_, lt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeDouble,
       },
       {
         .name = "lte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENDoubleRules_FieldNumber_Lte,
+        .number = DoubleRules_FieldNumber_Lte,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(SENDoubleRules__storage_, lte),
+        .offset = (uint32_t)offsetof(DoubleRules__storage_, lte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeDouble,
       },
       {
         .name = "gt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENDoubleRules_FieldNumber_Gt,
+        .number = DoubleRules_FieldNumber_Gt,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(SENDoubleRules__storage_, gt),
+        .offset = (uint32_t)offsetof(DoubleRules__storage_, gt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeDouble,
       },
       {
         .name = "gte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENDoubleRules_FieldNumber_Gte,
+        .number = DoubleRules_FieldNumber_Gte,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENDoubleRules__storage_, gte),
+        .offset = (uint32_t)offsetof(DoubleRules__storage_, gte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeDouble,
       },
       {
         .name = "inArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENDoubleRules_FieldNumber_InArray,
+        .number = DoubleRules_FieldNumber_InArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENDoubleRules__storage_, inArray),
+        .offset = (uint32_t)offsetof(DoubleRules__storage_, inArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeDouble,
       },
       {
         .name = "notInArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENDoubleRules_FieldNumber_NotInArray,
+        .number = DoubleRules_FieldNumber_NotInArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENDoubleRules__storage_, notInArray),
+        .offset = (uint32_t)offsetof(DoubleRules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeDouble,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENDoubleRules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[DoubleRules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENDoubleRules__storage_)
+                                   storageSize:sizeof(DoubleRules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -680,9 +679,9 @@ typedef struct SENDoubleRules__storage_ {
 
 @end
 
-#pragma mark - SENInt32Rules
+#pragma mark - Int32Rules
 
-@implementation SENInt32Rules
+@implementation Int32Rules
 
 @dynamic hasConst_p, const_p;
 @dynamic hasLt, lt;
@@ -692,7 +691,7 @@ typedef struct SENDoubleRules__storage_ {
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
 
-typedef struct SENInt32Rules__storage_ {
+typedef struct Int32Rules__storage_ {
   uint32_t _has_storage_[1];
   int32_t const_p;
   int32_t lt;
@@ -701,7 +700,7 @@ typedef struct SENInt32Rules__storage_ {
   int32_t gte;
   GPBInt32Array *inArray;
   GPBInt32Array *notInArray;
-} SENInt32Rules__storage_;
+} Int32Rules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -712,74 +711,74 @@ typedef struct SENInt32Rules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENInt32Rules_FieldNumber_Const_p,
+        .number = Int32Rules_FieldNumber_Const_p,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENInt32Rules__storage_, const_p),
+        .offset = (uint32_t)offsetof(Int32Rules__storage_, const_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt32,
       },
       {
         .name = "lt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENInt32Rules_FieldNumber_Lt,
+        .number = Int32Rules_FieldNumber_Lt,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(SENInt32Rules__storage_, lt),
+        .offset = (uint32_t)offsetof(Int32Rules__storage_, lt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt32,
       },
       {
         .name = "lte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENInt32Rules_FieldNumber_Lte,
+        .number = Int32Rules_FieldNumber_Lte,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(SENInt32Rules__storage_, lte),
+        .offset = (uint32_t)offsetof(Int32Rules__storage_, lte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt32,
       },
       {
         .name = "gt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENInt32Rules_FieldNumber_Gt,
+        .number = Int32Rules_FieldNumber_Gt,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(SENInt32Rules__storage_, gt),
+        .offset = (uint32_t)offsetof(Int32Rules__storage_, gt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt32,
       },
       {
         .name = "gte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENInt32Rules_FieldNumber_Gte,
+        .number = Int32Rules_FieldNumber_Gte,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENInt32Rules__storage_, gte),
+        .offset = (uint32_t)offsetof(Int32Rules__storage_, gte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt32,
       },
       {
         .name = "inArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENInt32Rules_FieldNumber_InArray,
+        .number = Int32Rules_FieldNumber_InArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENInt32Rules__storage_, inArray),
+        .offset = (uint32_t)offsetof(Int32Rules__storage_, inArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeInt32,
       },
       {
         .name = "notInArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENInt32Rules_FieldNumber_NotInArray,
+        .number = Int32Rules_FieldNumber_NotInArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENInt32Rules__storage_, notInArray),
+        .offset = (uint32_t)offsetof(Int32Rules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeInt32,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENInt32Rules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[Int32Rules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENInt32Rules__storage_)
+                                   storageSize:sizeof(Int32Rules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -791,9 +790,9 @@ typedef struct SENInt32Rules__storage_ {
 
 @end
 
-#pragma mark - SENInt64Rules
+#pragma mark - Int64Rules
 
-@implementation SENInt64Rules
+@implementation Int64Rules
 
 @dynamic hasConst_p, const_p;
 @dynamic hasLt, lt;
@@ -803,7 +802,7 @@ typedef struct SENInt32Rules__storage_ {
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
 
-typedef struct SENInt64Rules__storage_ {
+typedef struct Int64Rules__storage_ {
   uint32_t _has_storage_[1];
   GPBInt64Array *inArray;
   GPBInt64Array *notInArray;
@@ -812,7 +811,7 @@ typedef struct SENInt64Rules__storage_ {
   int64_t lte;
   int64_t gt;
   int64_t gte;
-} SENInt64Rules__storage_;
+} Int64Rules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -823,74 +822,74 @@ typedef struct SENInt64Rules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENInt64Rules_FieldNumber_Const_p,
+        .number = Int64Rules_FieldNumber_Const_p,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENInt64Rules__storage_, const_p),
+        .offset = (uint32_t)offsetof(Int64Rules__storage_, const_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt64,
       },
       {
         .name = "lt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENInt64Rules_FieldNumber_Lt,
+        .number = Int64Rules_FieldNumber_Lt,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(SENInt64Rules__storage_, lt),
+        .offset = (uint32_t)offsetof(Int64Rules__storage_, lt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt64,
       },
       {
         .name = "lte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENInt64Rules_FieldNumber_Lte,
+        .number = Int64Rules_FieldNumber_Lte,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(SENInt64Rules__storage_, lte),
+        .offset = (uint32_t)offsetof(Int64Rules__storage_, lte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt64,
       },
       {
         .name = "gt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENInt64Rules_FieldNumber_Gt,
+        .number = Int64Rules_FieldNumber_Gt,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(SENInt64Rules__storage_, gt),
+        .offset = (uint32_t)offsetof(Int64Rules__storage_, gt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt64,
       },
       {
         .name = "gte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENInt64Rules_FieldNumber_Gte,
+        .number = Int64Rules_FieldNumber_Gte,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENInt64Rules__storage_, gte),
+        .offset = (uint32_t)offsetof(Int64Rules__storage_, gte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt64,
       },
       {
         .name = "inArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENInt64Rules_FieldNumber_InArray,
+        .number = Int64Rules_FieldNumber_InArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENInt64Rules__storage_, inArray),
+        .offset = (uint32_t)offsetof(Int64Rules__storage_, inArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeInt64,
       },
       {
         .name = "notInArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENInt64Rules_FieldNumber_NotInArray,
+        .number = Int64Rules_FieldNumber_NotInArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENInt64Rules__storage_, notInArray),
+        .offset = (uint32_t)offsetof(Int64Rules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeInt64,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENInt64Rules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[Int64Rules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENInt64Rules__storage_)
+                                   storageSize:sizeof(Int64Rules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -902,9 +901,9 @@ typedef struct SENInt64Rules__storage_ {
 
 @end
 
-#pragma mark - SENUInt32Rules
+#pragma mark - UInt32Rules
 
-@implementation SENUInt32Rules
+@implementation UInt32Rules
 
 @dynamic hasConst_p, const_p;
 @dynamic hasLt, lt;
@@ -914,7 +913,7 @@ typedef struct SENInt64Rules__storage_ {
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
 
-typedef struct SENUInt32Rules__storage_ {
+typedef struct UInt32Rules__storage_ {
   uint32_t _has_storage_[1];
   uint32_t const_p;
   uint32_t lt;
@@ -923,7 +922,7 @@ typedef struct SENUInt32Rules__storage_ {
   uint32_t gte;
   GPBUInt32Array *inArray;
   GPBUInt32Array *notInArray;
-} SENUInt32Rules__storage_;
+} UInt32Rules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -934,74 +933,74 @@ typedef struct SENUInt32Rules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENUInt32Rules_FieldNumber_Const_p,
+        .number = UInt32Rules_FieldNumber_Const_p,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENUInt32Rules__storage_, const_p),
+        .offset = (uint32_t)offsetof(UInt32Rules__storage_, const_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
         .name = "lt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENUInt32Rules_FieldNumber_Lt,
+        .number = UInt32Rules_FieldNumber_Lt,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(SENUInt32Rules__storage_, lt),
+        .offset = (uint32_t)offsetof(UInt32Rules__storage_, lt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
         .name = "lte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENUInt32Rules_FieldNumber_Lte,
+        .number = UInt32Rules_FieldNumber_Lte,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(SENUInt32Rules__storage_, lte),
+        .offset = (uint32_t)offsetof(UInt32Rules__storage_, lte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
         .name = "gt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENUInt32Rules_FieldNumber_Gt,
+        .number = UInt32Rules_FieldNumber_Gt,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(SENUInt32Rules__storage_, gt),
+        .offset = (uint32_t)offsetof(UInt32Rules__storage_, gt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
         .name = "gte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENUInt32Rules_FieldNumber_Gte,
+        .number = UInt32Rules_FieldNumber_Gte,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENUInt32Rules__storage_, gte),
+        .offset = (uint32_t)offsetof(UInt32Rules__storage_, gte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt32,
       },
       {
         .name = "inArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENUInt32Rules_FieldNumber_InArray,
+        .number = UInt32Rules_FieldNumber_InArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENUInt32Rules__storage_, inArray),
+        .offset = (uint32_t)offsetof(UInt32Rules__storage_, inArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeUInt32,
       },
       {
         .name = "notInArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENUInt32Rules_FieldNumber_NotInArray,
+        .number = UInt32Rules_FieldNumber_NotInArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENUInt32Rules__storage_, notInArray),
+        .offset = (uint32_t)offsetof(UInt32Rules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeUInt32,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENUInt32Rules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[UInt32Rules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENUInt32Rules__storage_)
+                                   storageSize:sizeof(UInt32Rules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1013,9 +1012,9 @@ typedef struct SENUInt32Rules__storage_ {
 
 @end
 
-#pragma mark - SENUInt64Rules
+#pragma mark - UInt64Rules
 
-@implementation SENUInt64Rules
+@implementation UInt64Rules
 
 @dynamic hasConst_p, const_p;
 @dynamic hasLt, lt;
@@ -1025,7 +1024,7 @@ typedef struct SENUInt32Rules__storage_ {
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
 
-typedef struct SENUInt64Rules__storage_ {
+typedef struct UInt64Rules__storage_ {
   uint32_t _has_storage_[1];
   GPBUInt64Array *inArray;
   GPBUInt64Array *notInArray;
@@ -1034,7 +1033,7 @@ typedef struct SENUInt64Rules__storage_ {
   uint64_t lte;
   uint64_t gt;
   uint64_t gte;
-} SENUInt64Rules__storage_;
+} UInt64Rules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1045,74 +1044,74 @@ typedef struct SENUInt64Rules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENUInt64Rules_FieldNumber_Const_p,
+        .number = UInt64Rules_FieldNumber_Const_p,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENUInt64Rules__storage_, const_p),
+        .offset = (uint32_t)offsetof(UInt64Rules__storage_, const_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },
       {
         .name = "lt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENUInt64Rules_FieldNumber_Lt,
+        .number = UInt64Rules_FieldNumber_Lt,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(SENUInt64Rules__storage_, lt),
+        .offset = (uint32_t)offsetof(UInt64Rules__storage_, lt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },
       {
         .name = "lte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENUInt64Rules_FieldNumber_Lte,
+        .number = UInt64Rules_FieldNumber_Lte,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(SENUInt64Rules__storage_, lte),
+        .offset = (uint32_t)offsetof(UInt64Rules__storage_, lte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },
       {
         .name = "gt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENUInt64Rules_FieldNumber_Gt,
+        .number = UInt64Rules_FieldNumber_Gt,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(SENUInt64Rules__storage_, gt),
+        .offset = (uint32_t)offsetof(UInt64Rules__storage_, gt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },
       {
         .name = "gte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENUInt64Rules_FieldNumber_Gte,
+        .number = UInt64Rules_FieldNumber_Gte,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENUInt64Rules__storage_, gte),
+        .offset = (uint32_t)offsetof(UInt64Rules__storage_, gte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },
       {
         .name = "inArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENUInt64Rules_FieldNumber_InArray,
+        .number = UInt64Rules_FieldNumber_InArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENUInt64Rules__storage_, inArray),
+        .offset = (uint32_t)offsetof(UInt64Rules__storage_, inArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeUInt64,
       },
       {
         .name = "notInArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENUInt64Rules_FieldNumber_NotInArray,
+        .number = UInt64Rules_FieldNumber_NotInArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENUInt64Rules__storage_, notInArray),
+        .offset = (uint32_t)offsetof(UInt64Rules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeUInt64,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENUInt64Rules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[UInt64Rules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENUInt64Rules__storage_)
+                                   storageSize:sizeof(UInt64Rules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1124,9 +1123,9 @@ typedef struct SENUInt64Rules__storage_ {
 
 @end
 
-#pragma mark - SENSInt32Rules
+#pragma mark - SInt32Rules
 
-@implementation SENSInt32Rules
+@implementation SInt32Rules
 
 @dynamic hasConst_p, const_p;
 @dynamic hasLt, lt;
@@ -1136,7 +1135,7 @@ typedef struct SENUInt64Rules__storage_ {
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
 
-typedef struct SENSInt32Rules__storage_ {
+typedef struct SInt32Rules__storage_ {
   uint32_t _has_storage_[1];
   int32_t const_p;
   int32_t lt;
@@ -1145,7 +1144,7 @@ typedef struct SENSInt32Rules__storage_ {
   int32_t gte;
   GPBInt32Array *inArray;
   GPBInt32Array *notInArray;
-} SENSInt32Rules__storage_;
+} SInt32Rules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1156,74 +1155,74 @@ typedef struct SENSInt32Rules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSInt32Rules_FieldNumber_Const_p,
+        .number = SInt32Rules_FieldNumber_Const_p,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENSInt32Rules__storage_, const_p),
+        .offset = (uint32_t)offsetof(SInt32Rules__storage_, const_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSInt32,
       },
       {
         .name = "lt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSInt32Rules_FieldNumber_Lt,
+        .number = SInt32Rules_FieldNumber_Lt,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(SENSInt32Rules__storage_, lt),
+        .offset = (uint32_t)offsetof(SInt32Rules__storage_, lt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSInt32,
       },
       {
         .name = "lte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSInt32Rules_FieldNumber_Lte,
+        .number = SInt32Rules_FieldNumber_Lte,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(SENSInt32Rules__storage_, lte),
+        .offset = (uint32_t)offsetof(SInt32Rules__storage_, lte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSInt32,
       },
       {
         .name = "gt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSInt32Rules_FieldNumber_Gt,
+        .number = SInt32Rules_FieldNumber_Gt,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(SENSInt32Rules__storage_, gt),
+        .offset = (uint32_t)offsetof(SInt32Rules__storage_, gt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSInt32,
       },
       {
         .name = "gte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSInt32Rules_FieldNumber_Gte,
+        .number = SInt32Rules_FieldNumber_Gte,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENSInt32Rules__storage_, gte),
+        .offset = (uint32_t)offsetof(SInt32Rules__storage_, gte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSInt32,
       },
       {
         .name = "inArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSInt32Rules_FieldNumber_InArray,
+        .number = SInt32Rules_FieldNumber_InArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENSInt32Rules__storage_, inArray),
+        .offset = (uint32_t)offsetof(SInt32Rules__storage_, inArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeSInt32,
       },
       {
         .name = "notInArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSInt32Rules_FieldNumber_NotInArray,
+        .number = SInt32Rules_FieldNumber_NotInArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENSInt32Rules__storage_, notInArray),
+        .offset = (uint32_t)offsetof(SInt32Rules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeSInt32,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENSInt32Rules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[SInt32Rules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENSInt32Rules__storage_)
+                                   storageSize:sizeof(SInt32Rules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1235,9 +1234,9 @@ typedef struct SENSInt32Rules__storage_ {
 
 @end
 
-#pragma mark - SENSInt64Rules
+#pragma mark - SInt64Rules
 
-@implementation SENSInt64Rules
+@implementation SInt64Rules
 
 @dynamic hasConst_p, const_p;
 @dynamic hasLt, lt;
@@ -1247,7 +1246,7 @@ typedef struct SENSInt32Rules__storage_ {
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
 
-typedef struct SENSInt64Rules__storage_ {
+typedef struct SInt64Rules__storage_ {
   uint32_t _has_storage_[1];
   GPBInt64Array *inArray;
   GPBInt64Array *notInArray;
@@ -1256,7 +1255,7 @@ typedef struct SENSInt64Rules__storage_ {
   int64_t lte;
   int64_t gt;
   int64_t gte;
-} SENSInt64Rules__storage_;
+} SInt64Rules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1267,74 +1266,74 @@ typedef struct SENSInt64Rules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSInt64Rules_FieldNumber_Const_p,
+        .number = SInt64Rules_FieldNumber_Const_p,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENSInt64Rules__storage_, const_p),
+        .offset = (uint32_t)offsetof(SInt64Rules__storage_, const_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSInt64,
       },
       {
         .name = "lt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSInt64Rules_FieldNumber_Lt,
+        .number = SInt64Rules_FieldNumber_Lt,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(SENSInt64Rules__storage_, lt),
+        .offset = (uint32_t)offsetof(SInt64Rules__storage_, lt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSInt64,
       },
       {
         .name = "lte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSInt64Rules_FieldNumber_Lte,
+        .number = SInt64Rules_FieldNumber_Lte,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(SENSInt64Rules__storage_, lte),
+        .offset = (uint32_t)offsetof(SInt64Rules__storage_, lte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSInt64,
       },
       {
         .name = "gt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSInt64Rules_FieldNumber_Gt,
+        .number = SInt64Rules_FieldNumber_Gt,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(SENSInt64Rules__storage_, gt),
+        .offset = (uint32_t)offsetof(SInt64Rules__storage_, gt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSInt64,
       },
       {
         .name = "gte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSInt64Rules_FieldNumber_Gte,
+        .number = SInt64Rules_FieldNumber_Gte,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENSInt64Rules__storage_, gte),
+        .offset = (uint32_t)offsetof(SInt64Rules__storage_, gte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSInt64,
       },
       {
         .name = "inArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSInt64Rules_FieldNumber_InArray,
+        .number = SInt64Rules_FieldNumber_InArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENSInt64Rules__storage_, inArray),
+        .offset = (uint32_t)offsetof(SInt64Rules__storage_, inArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeSInt64,
       },
       {
         .name = "notInArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSInt64Rules_FieldNumber_NotInArray,
+        .number = SInt64Rules_FieldNumber_NotInArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENSInt64Rules__storage_, notInArray),
+        .offset = (uint32_t)offsetof(SInt64Rules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeSInt64,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENSInt64Rules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[SInt64Rules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENSInt64Rules__storage_)
+                                   storageSize:sizeof(SInt64Rules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1346,9 +1345,9 @@ typedef struct SENSInt64Rules__storage_ {
 
 @end
 
-#pragma mark - SENFixed32Rules
+#pragma mark - Fixed32Rules
 
-@implementation SENFixed32Rules
+@implementation Fixed32Rules
 
 @dynamic hasConst_p, const_p;
 @dynamic hasLt, lt;
@@ -1358,7 +1357,7 @@ typedef struct SENSInt64Rules__storage_ {
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
 
-typedef struct SENFixed32Rules__storage_ {
+typedef struct Fixed32Rules__storage_ {
   uint32_t _has_storage_[1];
   uint32_t const_p;
   uint32_t lt;
@@ -1367,7 +1366,7 @@ typedef struct SENFixed32Rules__storage_ {
   uint32_t gte;
   GPBUInt32Array *inArray;
   GPBUInt32Array *notInArray;
-} SENFixed32Rules__storage_;
+} Fixed32Rules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1378,74 +1377,74 @@ typedef struct SENFixed32Rules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFixed32Rules_FieldNumber_Const_p,
+        .number = Fixed32Rules_FieldNumber_Const_p,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENFixed32Rules__storage_, const_p),
+        .offset = (uint32_t)offsetof(Fixed32Rules__storage_, const_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeFixed32,
       },
       {
         .name = "lt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFixed32Rules_FieldNumber_Lt,
+        .number = Fixed32Rules_FieldNumber_Lt,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(SENFixed32Rules__storage_, lt),
+        .offset = (uint32_t)offsetof(Fixed32Rules__storage_, lt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeFixed32,
       },
       {
         .name = "lte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFixed32Rules_FieldNumber_Lte,
+        .number = Fixed32Rules_FieldNumber_Lte,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(SENFixed32Rules__storage_, lte),
+        .offset = (uint32_t)offsetof(Fixed32Rules__storage_, lte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeFixed32,
       },
       {
         .name = "gt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFixed32Rules_FieldNumber_Gt,
+        .number = Fixed32Rules_FieldNumber_Gt,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(SENFixed32Rules__storage_, gt),
+        .offset = (uint32_t)offsetof(Fixed32Rules__storage_, gt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeFixed32,
       },
       {
         .name = "gte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFixed32Rules_FieldNumber_Gte,
+        .number = Fixed32Rules_FieldNumber_Gte,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENFixed32Rules__storage_, gte),
+        .offset = (uint32_t)offsetof(Fixed32Rules__storage_, gte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeFixed32,
       },
       {
         .name = "inArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFixed32Rules_FieldNumber_InArray,
+        .number = Fixed32Rules_FieldNumber_InArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENFixed32Rules__storage_, inArray),
+        .offset = (uint32_t)offsetof(Fixed32Rules__storage_, inArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeFixed32,
       },
       {
         .name = "notInArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFixed32Rules_FieldNumber_NotInArray,
+        .number = Fixed32Rules_FieldNumber_NotInArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENFixed32Rules__storage_, notInArray),
+        .offset = (uint32_t)offsetof(Fixed32Rules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeFixed32,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENFixed32Rules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[Fixed32Rules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENFixed32Rules__storage_)
+                                   storageSize:sizeof(Fixed32Rules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1457,9 +1456,9 @@ typedef struct SENFixed32Rules__storage_ {
 
 @end
 
-#pragma mark - SENFixed64Rules
+#pragma mark - Fixed64Rules
 
-@implementation SENFixed64Rules
+@implementation Fixed64Rules
 
 @dynamic hasConst_p, const_p;
 @dynamic hasLt, lt;
@@ -1469,7 +1468,7 @@ typedef struct SENFixed32Rules__storage_ {
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
 
-typedef struct SENFixed64Rules__storage_ {
+typedef struct Fixed64Rules__storage_ {
   uint32_t _has_storage_[1];
   GPBUInt64Array *inArray;
   GPBUInt64Array *notInArray;
@@ -1478,7 +1477,7 @@ typedef struct SENFixed64Rules__storage_ {
   uint64_t lte;
   uint64_t gt;
   uint64_t gte;
-} SENFixed64Rules__storage_;
+} Fixed64Rules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1489,74 +1488,74 @@ typedef struct SENFixed64Rules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFixed64Rules_FieldNumber_Const_p,
+        .number = Fixed64Rules_FieldNumber_Const_p,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENFixed64Rules__storage_, const_p),
+        .offset = (uint32_t)offsetof(Fixed64Rules__storage_, const_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeFixed64,
       },
       {
         .name = "lt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFixed64Rules_FieldNumber_Lt,
+        .number = Fixed64Rules_FieldNumber_Lt,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(SENFixed64Rules__storage_, lt),
+        .offset = (uint32_t)offsetof(Fixed64Rules__storage_, lt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeFixed64,
       },
       {
         .name = "lte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFixed64Rules_FieldNumber_Lte,
+        .number = Fixed64Rules_FieldNumber_Lte,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(SENFixed64Rules__storage_, lte),
+        .offset = (uint32_t)offsetof(Fixed64Rules__storage_, lte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeFixed64,
       },
       {
         .name = "gt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFixed64Rules_FieldNumber_Gt,
+        .number = Fixed64Rules_FieldNumber_Gt,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(SENFixed64Rules__storage_, gt),
+        .offset = (uint32_t)offsetof(Fixed64Rules__storage_, gt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeFixed64,
       },
       {
         .name = "gte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFixed64Rules_FieldNumber_Gte,
+        .number = Fixed64Rules_FieldNumber_Gte,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENFixed64Rules__storage_, gte),
+        .offset = (uint32_t)offsetof(Fixed64Rules__storage_, gte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeFixed64,
       },
       {
         .name = "inArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFixed64Rules_FieldNumber_InArray,
+        .number = Fixed64Rules_FieldNumber_InArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENFixed64Rules__storage_, inArray),
+        .offset = (uint32_t)offsetof(Fixed64Rules__storage_, inArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeFixed64,
       },
       {
         .name = "notInArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENFixed64Rules_FieldNumber_NotInArray,
+        .number = Fixed64Rules_FieldNumber_NotInArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENFixed64Rules__storage_, notInArray),
+        .offset = (uint32_t)offsetof(Fixed64Rules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeFixed64,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENFixed64Rules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[Fixed64Rules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENFixed64Rules__storage_)
+                                   storageSize:sizeof(Fixed64Rules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1568,9 +1567,9 @@ typedef struct SENFixed64Rules__storage_ {
 
 @end
 
-#pragma mark - SENSFixed32Rules
+#pragma mark - SFixed32Rules
 
-@implementation SENSFixed32Rules
+@implementation SFixed32Rules
 
 @dynamic hasConst_p, const_p;
 @dynamic hasLt, lt;
@@ -1580,7 +1579,7 @@ typedef struct SENFixed64Rules__storage_ {
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
 
-typedef struct SENSFixed32Rules__storage_ {
+typedef struct SFixed32Rules__storage_ {
   uint32_t _has_storage_[1];
   int32_t const_p;
   int32_t lt;
@@ -1589,7 +1588,7 @@ typedef struct SENSFixed32Rules__storage_ {
   int32_t gte;
   GPBInt32Array *inArray;
   GPBInt32Array *notInArray;
-} SENSFixed32Rules__storage_;
+} SFixed32Rules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1600,74 +1599,74 @@ typedef struct SENSFixed32Rules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSFixed32Rules_FieldNumber_Const_p,
+        .number = SFixed32Rules_FieldNumber_Const_p,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENSFixed32Rules__storage_, const_p),
+        .offset = (uint32_t)offsetof(SFixed32Rules__storage_, const_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSFixed32,
       },
       {
         .name = "lt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSFixed32Rules_FieldNumber_Lt,
+        .number = SFixed32Rules_FieldNumber_Lt,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(SENSFixed32Rules__storage_, lt),
+        .offset = (uint32_t)offsetof(SFixed32Rules__storage_, lt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSFixed32,
       },
       {
         .name = "lte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSFixed32Rules_FieldNumber_Lte,
+        .number = SFixed32Rules_FieldNumber_Lte,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(SENSFixed32Rules__storage_, lte),
+        .offset = (uint32_t)offsetof(SFixed32Rules__storage_, lte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSFixed32,
       },
       {
         .name = "gt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSFixed32Rules_FieldNumber_Gt,
+        .number = SFixed32Rules_FieldNumber_Gt,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(SENSFixed32Rules__storage_, gt),
+        .offset = (uint32_t)offsetof(SFixed32Rules__storage_, gt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSFixed32,
       },
       {
         .name = "gte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSFixed32Rules_FieldNumber_Gte,
+        .number = SFixed32Rules_FieldNumber_Gte,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENSFixed32Rules__storage_, gte),
+        .offset = (uint32_t)offsetof(SFixed32Rules__storage_, gte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSFixed32,
       },
       {
         .name = "inArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSFixed32Rules_FieldNumber_InArray,
+        .number = SFixed32Rules_FieldNumber_InArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENSFixed32Rules__storage_, inArray),
+        .offset = (uint32_t)offsetof(SFixed32Rules__storage_, inArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeSFixed32,
       },
       {
         .name = "notInArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSFixed32Rules_FieldNumber_NotInArray,
+        .number = SFixed32Rules_FieldNumber_NotInArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENSFixed32Rules__storage_, notInArray),
+        .offset = (uint32_t)offsetof(SFixed32Rules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeSFixed32,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENSFixed32Rules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[SFixed32Rules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENSFixed32Rules__storage_)
+                                   storageSize:sizeof(SFixed32Rules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1679,9 +1678,9 @@ typedef struct SENSFixed32Rules__storage_ {
 
 @end
 
-#pragma mark - SENSFixed64Rules
+#pragma mark - SFixed64Rules
 
-@implementation SENSFixed64Rules
+@implementation SFixed64Rules
 
 @dynamic hasConst_p, const_p;
 @dynamic hasLt, lt;
@@ -1691,7 +1690,7 @@ typedef struct SENSFixed32Rules__storage_ {
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
 
-typedef struct SENSFixed64Rules__storage_ {
+typedef struct SFixed64Rules__storage_ {
   uint32_t _has_storage_[1];
   GPBInt64Array *inArray;
   GPBInt64Array *notInArray;
@@ -1700,7 +1699,7 @@ typedef struct SENSFixed64Rules__storage_ {
   int64_t lte;
   int64_t gt;
   int64_t gte;
-} SENSFixed64Rules__storage_;
+} SFixed64Rules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1711,74 +1710,74 @@ typedef struct SENSFixed64Rules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSFixed64Rules_FieldNumber_Const_p,
+        .number = SFixed64Rules_FieldNumber_Const_p,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENSFixed64Rules__storage_, const_p),
+        .offset = (uint32_t)offsetof(SFixed64Rules__storage_, const_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSFixed64,
       },
       {
         .name = "lt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSFixed64Rules_FieldNumber_Lt,
+        .number = SFixed64Rules_FieldNumber_Lt,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(SENSFixed64Rules__storage_, lt),
+        .offset = (uint32_t)offsetof(SFixed64Rules__storage_, lt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSFixed64,
       },
       {
         .name = "lte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSFixed64Rules_FieldNumber_Lte,
+        .number = SFixed64Rules_FieldNumber_Lte,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(SENSFixed64Rules__storage_, lte),
+        .offset = (uint32_t)offsetof(SFixed64Rules__storage_, lte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSFixed64,
       },
       {
         .name = "gt",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSFixed64Rules_FieldNumber_Gt,
+        .number = SFixed64Rules_FieldNumber_Gt,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(SENSFixed64Rules__storage_, gt),
+        .offset = (uint32_t)offsetof(SFixed64Rules__storage_, gt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSFixed64,
       },
       {
         .name = "gte",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSFixed64Rules_FieldNumber_Gte,
+        .number = SFixed64Rules_FieldNumber_Gte,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENSFixed64Rules__storage_, gte),
+        .offset = (uint32_t)offsetof(SFixed64Rules__storage_, gte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeSFixed64,
       },
       {
         .name = "inArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSFixed64Rules_FieldNumber_InArray,
+        .number = SFixed64Rules_FieldNumber_InArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENSFixed64Rules__storage_, inArray),
+        .offset = (uint32_t)offsetof(SFixed64Rules__storage_, inArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeSFixed64,
       },
       {
         .name = "notInArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENSFixed64Rules_FieldNumber_NotInArray,
+        .number = SFixed64Rules_FieldNumber_NotInArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENSFixed64Rules__storage_, notInArray),
+        .offset = (uint32_t)offsetof(SFixed64Rules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeSFixed64,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENSFixed64Rules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[SFixed64Rules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENSFixed64Rules__storage_)
+                                   storageSize:sizeof(SFixed64Rules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1790,15 +1789,15 @@ typedef struct SENSFixed64Rules__storage_ {
 
 @end
 
-#pragma mark - SENBoolRules
+#pragma mark - BoolRules
 
-@implementation SENBoolRules
+@implementation BoolRules
 
 @dynamic hasConst_p, const_p;
 
-typedef struct SENBoolRules__storage_ {
+typedef struct BoolRules__storage_ {
   uint32_t _has_storage_[1];
-} SENBoolRules__storage_;
+} BoolRules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1809,7 +1808,7 @@ typedef struct SENBoolRules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENBoolRules_FieldNumber_Const_p,
+        .number = BoolRules_FieldNumber_Const_p,
         .hasIndex = 0,
         .offset = 1,  // Stored in _has_storage_ to save space.
         .flags = GPBFieldOptional,
@@ -1817,12 +1816,12 @@ typedef struct SENBoolRules__storage_ {
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENBoolRules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[BoolRules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENBoolRules__storage_)
+                                   storageSize:sizeof(BoolRules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -1834,9 +1833,9 @@ typedef struct SENBoolRules__storage_ {
 
 @end
 
-#pragma mark - SENStringRules
+#pragma mark - StringRules
 
-@implementation SENStringRules
+@implementation StringRules
 
 @dynamic wellKnownOneOfCase;
 @dynamic hasConst_p, const_p;
@@ -1865,9 +1864,9 @@ typedef struct SENBoolRules__storage_ {
 @dynamic wellKnownRegex;
 @dynamic hasStrict, strict;
 
-typedef struct SENStringRules__storage_ {
+typedef struct StringRules__storage_ {
   uint32_t _has_storage_[2];
-  SENKnownRegex wellKnownRegex;
+  KnownRegex wellKnownRegex;
   NSString *const_p;
   NSString *pattern;
   NSString *prefix;
@@ -1882,7 +1881,7 @@ typedef struct SENStringRules__storage_ {
   uint64_t maxBytes;
   uint64_t len;
   uint64_t lenBytes;
-} SENStringRules__storage_;
+} StringRules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -1894,9 +1893,9 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueString = nil,
         .core.name = "const_p",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_Const_p,
+        .core.number = StringRules_FieldNumber_Const_p,
         .core.hasIndex = 0,
-        .core.offset = (uint32_t)offsetof(SENStringRules__storage_, const_p),
+        .core.offset = (uint32_t)offsetof(StringRules__storage_, const_p),
         .core.flags = GPBFieldOptional,
         .core.dataType = GPBDataTypeString,
       },
@@ -1904,9 +1903,9 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueUInt64 = 0ULL,
         .core.name = "minLen",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_MinLen,
+        .core.number = StringRules_FieldNumber_MinLen,
         .core.hasIndex = 2,
-        .core.offset = (uint32_t)offsetof(SENStringRules__storage_, minLen),
+        .core.offset = (uint32_t)offsetof(StringRules__storage_, minLen),
         .core.flags = GPBFieldOptional,
         .core.dataType = GPBDataTypeUInt64,
       },
@@ -1914,9 +1913,9 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueUInt64 = 0ULL,
         .core.name = "maxLen",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_MaxLen,
+        .core.number = StringRules_FieldNumber_MaxLen,
         .core.hasIndex = 3,
-        .core.offset = (uint32_t)offsetof(SENStringRules__storage_, maxLen),
+        .core.offset = (uint32_t)offsetof(StringRules__storage_, maxLen),
         .core.flags = GPBFieldOptional,
         .core.dataType = GPBDataTypeUInt64,
       },
@@ -1924,9 +1923,9 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueUInt64 = 0ULL,
         .core.name = "minBytes",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_MinBytes,
+        .core.number = StringRules_FieldNumber_MinBytes,
         .core.hasIndex = 5,
-        .core.offset = (uint32_t)offsetof(SENStringRules__storage_, minBytes),
+        .core.offset = (uint32_t)offsetof(StringRules__storage_, minBytes),
         .core.flags = GPBFieldOptional,
         .core.dataType = GPBDataTypeUInt64,
       },
@@ -1934,9 +1933,9 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueUInt64 = 0ULL,
         .core.name = "maxBytes",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_MaxBytes,
+        .core.number = StringRules_FieldNumber_MaxBytes,
         .core.hasIndex = 6,
-        .core.offset = (uint32_t)offsetof(SENStringRules__storage_, maxBytes),
+        .core.offset = (uint32_t)offsetof(StringRules__storage_, maxBytes),
         .core.flags = GPBFieldOptional,
         .core.dataType = GPBDataTypeUInt64,
       },
@@ -1944,9 +1943,9 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueString = nil,
         .core.name = "pattern",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_Pattern,
+        .core.number = StringRules_FieldNumber_Pattern,
         .core.hasIndex = 7,
-        .core.offset = (uint32_t)offsetof(SENStringRules__storage_, pattern),
+        .core.offset = (uint32_t)offsetof(StringRules__storage_, pattern),
         .core.flags = GPBFieldOptional,
         .core.dataType = GPBDataTypeString,
       },
@@ -1954,9 +1953,9 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueString = nil,
         .core.name = "prefix",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_Prefix,
+        .core.number = StringRules_FieldNumber_Prefix,
         .core.hasIndex = 8,
-        .core.offset = (uint32_t)offsetof(SENStringRules__storage_, prefix),
+        .core.offset = (uint32_t)offsetof(StringRules__storage_, prefix),
         .core.flags = GPBFieldOptional,
         .core.dataType = GPBDataTypeString,
       },
@@ -1964,9 +1963,9 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueString = nil,
         .core.name = "suffix",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_Suffix,
+        .core.number = StringRules_FieldNumber_Suffix,
         .core.hasIndex = 9,
-        .core.offset = (uint32_t)offsetof(SENStringRules__storage_, suffix),
+        .core.offset = (uint32_t)offsetof(StringRules__storage_, suffix),
         .core.flags = GPBFieldOptional,
         .core.dataType = GPBDataTypeString,
       },
@@ -1974,9 +1973,9 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueString = nil,
         .core.name = "contains",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_Contains,
+        .core.number = StringRules_FieldNumber_Contains,
         .core.hasIndex = 10,
-        .core.offset = (uint32_t)offsetof(SENStringRules__storage_, contains),
+        .core.offset = (uint32_t)offsetof(StringRules__storage_, contains),
         .core.flags = GPBFieldOptional,
         .core.dataType = GPBDataTypeString,
       },
@@ -1984,9 +1983,9 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueMessage = nil,
         .core.name = "inArray",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_InArray,
+        .core.number = StringRules_FieldNumber_InArray,
         .core.hasIndex = GPBNoHasBit,
-        .core.offset = (uint32_t)offsetof(SENStringRules__storage_, inArray),
+        .core.offset = (uint32_t)offsetof(StringRules__storage_, inArray),
         .core.flags = GPBFieldRepeated,
         .core.dataType = GPBDataTypeString,
       },
@@ -1994,9 +1993,9 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueMessage = nil,
         .core.name = "notInArray",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_NotInArray,
+        .core.number = StringRules_FieldNumber_NotInArray,
         .core.hasIndex = GPBNoHasBit,
-        .core.offset = (uint32_t)offsetof(SENStringRules__storage_, notInArray),
+        .core.offset = (uint32_t)offsetof(StringRules__storage_, notInArray),
         .core.flags = GPBFieldRepeated,
         .core.dataType = GPBDataTypeString,
       },
@@ -2004,7 +2003,7 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueBool = NO,
         .core.name = "email",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_Email,
+        .core.number = StringRules_FieldNumber_Email,
         .core.hasIndex = -1,
         .core.offset = 12,  // Stored in _has_storage_ to save space.
         .core.flags = GPBFieldOptional,
@@ -2014,7 +2013,7 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueBool = NO,
         .core.name = "hostname",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_Hostname,
+        .core.number = StringRules_FieldNumber_Hostname,
         .core.hasIndex = -1,
         .core.offset = 13,  // Stored in _has_storage_ to save space.
         .core.flags = GPBFieldOptional,
@@ -2024,7 +2023,7 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueBool = NO,
         .core.name = "ip",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_Ip,
+        .core.number = StringRules_FieldNumber_Ip,
         .core.hasIndex = -1,
         .core.offset = 14,  // Stored in _has_storage_ to save space.
         .core.flags = GPBFieldOptional,
@@ -2034,7 +2033,7 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueBool = NO,
         .core.name = "ipv4",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_Ipv4,
+        .core.number = StringRules_FieldNumber_Ipv4,
         .core.hasIndex = -1,
         .core.offset = 15,  // Stored in _has_storage_ to save space.
         .core.flags = GPBFieldOptional,
@@ -2044,7 +2043,7 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueBool = NO,
         .core.name = "ipv6",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_Ipv6,
+        .core.number = StringRules_FieldNumber_Ipv6,
         .core.hasIndex = -1,
         .core.offset = 16,  // Stored in _has_storage_ to save space.
         .core.flags = GPBFieldOptional,
@@ -2054,7 +2053,7 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueBool = NO,
         .core.name = "uri",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_Uri,
+        .core.number = StringRules_FieldNumber_Uri,
         .core.hasIndex = -1,
         .core.offset = 17,  // Stored in _has_storage_ to save space.
         .core.flags = GPBFieldOptional,
@@ -2064,7 +2063,7 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueBool = NO,
         .core.name = "uriRef",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_UriRef,
+        .core.number = StringRules_FieldNumber_UriRef,
         .core.hasIndex = -1,
         .core.offset = 18,  // Stored in _has_storage_ to save space.
         .core.flags = GPBFieldOptional,
@@ -2074,9 +2073,9 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueUInt64 = 0ULL,
         .core.name = "len",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_Len,
+        .core.number = StringRules_FieldNumber_Len,
         .core.hasIndex = 1,
-        .core.offset = (uint32_t)offsetof(SENStringRules__storage_, len),
+        .core.offset = (uint32_t)offsetof(StringRules__storage_, len),
         .core.flags = GPBFieldOptional,
         .core.dataType = GPBDataTypeUInt64,
       },
@@ -2084,9 +2083,9 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueUInt64 = 0ULL,
         .core.name = "lenBytes",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_LenBytes,
+        .core.number = StringRules_FieldNumber_LenBytes,
         .core.hasIndex = 4,
-        .core.offset = (uint32_t)offsetof(SENStringRules__storage_, lenBytes),
+        .core.offset = (uint32_t)offsetof(StringRules__storage_, lenBytes),
         .core.flags = GPBFieldOptional,
         .core.dataType = GPBDataTypeUInt64,
       },
@@ -2094,7 +2093,7 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueBool = NO,
         .core.name = "address",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_Address,
+        .core.number = StringRules_FieldNumber_Address,
         .core.hasIndex = -1,
         .core.offset = 19,  // Stored in _has_storage_ to save space.
         .core.flags = GPBFieldOptional,
@@ -2104,7 +2103,7 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueBool = NO,
         .core.name = "uuid",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_Uuid,
+        .core.number = StringRules_FieldNumber_Uuid,
         .core.hasIndex = -1,
         .core.offset = 20,  // Stored in _has_storage_ to save space.
         .core.flags = GPBFieldOptional,
@@ -2114,19 +2113,19 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueString = nil,
         .core.name = "notContains",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_NotContains,
+        .core.number = StringRules_FieldNumber_NotContains,
         .core.hasIndex = 11,
-        .core.offset = (uint32_t)offsetof(SENStringRules__storage_, notContains),
+        .core.offset = (uint32_t)offsetof(StringRules__storage_, notContains),
         .core.flags = GPBFieldOptional,
         .core.dataType = GPBDataTypeString,
       },
       {
-        .defaultValue.valueEnum = SENKnownRegex_Unknown,
+        .defaultValue.valueEnum = KnownRegex_Unknown,
         .core.name = "wellKnownRegex",
-        .core.dataTypeSpecific.enumDescFunc = SENKnownRegex_EnumDescriptor,
-        .core.number = SENStringRules_FieldNumber_WellKnownRegex,
+        .core.dataTypeSpecific.enumDescFunc = KnownRegex_EnumDescriptor,
+        .core.number = StringRules_FieldNumber_WellKnownRegex,
         .core.hasIndex = -1,
-        .core.offset = (uint32_t)offsetof(SENStringRules__storage_, wellKnownRegex),
+        .core.offset = (uint32_t)offsetof(StringRules__storage_, wellKnownRegex),
         .core.flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor),
         .core.dataType = GPBDataTypeEnum,
       },
@@ -2134,7 +2133,7 @@ typedef struct SENStringRules__storage_ {
         .defaultValue.valueBool = YES,
         .core.name = "strict",
         .core.dataTypeSpecific.clazz = Nil,
-        .core.number = SENStringRules_FieldNumber_Strict,
+        .core.number = StringRules_FieldNumber_Strict,
         .core.hasIndex = 21,
         .core.offset = 22,  // Stored in _has_storage_ to save space.
         .core.flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasDefaultValue),
@@ -2142,12 +2141,12 @@ typedef struct SENStringRules__storage_ {
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENStringRules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[StringRules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescriptionWithDefault))
-                                   storageSize:sizeof(SENStringRules__storage_)
+                                   storageSize:sizeof(StringRules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown | GPBDescriptorInitializationFlag_FieldsWithDefault)];
     static const char *oneofs[] = {
       "wellKnown",
@@ -2165,14 +2164,14 @@ typedef struct SENStringRules__storage_ {
 
 @end
 
-void SENStringRules_ClearWellKnownOneOfCase(SENStringRules *message) {
-  GPBDescriptor *descriptor = [SENStringRules descriptor];
+void StringRules_ClearWellKnownOneOfCase(StringRules *message) {
+  GPBDescriptor *descriptor = [StringRules descriptor];
   GPBOneofDescriptor *oneof = [descriptor.oneofs objectAtIndex:0];
   GPBClearOneof(message, oneof);
 }
-#pragma mark - SENBytesRules
+#pragma mark - BytesRules
 
-@implementation SENBytesRules
+@implementation BytesRules
 
 @dynamic wellKnownOneOfCase;
 @dynamic hasConst_p, const_p;
@@ -2189,7 +2188,7 @@ void SENStringRules_ClearWellKnownOneOfCase(SENStringRules *message) {
 @dynamic ipv4;
 @dynamic ipv6;
 
-typedef struct SENBytesRules__storage_ {
+typedef struct BytesRules__storage_ {
   uint32_t _has_storage_[2];
   NSData *const_p;
   NSString *pattern;
@@ -2201,7 +2200,7 @@ typedef struct SENBytesRules__storage_ {
   uint64_t minLen;
   uint64_t maxLen;
   uint64_t len;
-} SENBytesRules__storage_;
+} BytesRules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -2212,88 +2211,88 @@ typedef struct SENBytesRules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENBytesRules_FieldNumber_Const_p,
+        .number = BytesRules_FieldNumber_Const_p,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENBytesRules__storage_, const_p),
+        .offset = (uint32_t)offsetof(BytesRules__storage_, const_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBytes,
       },
       {
         .name = "minLen",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENBytesRules_FieldNumber_MinLen,
+        .number = BytesRules_FieldNumber_MinLen,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(SENBytesRules__storage_, minLen),
+        .offset = (uint32_t)offsetof(BytesRules__storage_, minLen),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },
       {
         .name = "maxLen",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENBytesRules_FieldNumber_MaxLen,
+        .number = BytesRules_FieldNumber_MaxLen,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(SENBytesRules__storage_, maxLen),
+        .offset = (uint32_t)offsetof(BytesRules__storage_, maxLen),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },
       {
         .name = "pattern",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENBytesRules_FieldNumber_Pattern,
+        .number = BytesRules_FieldNumber_Pattern,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENBytesRules__storage_, pattern),
+        .offset = (uint32_t)offsetof(BytesRules__storage_, pattern),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "prefix",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENBytesRules_FieldNumber_Prefix,
+        .number = BytesRules_FieldNumber_Prefix,
         .hasIndex = 5,
-        .offset = (uint32_t)offsetof(SENBytesRules__storage_, prefix),
+        .offset = (uint32_t)offsetof(BytesRules__storage_, prefix),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBytes,
       },
       {
         .name = "suffix",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENBytesRules_FieldNumber_Suffix,
+        .number = BytesRules_FieldNumber_Suffix,
         .hasIndex = 6,
-        .offset = (uint32_t)offsetof(SENBytesRules__storage_, suffix),
+        .offset = (uint32_t)offsetof(BytesRules__storage_, suffix),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBytes,
       },
       {
         .name = "contains",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENBytesRules_FieldNumber_Contains,
+        .number = BytesRules_FieldNumber_Contains,
         .hasIndex = 7,
-        .offset = (uint32_t)offsetof(SENBytesRules__storage_, contains),
+        .offset = (uint32_t)offsetof(BytesRules__storage_, contains),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBytes,
       },
       {
         .name = "inArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENBytesRules_FieldNumber_InArray,
+        .number = BytesRules_FieldNumber_InArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENBytesRules__storage_, inArray),
+        .offset = (uint32_t)offsetof(BytesRules__storage_, inArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeBytes,
       },
       {
         .name = "notInArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENBytesRules_FieldNumber_NotInArray,
+        .number = BytesRules_FieldNumber_NotInArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENBytesRules__storage_, notInArray),
+        .offset = (uint32_t)offsetof(BytesRules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeBytes,
       },
       {
         .name = "ip",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENBytesRules_FieldNumber_Ip,
+        .number = BytesRules_FieldNumber_Ip,
         .hasIndex = -1,
         .offset = 8,  // Stored in _has_storage_ to save space.
         .flags = GPBFieldOptional,
@@ -2302,7 +2301,7 @@ typedef struct SENBytesRules__storage_ {
       {
         .name = "ipv4",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENBytesRules_FieldNumber_Ipv4,
+        .number = BytesRules_FieldNumber_Ipv4,
         .hasIndex = -1,
         .offset = 9,  // Stored in _has_storage_ to save space.
         .flags = GPBFieldOptional,
@@ -2311,7 +2310,7 @@ typedef struct SENBytesRules__storage_ {
       {
         .name = "ipv6",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENBytesRules_FieldNumber_Ipv6,
+        .number = BytesRules_FieldNumber_Ipv6,
         .hasIndex = -1,
         .offset = 10,  // Stored in _has_storage_ to save space.
         .flags = GPBFieldOptional,
@@ -2320,20 +2319,20 @@ typedef struct SENBytesRules__storage_ {
       {
         .name = "len",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENBytesRules_FieldNumber_Len,
+        .number = BytesRules_FieldNumber_Len,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(SENBytesRules__storage_, len),
+        .offset = (uint32_t)offsetof(BytesRules__storage_, len),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENBytesRules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[BytesRules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENBytesRules__storage_)
+                                   storageSize:sizeof(BytesRules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     static const char *oneofs[] = {
       "wellKnown",
@@ -2351,26 +2350,26 @@ typedef struct SENBytesRules__storage_ {
 
 @end
 
-void SENBytesRules_ClearWellKnownOneOfCase(SENBytesRules *message) {
-  GPBDescriptor *descriptor = [SENBytesRules descriptor];
+void BytesRules_ClearWellKnownOneOfCase(BytesRules *message) {
+  GPBDescriptor *descriptor = [BytesRules descriptor];
   GPBOneofDescriptor *oneof = [descriptor.oneofs objectAtIndex:0];
   GPBClearOneof(message, oneof);
 }
-#pragma mark - SENEnumRules
+#pragma mark - EnumRules
 
-@implementation SENEnumRules
+@implementation EnumRules
 
 @dynamic hasConst_p, const_p;
 @dynamic hasDefinedOnly, definedOnly;
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
 
-typedef struct SENEnumRules__storage_ {
+typedef struct EnumRules__storage_ {
   uint32_t _has_storage_[1];
   int32_t const_p;
   GPBInt32Array *inArray;
   GPBInt32Array *notInArray;
-} SENEnumRules__storage_;
+} EnumRules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -2381,16 +2380,16 @@ typedef struct SENEnumRules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENEnumRules_FieldNumber_Const_p,
+        .number = EnumRules_FieldNumber_Const_p,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENEnumRules__storage_, const_p),
+        .offset = (uint32_t)offsetof(EnumRules__storage_, const_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeInt32,
       },
       {
         .name = "definedOnly",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENEnumRules_FieldNumber_DefinedOnly,
+        .number = EnumRules_FieldNumber_DefinedOnly,
         .hasIndex = 1,
         .offset = 2,  // Stored in _has_storage_ to save space.
         .flags = GPBFieldOptional,
@@ -2399,29 +2398,29 @@ typedef struct SENEnumRules__storage_ {
       {
         .name = "inArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENEnumRules_FieldNumber_InArray,
+        .number = EnumRules_FieldNumber_InArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENEnumRules__storage_, inArray),
+        .offset = (uint32_t)offsetof(EnumRules__storage_, inArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeInt32,
       },
       {
         .name = "notInArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENEnumRules_FieldNumber_NotInArray,
+        .number = EnumRules_FieldNumber_NotInArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENEnumRules__storage_, notInArray),
+        .offset = (uint32_t)offsetof(EnumRules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeInt32,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENEnumRules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[EnumRules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENEnumRules__storage_)
+                                   storageSize:sizeof(EnumRules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -2433,16 +2432,16 @@ typedef struct SENEnumRules__storage_ {
 
 @end
 
-#pragma mark - SENMessageRules
+#pragma mark - MessageRules
 
-@implementation SENMessageRules
+@implementation MessageRules
 
 @dynamic hasSkip, skip;
 @dynamic hasRequired, required;
 
-typedef struct SENMessageRules__storage_ {
+typedef struct MessageRules__storage_ {
   uint32_t _has_storage_[1];
-} SENMessageRules__storage_;
+} MessageRules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -2453,7 +2452,7 @@ typedef struct SENMessageRules__storage_ {
       {
         .name = "skip",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENMessageRules_FieldNumber_Skip,
+        .number = MessageRules_FieldNumber_Skip,
         .hasIndex = 0,
         .offset = 1,  // Stored in _has_storage_ to save space.
         .flags = GPBFieldOptional,
@@ -2462,7 +2461,7 @@ typedef struct SENMessageRules__storage_ {
       {
         .name = "required",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENMessageRules_FieldNumber_Required,
+        .number = MessageRules_FieldNumber_Required,
         .hasIndex = 2,
         .offset = 3,  // Stored in _has_storage_ to save space.
         .flags = GPBFieldOptional,
@@ -2470,12 +2469,12 @@ typedef struct SENMessageRules__storage_ {
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENMessageRules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[MessageRules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENMessageRules__storage_)
+                                   storageSize:sizeof(MessageRules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -2487,21 +2486,21 @@ typedef struct SENMessageRules__storage_ {
 
 @end
 
-#pragma mark - SENRepeatedRules
+#pragma mark - RepeatedRules
 
-@implementation SENRepeatedRules
+@implementation RepeatedRules
 
 @dynamic hasMinItems, minItems;
 @dynamic hasMaxItems, maxItems;
 @dynamic hasUnique, unique;
 @dynamic hasItems, items;
 
-typedef struct SENRepeatedRules__storage_ {
+typedef struct RepeatedRules__storage_ {
   uint32_t _has_storage_[1];
-  SENFieldRules *items;
+  FieldRules *items;
   uint64_t minItems;
   uint64_t maxItems;
-} SENRepeatedRules__storage_;
+} RepeatedRules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -2512,25 +2511,25 @@ typedef struct SENRepeatedRules__storage_ {
       {
         .name = "minItems",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENRepeatedRules_FieldNumber_MinItems,
+        .number = RepeatedRules_FieldNumber_MinItems,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENRepeatedRules__storage_, minItems),
+        .offset = (uint32_t)offsetof(RepeatedRules__storage_, minItems),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },
       {
         .name = "maxItems",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENRepeatedRules_FieldNumber_MaxItems,
+        .number = RepeatedRules_FieldNumber_MaxItems,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(SENRepeatedRules__storage_, maxItems),
+        .offset = (uint32_t)offsetof(RepeatedRules__storage_, maxItems),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },
       {
         .name = "unique",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENRepeatedRules_FieldNumber_Unique,
+        .number = RepeatedRules_FieldNumber_Unique,
         .hasIndex = 2,
         .offset = 3,  // Stored in _has_storage_ to save space.
         .flags = GPBFieldOptional,
@@ -2538,21 +2537,21 @@ typedef struct SENRepeatedRules__storage_ {
       },
       {
         .name = "items",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENFieldRules),
-        .number = SENRepeatedRules_FieldNumber_Items,
+        .dataTypeSpecific.clazz = GPBObjCClass(FieldRules),
+        .number = RepeatedRules_FieldNumber_Items,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENRepeatedRules__storage_, items),
+        .offset = (uint32_t)offsetof(RepeatedRules__storage_, items),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENRepeatedRules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[RepeatedRules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENRepeatedRules__storage_)
+                                   storageSize:sizeof(RepeatedRules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -2564,9 +2563,9 @@ typedef struct SENRepeatedRules__storage_ {
 
 @end
 
-#pragma mark - SENMapRules
+#pragma mark - MapRules
 
-@implementation SENMapRules
+@implementation MapRules
 
 @dynamic hasMinPairs, minPairs;
 @dynamic hasMaxPairs, maxPairs;
@@ -2574,13 +2573,13 @@ typedef struct SENRepeatedRules__storage_ {
 @dynamic hasKeys, keys;
 @dynamic hasValues, values;
 
-typedef struct SENMapRules__storage_ {
+typedef struct MapRules__storage_ {
   uint32_t _has_storage_[1];
-  SENFieldRules *keys;
-  SENFieldRules *values;
+  FieldRules *keys;
+  FieldRules *values;
   uint64_t minPairs;
   uint64_t maxPairs;
-} SENMapRules__storage_;
+} MapRules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -2591,25 +2590,25 @@ typedef struct SENMapRules__storage_ {
       {
         .name = "minPairs",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENMapRules_FieldNumber_MinPairs,
+        .number = MapRules_FieldNumber_MinPairs,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(SENMapRules__storage_, minPairs),
+        .offset = (uint32_t)offsetof(MapRules__storage_, minPairs),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },
       {
         .name = "maxPairs",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENMapRules_FieldNumber_MaxPairs,
+        .number = MapRules_FieldNumber_MaxPairs,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(SENMapRules__storage_, maxPairs),
+        .offset = (uint32_t)offsetof(MapRules__storage_, maxPairs),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },
       {
         .name = "noSparse",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENMapRules_FieldNumber_NoSparse,
+        .number = MapRules_FieldNumber_NoSparse,
         .hasIndex = 2,
         .offset = 3,  // Stored in _has_storage_ to save space.
         .flags = GPBFieldOptional,
@@ -2617,30 +2616,30 @@ typedef struct SENMapRules__storage_ {
       },
       {
         .name = "keys",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENFieldRules),
-        .number = SENMapRules_FieldNumber_Keys,
+        .dataTypeSpecific.clazz = GPBObjCClass(FieldRules),
+        .number = MapRules_FieldNumber_Keys,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENMapRules__storage_, keys),
+        .offset = (uint32_t)offsetof(MapRules__storage_, keys),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "values",
-        .dataTypeSpecific.clazz = GPBObjCClass(SENFieldRules),
-        .number = SENMapRules_FieldNumber_Values,
+        .dataTypeSpecific.clazz = GPBObjCClass(FieldRules),
+        .number = MapRules_FieldNumber_Values,
         .hasIndex = 5,
-        .offset = (uint32_t)offsetof(SENMapRules__storage_, values),
+        .offset = (uint32_t)offsetof(MapRules__storage_, values),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENMapRules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[MapRules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENMapRules__storage_)
+                                   storageSize:sizeof(MapRules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -2652,19 +2651,19 @@ typedef struct SENMapRules__storage_ {
 
 @end
 
-#pragma mark - SENAnyRules
+#pragma mark - AnyRules
 
-@implementation SENAnyRules
+@implementation AnyRules
 
 @dynamic hasRequired, required;
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
 
-typedef struct SENAnyRules__storage_ {
+typedef struct AnyRules__storage_ {
   uint32_t _has_storage_[1];
   NSMutableArray *inArray;
   NSMutableArray *notInArray;
-} SENAnyRules__storage_;
+} AnyRules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -2675,7 +2674,7 @@ typedef struct SENAnyRules__storage_ {
       {
         .name = "required",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENAnyRules_FieldNumber_Required,
+        .number = AnyRules_FieldNumber_Required,
         .hasIndex = 0,
         .offset = 1,  // Stored in _has_storage_ to save space.
         .flags = GPBFieldOptional,
@@ -2684,29 +2683,29 @@ typedef struct SENAnyRules__storage_ {
       {
         .name = "inArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENAnyRules_FieldNumber_InArray,
+        .number = AnyRules_FieldNumber_InArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENAnyRules__storage_, inArray),
+        .offset = (uint32_t)offsetof(AnyRules__storage_, inArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeString,
       },
       {
         .name = "notInArray",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENAnyRules_FieldNumber_NotInArray,
+        .number = AnyRules_FieldNumber_NotInArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENAnyRules__storage_, notInArray),
+        .offset = (uint32_t)offsetof(AnyRules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENAnyRules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[AnyRules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENAnyRules__storage_)
+                                   storageSize:sizeof(AnyRules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -2718,9 +2717,9 @@ typedef struct SENAnyRules__storage_ {
 
 @end
 
-#pragma mark - SENDurationRules
+#pragma mark - DurationRules
 
-@implementation SENDurationRules
+@implementation DurationRules
 
 @dynamic hasRequired, required;
 @dynamic hasConst_p, const_p;
@@ -2731,7 +2730,7 @@ typedef struct SENAnyRules__storage_ {
 @dynamic inArray, inArray_Count;
 @dynamic notInArray, notInArray_Count;
 
-typedef struct SENDurationRules__storage_ {
+typedef struct DurationRules__storage_ {
   uint32_t _has_storage_[1];
   GPBDuration *const_p;
   GPBDuration *lt;
@@ -2740,7 +2739,7 @@ typedef struct SENDurationRules__storage_ {
   GPBDuration *gte;
   NSMutableArray *inArray;
   NSMutableArray *notInArray;
-} SENDurationRules__storage_;
+} DurationRules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -2751,7 +2750,7 @@ typedef struct SENDurationRules__storage_ {
       {
         .name = "required",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENDurationRules_FieldNumber_Required,
+        .number = DurationRules_FieldNumber_Required,
         .hasIndex = 0,
         .offset = 1,  // Stored in _has_storage_ to save space.
         .flags = GPBFieldOptional,
@@ -2760,74 +2759,74 @@ typedef struct SENDurationRules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = GPBObjCClass(GPBDuration),
-        .number = SENDurationRules_FieldNumber_Const_p,
+        .number = DurationRules_FieldNumber_Const_p,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(SENDurationRules__storage_, const_p),
+        .offset = (uint32_t)offsetof(DurationRules__storage_, const_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "lt",
         .dataTypeSpecific.clazz = GPBObjCClass(GPBDuration),
-        .number = SENDurationRules_FieldNumber_Lt,
+        .number = DurationRules_FieldNumber_Lt,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(SENDurationRules__storage_, lt),
+        .offset = (uint32_t)offsetof(DurationRules__storage_, lt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "lte",
         .dataTypeSpecific.clazz = GPBObjCClass(GPBDuration),
-        .number = SENDurationRules_FieldNumber_Lte,
+        .number = DurationRules_FieldNumber_Lte,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENDurationRules__storage_, lte),
+        .offset = (uint32_t)offsetof(DurationRules__storage_, lte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "gt",
         .dataTypeSpecific.clazz = GPBObjCClass(GPBDuration),
-        .number = SENDurationRules_FieldNumber_Gt,
+        .number = DurationRules_FieldNumber_Gt,
         .hasIndex = 5,
-        .offset = (uint32_t)offsetof(SENDurationRules__storage_, gt),
+        .offset = (uint32_t)offsetof(DurationRules__storage_, gt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "gte",
         .dataTypeSpecific.clazz = GPBObjCClass(GPBDuration),
-        .number = SENDurationRules_FieldNumber_Gte,
+        .number = DurationRules_FieldNumber_Gte,
         .hasIndex = 6,
-        .offset = (uint32_t)offsetof(SENDurationRules__storage_, gte),
+        .offset = (uint32_t)offsetof(DurationRules__storage_, gte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "inArray",
         .dataTypeSpecific.clazz = GPBObjCClass(GPBDuration),
-        .number = SENDurationRules_FieldNumber_InArray,
+        .number = DurationRules_FieldNumber_InArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENDurationRules__storage_, inArray),
+        .offset = (uint32_t)offsetof(DurationRules__storage_, inArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "notInArray",
         .dataTypeSpecific.clazz = GPBObjCClass(GPBDuration),
-        .number = SENDurationRules_FieldNumber_NotInArray,
+        .number = DurationRules_FieldNumber_NotInArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(SENDurationRules__storage_, notInArray),
+        .offset = (uint32_t)offsetof(DurationRules__storage_, notInArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENDurationRules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[DurationRules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENDurationRules__storage_)
+                                   storageSize:sizeof(DurationRules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
@@ -2839,9 +2838,9 @@ typedef struct SENDurationRules__storage_ {
 
 @end
 
-#pragma mark - SENTimestampRules
+#pragma mark - TimestampRules
 
-@implementation SENTimestampRules
+@implementation TimestampRules
 
 @dynamic hasRequired, required;
 @dynamic hasConst_p, const_p;
@@ -2853,7 +2852,7 @@ typedef struct SENDurationRules__storage_ {
 @dynamic hasGtNow, gtNow;
 @dynamic hasWithin, within;
 
-typedef struct SENTimestampRules__storage_ {
+typedef struct TimestampRules__storage_ {
   uint32_t _has_storage_[1];
   GPBTimestamp *const_p;
   GPBTimestamp *lt;
@@ -2861,7 +2860,7 @@ typedef struct SENTimestampRules__storage_ {
   GPBTimestamp *gt;
   GPBTimestamp *gte;
   GPBDuration *within;
-} SENTimestampRules__storage_;
+} TimestampRules__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -2872,7 +2871,7 @@ typedef struct SENTimestampRules__storage_ {
       {
         .name = "required",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENTimestampRules_FieldNumber_Required,
+        .number = TimestampRules_FieldNumber_Required,
         .hasIndex = 0,
         .offset = 1,  // Stored in _has_storage_ to save space.
         .flags = GPBFieldOptional,
@@ -2881,52 +2880,52 @@ typedef struct SENTimestampRules__storage_ {
       {
         .name = "const_p",
         .dataTypeSpecific.clazz = GPBObjCClass(GPBTimestamp),
-        .number = SENTimestampRules_FieldNumber_Const_p,
+        .number = TimestampRules_FieldNumber_Const_p,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(SENTimestampRules__storage_, const_p),
+        .offset = (uint32_t)offsetof(TimestampRules__storage_, const_p),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "lt",
         .dataTypeSpecific.clazz = GPBObjCClass(GPBTimestamp),
-        .number = SENTimestampRules_FieldNumber_Lt,
+        .number = TimestampRules_FieldNumber_Lt,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(SENTimestampRules__storage_, lt),
+        .offset = (uint32_t)offsetof(TimestampRules__storage_, lt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "lte",
         .dataTypeSpecific.clazz = GPBObjCClass(GPBTimestamp),
-        .number = SENTimestampRules_FieldNumber_Lte,
+        .number = TimestampRules_FieldNumber_Lte,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(SENTimestampRules__storage_, lte),
+        .offset = (uint32_t)offsetof(TimestampRules__storage_, lte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "gt",
         .dataTypeSpecific.clazz = GPBObjCClass(GPBTimestamp),
-        .number = SENTimestampRules_FieldNumber_Gt,
+        .number = TimestampRules_FieldNumber_Gt,
         .hasIndex = 5,
-        .offset = (uint32_t)offsetof(SENTimestampRules__storage_, gt),
+        .offset = (uint32_t)offsetof(TimestampRules__storage_, gt),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "gte",
         .dataTypeSpecific.clazz = GPBObjCClass(GPBTimestamp),
-        .number = SENTimestampRules_FieldNumber_Gte,
+        .number = TimestampRules_FieldNumber_Gte,
         .hasIndex = 6,
-        .offset = (uint32_t)offsetof(SENTimestampRules__storage_, gte),
+        .offset = (uint32_t)offsetof(TimestampRules__storage_, gte),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "ltNow",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENTimestampRules_FieldNumber_LtNow,
+        .number = TimestampRules_FieldNumber_LtNow,
         .hasIndex = 7,
         .offset = 8,  // Stored in _has_storage_ to save space.
         .flags = GPBFieldOptional,
@@ -2935,7 +2934,7 @@ typedef struct SENTimestampRules__storage_ {
       {
         .name = "gtNow",
         .dataTypeSpecific.clazz = Nil,
-        .number = SENTimestampRules_FieldNumber_GtNow,
+        .number = TimestampRules_FieldNumber_GtNow,
         .hasIndex = 9,
         .offset = 10,  // Stored in _has_storage_ to save space.
         .flags = GPBFieldOptional,
@@ -2944,20 +2943,20 @@ typedef struct SENTimestampRules__storage_ {
       {
         .name = "within",
         .dataTypeSpecific.clazz = GPBObjCClass(GPBDuration),
-        .number = SENTimestampRules_FieldNumber_Within,
+        .number = TimestampRules_FieldNumber_Within,
         .hasIndex = 11,
-        .offset = (uint32_t)offsetof(SENTimestampRules__storage_, within),
+        .offset = (uint32_t)offsetof(TimestampRules__storage_, within),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[SENTimestampRules class]
-                                     rootClass:[SENValidateRoot class]
-                                          file:SENValidateRoot_FileDescriptor()
+        [GPBDescriptor allocDescriptorForClass:[TimestampRules class]
+                                     rootClass:[ValidateRoot class]
+                                          file:ValidateRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(SENTimestampRules__storage_)
+                                   storageSize:sizeof(TimestampRules__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");

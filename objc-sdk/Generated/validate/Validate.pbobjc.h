@@ -27,54 +27,54 @@
 
 CF_EXTERN_C_BEGIN
 
-@class SENAnyRules;
-@class SENBoolRules;
-@class SENBytesRules;
-@class SENDoubleRules;
-@class SENDurationRules;
-@class SENEnumRules;
-@class SENFieldRules;
-@class SENFixed32Rules;
-@class SENFixed64Rules;
-@class SENFloatRules;
-@class SENInt32Rules;
-@class SENInt64Rules;
-@class SENMapRules;
-@class SENMessageRules;
-@class SENRepeatedRules;
-@class SENSFixed32Rules;
-@class SENSFixed64Rules;
-@class SENSInt32Rules;
-@class SENSInt64Rules;
-@class SENStringRules;
-@class SENTimestampRules;
-@class SENUInt32Rules;
-@class SENUInt64Rules;
+@class AnyRules;
+@class BoolRules;
+@class BytesRules;
+@class DoubleRules;
+@class DurationRules;
+@class EnumRules;
+@class FieldRules;
+@class Fixed32Rules;
+@class Fixed64Rules;
+@class FloatRules;
+@class Int32Rules;
+@class Int64Rules;
+@class MapRules;
+@class MessageRules;
+@class RepeatedRules;
+@class SFixed32Rules;
+@class SFixed64Rules;
+@class SInt32Rules;
+@class SInt64Rules;
+@class StringRules;
+@class TimestampRules;
+@class UInt32Rules;
+@class UInt64Rules;
 
 NS_ASSUME_NONNULL_BEGIN
 
-#pragma mark - Enum SENKnownRegex
+#pragma mark - Enum KnownRegex
 
 /** WellKnownRegex contain some well-known patterns. */
-typedef GPB_ENUM(SENKnownRegex) {
-  SENKnownRegex_Unknown = 0,
+typedef GPB_ENUM(KnownRegex) {
+  KnownRegex_Unknown = 0,
 
   /** HTTP header name as defined by RFC 7230. */
-  SENKnownRegex_HTTPHeaderName = 1,
+  KnownRegex_HTTPHeaderName = 1,
 
   /** HTTP header value as defined by RFC 7230. */
-  SENKnownRegex_HTTPHeaderValue = 2,
+  KnownRegex_HTTPHeaderValue = 2,
 };
 
-GPBEnumDescriptor *SENKnownRegex_EnumDescriptor(void);
+GPBEnumDescriptor *KnownRegex_EnumDescriptor(void);
 
 /**
  * Checks to see if the given value is defined by the enum or was not known at
  * the time this source was generated.
  **/
-BOOL SENKnownRegex_IsValidValue(int32_t value);
+BOOL KnownRegex_IsValidValue(int32_t value);
 
-#pragma mark - SENValidateRoot
+#pragma mark - ValidateRoot
 
 /**
  * Exposes the extension registry for this file.
@@ -86,10 +86,10 @@ BOOL SENKnownRegex_IsValidValue(int32_t value);
  * which is a @c GPBExtensionRegistry that includes all the extensions defined by
  * this file and all files that it depends on.
  **/
-GPB_FINAL @interface SENValidateRoot : GPBRootObject
+GPB_FINAL @interface ValidateRoot : GPBRootObject
 @end
 
-@interface SENValidateRoot (DynamicMethods)
+@interface ValidateRoot (DynamicMethods)
 /**
  * Disabled nullifies any validation rules for this message, including any
  * message fields associated with it that do support validation.
@@ -107,138 +107,138 @@ GPB_FINAL @interface SENValidateRoot : GPBRootObject
 + (GPBExtensionDescriptor *)rules;
 @end
 
-#pragma mark - SENFieldRules
+#pragma mark - FieldRules
 
-typedef GPB_ENUM(SENFieldRules_FieldNumber) {
-  SENFieldRules_FieldNumber_Float_p = 1,
-  SENFieldRules_FieldNumber_Double_p = 2,
-  SENFieldRules_FieldNumber_Int32 = 3,
-  SENFieldRules_FieldNumber_Int64 = 4,
-  SENFieldRules_FieldNumber_Uint32 = 5,
-  SENFieldRules_FieldNumber_Uint64 = 6,
-  SENFieldRules_FieldNumber_Sint32 = 7,
-  SENFieldRules_FieldNumber_Sint64 = 8,
-  SENFieldRules_FieldNumber_Fixed32 = 9,
-  SENFieldRules_FieldNumber_Fixed64 = 10,
-  SENFieldRules_FieldNumber_Sfixed32 = 11,
-  SENFieldRules_FieldNumber_Sfixed64 = 12,
-  SENFieldRules_FieldNumber_Bool_p = 13,
-  SENFieldRules_FieldNumber_String = 14,
-  SENFieldRules_FieldNumber_Bytes = 15,
-  SENFieldRules_FieldNumber_Enum_p = 16,
-  SENFieldRules_FieldNumber_Message = 17,
-  SENFieldRules_FieldNumber_Repeated = 18,
-  SENFieldRules_FieldNumber_Map = 19,
-  SENFieldRules_FieldNumber_Any = 20,
-  SENFieldRules_FieldNumber_Duration = 21,
-  SENFieldRules_FieldNumber_Timestamp = 22,
+typedef GPB_ENUM(FieldRules_FieldNumber) {
+  FieldRules_FieldNumber_Float_p = 1,
+  FieldRules_FieldNumber_Double_p = 2,
+  FieldRules_FieldNumber_Int32 = 3,
+  FieldRules_FieldNumber_Int64 = 4,
+  FieldRules_FieldNumber_Uint32 = 5,
+  FieldRules_FieldNumber_Uint64 = 6,
+  FieldRules_FieldNumber_Sint32 = 7,
+  FieldRules_FieldNumber_Sint64 = 8,
+  FieldRules_FieldNumber_Fixed32 = 9,
+  FieldRules_FieldNumber_Fixed64 = 10,
+  FieldRules_FieldNumber_Sfixed32 = 11,
+  FieldRules_FieldNumber_Sfixed64 = 12,
+  FieldRules_FieldNumber_Bool_p = 13,
+  FieldRules_FieldNumber_String = 14,
+  FieldRules_FieldNumber_Bytes = 15,
+  FieldRules_FieldNumber_Enum_p = 16,
+  FieldRules_FieldNumber_Message = 17,
+  FieldRules_FieldNumber_Repeated = 18,
+  FieldRules_FieldNumber_Map = 19,
+  FieldRules_FieldNumber_Any = 20,
+  FieldRules_FieldNumber_Duration = 21,
+  FieldRules_FieldNumber_Timestamp = 22,
 };
 
-typedef GPB_ENUM(SENFieldRules_Type_OneOfCase) {
-  SENFieldRules_Type_OneOfCase_GPBUnsetOneOfCase = 0,
-  SENFieldRules_Type_OneOfCase_Float_p = 1,
-  SENFieldRules_Type_OneOfCase_Double_p = 2,
-  SENFieldRules_Type_OneOfCase_Int32 = 3,
-  SENFieldRules_Type_OneOfCase_Int64 = 4,
-  SENFieldRules_Type_OneOfCase_Uint32 = 5,
-  SENFieldRules_Type_OneOfCase_Uint64 = 6,
-  SENFieldRules_Type_OneOfCase_Sint32 = 7,
-  SENFieldRules_Type_OneOfCase_Sint64 = 8,
-  SENFieldRules_Type_OneOfCase_Fixed32 = 9,
-  SENFieldRules_Type_OneOfCase_Fixed64 = 10,
-  SENFieldRules_Type_OneOfCase_Sfixed32 = 11,
-  SENFieldRules_Type_OneOfCase_Sfixed64 = 12,
-  SENFieldRules_Type_OneOfCase_Bool_p = 13,
-  SENFieldRules_Type_OneOfCase_String = 14,
-  SENFieldRules_Type_OneOfCase_Bytes = 15,
-  SENFieldRules_Type_OneOfCase_Enum_p = 16,
-  SENFieldRules_Type_OneOfCase_Repeated = 18,
-  SENFieldRules_Type_OneOfCase_Map = 19,
-  SENFieldRules_Type_OneOfCase_Any = 20,
-  SENFieldRules_Type_OneOfCase_Duration = 21,
-  SENFieldRules_Type_OneOfCase_Timestamp = 22,
+typedef GPB_ENUM(FieldRules_Type_OneOfCase) {
+  FieldRules_Type_OneOfCase_GPBUnsetOneOfCase = 0,
+  FieldRules_Type_OneOfCase_Float_p = 1,
+  FieldRules_Type_OneOfCase_Double_p = 2,
+  FieldRules_Type_OneOfCase_Int32 = 3,
+  FieldRules_Type_OneOfCase_Int64 = 4,
+  FieldRules_Type_OneOfCase_Uint32 = 5,
+  FieldRules_Type_OneOfCase_Uint64 = 6,
+  FieldRules_Type_OneOfCase_Sint32 = 7,
+  FieldRules_Type_OneOfCase_Sint64 = 8,
+  FieldRules_Type_OneOfCase_Fixed32 = 9,
+  FieldRules_Type_OneOfCase_Fixed64 = 10,
+  FieldRules_Type_OneOfCase_Sfixed32 = 11,
+  FieldRules_Type_OneOfCase_Sfixed64 = 12,
+  FieldRules_Type_OneOfCase_Bool_p = 13,
+  FieldRules_Type_OneOfCase_String = 14,
+  FieldRules_Type_OneOfCase_Bytes = 15,
+  FieldRules_Type_OneOfCase_Enum_p = 16,
+  FieldRules_Type_OneOfCase_Repeated = 18,
+  FieldRules_Type_OneOfCase_Map = 19,
+  FieldRules_Type_OneOfCase_Any = 20,
+  FieldRules_Type_OneOfCase_Duration = 21,
+  FieldRules_Type_OneOfCase_Timestamp = 22,
 };
 
 /**
  * FieldRules encapsulates the rules for each type of field. Depending on the
  * field, the correct set should be used to ensure proper validations.
  **/
-GPB_FINAL @interface SENFieldRules : GPBMessage
+GPB_FINAL @interface FieldRules : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) SENMessageRules *message;
+@property(nonatomic, readwrite, strong, null_resettable) MessageRules *message;
 /** Test to see if @c message has been set. */
 @property(nonatomic, readwrite) BOOL hasMessage;
 
-@property(nonatomic, readonly) SENFieldRules_Type_OneOfCase typeOneOfCase;
+@property(nonatomic, readonly) FieldRules_Type_OneOfCase typeOneOfCase;
 
 /** Scalar Field Types */
-@property(nonatomic, readwrite, strong, null_resettable) SENFloatRules *float_p;
+@property(nonatomic, readwrite, strong, null_resettable) FloatRules *float_p;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENDoubleRules *double_p;
+@property(nonatomic, readwrite, strong, null_resettable) DoubleRules *double_p;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENInt32Rules *int32;
+@property(nonatomic, readwrite, strong, null_resettable) Int32Rules *int32;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENInt64Rules *int64;
+@property(nonatomic, readwrite, strong, null_resettable) Int64Rules *int64;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENUInt32Rules *uint32;
+@property(nonatomic, readwrite, strong, null_resettable) UInt32Rules *uint32;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENUInt64Rules *uint64;
+@property(nonatomic, readwrite, strong, null_resettable) UInt64Rules *uint64;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENSInt32Rules *sint32;
+@property(nonatomic, readwrite, strong, null_resettable) SInt32Rules *sint32;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENSInt64Rules *sint64;
+@property(nonatomic, readwrite, strong, null_resettable) SInt64Rules *sint64;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENFixed32Rules *fixed32;
+@property(nonatomic, readwrite, strong, null_resettable) Fixed32Rules *fixed32;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENFixed64Rules *fixed64;
+@property(nonatomic, readwrite, strong, null_resettable) Fixed64Rules *fixed64;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENSFixed32Rules *sfixed32;
+@property(nonatomic, readwrite, strong, null_resettable) SFixed32Rules *sfixed32;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENSFixed64Rules *sfixed64;
+@property(nonatomic, readwrite, strong, null_resettable) SFixed64Rules *sfixed64;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENBoolRules *bool_p;
+@property(nonatomic, readwrite, strong, null_resettable) BoolRules *bool_p;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENStringRules *string;
+@property(nonatomic, readwrite, strong, null_resettable) StringRules *string;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENBytesRules *bytes;
+@property(nonatomic, readwrite, strong, null_resettable) BytesRules *bytes;
 
 /** Complex Field Types */
-@property(nonatomic, readwrite, strong, null_resettable) SENEnumRules *enum_p;
+@property(nonatomic, readwrite, strong, null_resettable) EnumRules *enum_p;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENRepeatedRules *repeated;
+@property(nonatomic, readwrite, strong, null_resettable) RepeatedRules *repeated;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENMapRules *map;
+@property(nonatomic, readwrite, strong, null_resettable) MapRules *map;
 
 /** Well-Known Field Types */
-@property(nonatomic, readwrite, strong, null_resettable) SENAnyRules *any;
+@property(nonatomic, readwrite, strong, null_resettable) AnyRules *any;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENDurationRules *duration;
+@property(nonatomic, readwrite, strong, null_resettable) DurationRules *duration;
 
-@property(nonatomic, readwrite, strong, null_resettable) SENTimestampRules *timestamp;
+@property(nonatomic, readwrite, strong, null_resettable) TimestampRules *timestamp;
 
 @end
 
 /**
  * Clears whatever value was set for the oneof 'type'.
  **/
-void SENFieldRules_ClearTypeOneOfCase(SENFieldRules *message);
+void FieldRules_ClearTypeOneOfCase(FieldRules *message);
 
-#pragma mark - SENFloatRules
+#pragma mark - FloatRules
 
-typedef GPB_ENUM(SENFloatRules_FieldNumber) {
-  SENFloatRules_FieldNumber_Const_p = 1,
-  SENFloatRules_FieldNumber_Lt = 2,
-  SENFloatRules_FieldNumber_Lte = 3,
-  SENFloatRules_FieldNumber_Gt = 4,
-  SENFloatRules_FieldNumber_Gte = 5,
-  SENFloatRules_FieldNumber_InArray = 6,
-  SENFloatRules_FieldNumber_NotInArray = 7,
+typedef GPB_ENUM(FloatRules_FieldNumber) {
+  FloatRules_FieldNumber_Const_p = 1,
+  FloatRules_FieldNumber_Lt = 2,
+  FloatRules_FieldNumber_Lte = 3,
+  FloatRules_FieldNumber_Gt = 4,
+  FloatRules_FieldNumber_Gte = 5,
+  FloatRules_FieldNumber_InArray = 6,
+  FloatRules_FieldNumber_NotInArray = 7,
 };
 
 /**
  * FloatRules describes the constraints applied to `float` values
  **/
-GPB_FINAL @interface SENFloatRules : GPBMessage
+GPB_FINAL @interface FloatRules : GPBMessage
 
 /** Const specifies that this field must be exactly the specified value */
 @property(nonatomic, readwrite) float const_p;
@@ -292,22 +292,22 @@ GPB_FINAL @interface SENFloatRules : GPBMessage
 
 @end
 
-#pragma mark - SENDoubleRules
+#pragma mark - DoubleRules
 
-typedef GPB_ENUM(SENDoubleRules_FieldNumber) {
-  SENDoubleRules_FieldNumber_Const_p = 1,
-  SENDoubleRules_FieldNumber_Lt = 2,
-  SENDoubleRules_FieldNumber_Lte = 3,
-  SENDoubleRules_FieldNumber_Gt = 4,
-  SENDoubleRules_FieldNumber_Gte = 5,
-  SENDoubleRules_FieldNumber_InArray = 6,
-  SENDoubleRules_FieldNumber_NotInArray = 7,
+typedef GPB_ENUM(DoubleRules_FieldNumber) {
+  DoubleRules_FieldNumber_Const_p = 1,
+  DoubleRules_FieldNumber_Lt = 2,
+  DoubleRules_FieldNumber_Lte = 3,
+  DoubleRules_FieldNumber_Gt = 4,
+  DoubleRules_FieldNumber_Gte = 5,
+  DoubleRules_FieldNumber_InArray = 6,
+  DoubleRules_FieldNumber_NotInArray = 7,
 };
 
 /**
  * DoubleRules describes the constraints applied to `double` values
  **/
-GPB_FINAL @interface SENDoubleRules : GPBMessage
+GPB_FINAL @interface DoubleRules : GPBMessage
 
 /** Const specifies that this field must be exactly the specified value */
 @property(nonatomic, readwrite) double const_p;
@@ -361,22 +361,22 @@ GPB_FINAL @interface SENDoubleRules : GPBMessage
 
 @end
 
-#pragma mark - SENInt32Rules
+#pragma mark - Int32Rules
 
-typedef GPB_ENUM(SENInt32Rules_FieldNumber) {
-  SENInt32Rules_FieldNumber_Const_p = 1,
-  SENInt32Rules_FieldNumber_Lt = 2,
-  SENInt32Rules_FieldNumber_Lte = 3,
-  SENInt32Rules_FieldNumber_Gt = 4,
-  SENInt32Rules_FieldNumber_Gte = 5,
-  SENInt32Rules_FieldNumber_InArray = 6,
-  SENInt32Rules_FieldNumber_NotInArray = 7,
+typedef GPB_ENUM(Int32Rules_FieldNumber) {
+  Int32Rules_FieldNumber_Const_p = 1,
+  Int32Rules_FieldNumber_Lt = 2,
+  Int32Rules_FieldNumber_Lte = 3,
+  Int32Rules_FieldNumber_Gt = 4,
+  Int32Rules_FieldNumber_Gte = 5,
+  Int32Rules_FieldNumber_InArray = 6,
+  Int32Rules_FieldNumber_NotInArray = 7,
 };
 
 /**
  * Int32Rules describes the constraints applied to `int32` values
  **/
-GPB_FINAL @interface SENInt32Rules : GPBMessage
+GPB_FINAL @interface Int32Rules : GPBMessage
 
 /** Const specifies that this field must be exactly the specified value */
 @property(nonatomic, readwrite) int32_t const_p;
@@ -430,22 +430,22 @@ GPB_FINAL @interface SENInt32Rules : GPBMessage
 
 @end
 
-#pragma mark - SENInt64Rules
+#pragma mark - Int64Rules
 
-typedef GPB_ENUM(SENInt64Rules_FieldNumber) {
-  SENInt64Rules_FieldNumber_Const_p = 1,
-  SENInt64Rules_FieldNumber_Lt = 2,
-  SENInt64Rules_FieldNumber_Lte = 3,
-  SENInt64Rules_FieldNumber_Gt = 4,
-  SENInt64Rules_FieldNumber_Gte = 5,
-  SENInt64Rules_FieldNumber_InArray = 6,
-  SENInt64Rules_FieldNumber_NotInArray = 7,
+typedef GPB_ENUM(Int64Rules_FieldNumber) {
+  Int64Rules_FieldNumber_Const_p = 1,
+  Int64Rules_FieldNumber_Lt = 2,
+  Int64Rules_FieldNumber_Lte = 3,
+  Int64Rules_FieldNumber_Gt = 4,
+  Int64Rules_FieldNumber_Gte = 5,
+  Int64Rules_FieldNumber_InArray = 6,
+  Int64Rules_FieldNumber_NotInArray = 7,
 };
 
 /**
  * Int64Rules describes the constraints applied to `int64` values
  **/
-GPB_FINAL @interface SENInt64Rules : GPBMessage
+GPB_FINAL @interface Int64Rules : GPBMessage
 
 /** Const specifies that this field must be exactly the specified value */
 @property(nonatomic, readwrite) int64_t const_p;
@@ -499,22 +499,22 @@ GPB_FINAL @interface SENInt64Rules : GPBMessage
 
 @end
 
-#pragma mark - SENUInt32Rules
+#pragma mark - UInt32Rules
 
-typedef GPB_ENUM(SENUInt32Rules_FieldNumber) {
-  SENUInt32Rules_FieldNumber_Const_p = 1,
-  SENUInt32Rules_FieldNumber_Lt = 2,
-  SENUInt32Rules_FieldNumber_Lte = 3,
-  SENUInt32Rules_FieldNumber_Gt = 4,
-  SENUInt32Rules_FieldNumber_Gte = 5,
-  SENUInt32Rules_FieldNumber_InArray = 6,
-  SENUInt32Rules_FieldNumber_NotInArray = 7,
+typedef GPB_ENUM(UInt32Rules_FieldNumber) {
+  UInt32Rules_FieldNumber_Const_p = 1,
+  UInt32Rules_FieldNumber_Lt = 2,
+  UInt32Rules_FieldNumber_Lte = 3,
+  UInt32Rules_FieldNumber_Gt = 4,
+  UInt32Rules_FieldNumber_Gte = 5,
+  UInt32Rules_FieldNumber_InArray = 6,
+  UInt32Rules_FieldNumber_NotInArray = 7,
 };
 
 /**
  * UInt32Rules describes the constraints applied to `uint32` values
  **/
-GPB_FINAL @interface SENUInt32Rules : GPBMessage
+GPB_FINAL @interface UInt32Rules : GPBMessage
 
 /** Const specifies that this field must be exactly the specified value */
 @property(nonatomic, readwrite) uint32_t const_p;
@@ -568,22 +568,22 @@ GPB_FINAL @interface SENUInt32Rules : GPBMessage
 
 @end
 
-#pragma mark - SENUInt64Rules
+#pragma mark - UInt64Rules
 
-typedef GPB_ENUM(SENUInt64Rules_FieldNumber) {
-  SENUInt64Rules_FieldNumber_Const_p = 1,
-  SENUInt64Rules_FieldNumber_Lt = 2,
-  SENUInt64Rules_FieldNumber_Lte = 3,
-  SENUInt64Rules_FieldNumber_Gt = 4,
-  SENUInt64Rules_FieldNumber_Gte = 5,
-  SENUInt64Rules_FieldNumber_InArray = 6,
-  SENUInt64Rules_FieldNumber_NotInArray = 7,
+typedef GPB_ENUM(UInt64Rules_FieldNumber) {
+  UInt64Rules_FieldNumber_Const_p = 1,
+  UInt64Rules_FieldNumber_Lt = 2,
+  UInt64Rules_FieldNumber_Lte = 3,
+  UInt64Rules_FieldNumber_Gt = 4,
+  UInt64Rules_FieldNumber_Gte = 5,
+  UInt64Rules_FieldNumber_InArray = 6,
+  UInt64Rules_FieldNumber_NotInArray = 7,
 };
 
 /**
  * UInt64Rules describes the constraints applied to `uint64` values
  **/
-GPB_FINAL @interface SENUInt64Rules : GPBMessage
+GPB_FINAL @interface UInt64Rules : GPBMessage
 
 /** Const specifies that this field must be exactly the specified value */
 @property(nonatomic, readwrite) uint64_t const_p;
@@ -637,22 +637,22 @@ GPB_FINAL @interface SENUInt64Rules : GPBMessage
 
 @end
 
-#pragma mark - SENSInt32Rules
+#pragma mark - SInt32Rules
 
-typedef GPB_ENUM(SENSInt32Rules_FieldNumber) {
-  SENSInt32Rules_FieldNumber_Const_p = 1,
-  SENSInt32Rules_FieldNumber_Lt = 2,
-  SENSInt32Rules_FieldNumber_Lte = 3,
-  SENSInt32Rules_FieldNumber_Gt = 4,
-  SENSInt32Rules_FieldNumber_Gte = 5,
-  SENSInt32Rules_FieldNumber_InArray = 6,
-  SENSInt32Rules_FieldNumber_NotInArray = 7,
+typedef GPB_ENUM(SInt32Rules_FieldNumber) {
+  SInt32Rules_FieldNumber_Const_p = 1,
+  SInt32Rules_FieldNumber_Lt = 2,
+  SInt32Rules_FieldNumber_Lte = 3,
+  SInt32Rules_FieldNumber_Gt = 4,
+  SInt32Rules_FieldNumber_Gte = 5,
+  SInt32Rules_FieldNumber_InArray = 6,
+  SInt32Rules_FieldNumber_NotInArray = 7,
 };
 
 /**
  * SInt32Rules describes the constraints applied to `sint32` values
  **/
-GPB_FINAL @interface SENSInt32Rules : GPBMessage
+GPB_FINAL @interface SInt32Rules : GPBMessage
 
 /** Const specifies that this field must be exactly the specified value */
 @property(nonatomic, readwrite) int32_t const_p;
@@ -706,22 +706,22 @@ GPB_FINAL @interface SENSInt32Rules : GPBMessage
 
 @end
 
-#pragma mark - SENSInt64Rules
+#pragma mark - SInt64Rules
 
-typedef GPB_ENUM(SENSInt64Rules_FieldNumber) {
-  SENSInt64Rules_FieldNumber_Const_p = 1,
-  SENSInt64Rules_FieldNumber_Lt = 2,
-  SENSInt64Rules_FieldNumber_Lte = 3,
-  SENSInt64Rules_FieldNumber_Gt = 4,
-  SENSInt64Rules_FieldNumber_Gte = 5,
-  SENSInt64Rules_FieldNumber_InArray = 6,
-  SENSInt64Rules_FieldNumber_NotInArray = 7,
+typedef GPB_ENUM(SInt64Rules_FieldNumber) {
+  SInt64Rules_FieldNumber_Const_p = 1,
+  SInt64Rules_FieldNumber_Lt = 2,
+  SInt64Rules_FieldNumber_Lte = 3,
+  SInt64Rules_FieldNumber_Gt = 4,
+  SInt64Rules_FieldNumber_Gte = 5,
+  SInt64Rules_FieldNumber_InArray = 6,
+  SInt64Rules_FieldNumber_NotInArray = 7,
 };
 
 /**
  * SInt64Rules describes the constraints applied to `sint64` values
  **/
-GPB_FINAL @interface SENSInt64Rules : GPBMessage
+GPB_FINAL @interface SInt64Rules : GPBMessage
 
 /** Const specifies that this field must be exactly the specified value */
 @property(nonatomic, readwrite) int64_t const_p;
@@ -775,22 +775,22 @@ GPB_FINAL @interface SENSInt64Rules : GPBMessage
 
 @end
 
-#pragma mark - SENFixed32Rules
+#pragma mark - Fixed32Rules
 
-typedef GPB_ENUM(SENFixed32Rules_FieldNumber) {
-  SENFixed32Rules_FieldNumber_Const_p = 1,
-  SENFixed32Rules_FieldNumber_Lt = 2,
-  SENFixed32Rules_FieldNumber_Lte = 3,
-  SENFixed32Rules_FieldNumber_Gt = 4,
-  SENFixed32Rules_FieldNumber_Gte = 5,
-  SENFixed32Rules_FieldNumber_InArray = 6,
-  SENFixed32Rules_FieldNumber_NotInArray = 7,
+typedef GPB_ENUM(Fixed32Rules_FieldNumber) {
+  Fixed32Rules_FieldNumber_Const_p = 1,
+  Fixed32Rules_FieldNumber_Lt = 2,
+  Fixed32Rules_FieldNumber_Lte = 3,
+  Fixed32Rules_FieldNumber_Gt = 4,
+  Fixed32Rules_FieldNumber_Gte = 5,
+  Fixed32Rules_FieldNumber_InArray = 6,
+  Fixed32Rules_FieldNumber_NotInArray = 7,
 };
 
 /**
  * Fixed32Rules describes the constraints applied to `fixed32` values
  **/
-GPB_FINAL @interface SENFixed32Rules : GPBMessage
+GPB_FINAL @interface Fixed32Rules : GPBMessage
 
 /** Const specifies that this field must be exactly the specified value */
 @property(nonatomic, readwrite) uint32_t const_p;
@@ -844,22 +844,22 @@ GPB_FINAL @interface SENFixed32Rules : GPBMessage
 
 @end
 
-#pragma mark - SENFixed64Rules
+#pragma mark - Fixed64Rules
 
-typedef GPB_ENUM(SENFixed64Rules_FieldNumber) {
-  SENFixed64Rules_FieldNumber_Const_p = 1,
-  SENFixed64Rules_FieldNumber_Lt = 2,
-  SENFixed64Rules_FieldNumber_Lte = 3,
-  SENFixed64Rules_FieldNumber_Gt = 4,
-  SENFixed64Rules_FieldNumber_Gte = 5,
-  SENFixed64Rules_FieldNumber_InArray = 6,
-  SENFixed64Rules_FieldNumber_NotInArray = 7,
+typedef GPB_ENUM(Fixed64Rules_FieldNumber) {
+  Fixed64Rules_FieldNumber_Const_p = 1,
+  Fixed64Rules_FieldNumber_Lt = 2,
+  Fixed64Rules_FieldNumber_Lte = 3,
+  Fixed64Rules_FieldNumber_Gt = 4,
+  Fixed64Rules_FieldNumber_Gte = 5,
+  Fixed64Rules_FieldNumber_InArray = 6,
+  Fixed64Rules_FieldNumber_NotInArray = 7,
 };
 
 /**
  * Fixed64Rules describes the constraints applied to `fixed64` values
  **/
-GPB_FINAL @interface SENFixed64Rules : GPBMessage
+GPB_FINAL @interface Fixed64Rules : GPBMessage
 
 /** Const specifies that this field must be exactly the specified value */
 @property(nonatomic, readwrite) uint64_t const_p;
@@ -913,22 +913,22 @@ GPB_FINAL @interface SENFixed64Rules : GPBMessage
 
 @end
 
-#pragma mark - SENSFixed32Rules
+#pragma mark - SFixed32Rules
 
-typedef GPB_ENUM(SENSFixed32Rules_FieldNumber) {
-  SENSFixed32Rules_FieldNumber_Const_p = 1,
-  SENSFixed32Rules_FieldNumber_Lt = 2,
-  SENSFixed32Rules_FieldNumber_Lte = 3,
-  SENSFixed32Rules_FieldNumber_Gt = 4,
-  SENSFixed32Rules_FieldNumber_Gte = 5,
-  SENSFixed32Rules_FieldNumber_InArray = 6,
-  SENSFixed32Rules_FieldNumber_NotInArray = 7,
+typedef GPB_ENUM(SFixed32Rules_FieldNumber) {
+  SFixed32Rules_FieldNumber_Const_p = 1,
+  SFixed32Rules_FieldNumber_Lt = 2,
+  SFixed32Rules_FieldNumber_Lte = 3,
+  SFixed32Rules_FieldNumber_Gt = 4,
+  SFixed32Rules_FieldNumber_Gte = 5,
+  SFixed32Rules_FieldNumber_InArray = 6,
+  SFixed32Rules_FieldNumber_NotInArray = 7,
 };
 
 /**
  * SFixed32Rules describes the constraints applied to `sfixed32` values
  **/
-GPB_FINAL @interface SENSFixed32Rules : GPBMessage
+GPB_FINAL @interface SFixed32Rules : GPBMessage
 
 /** Const specifies that this field must be exactly the specified value */
 @property(nonatomic, readwrite) int32_t const_p;
@@ -982,22 +982,22 @@ GPB_FINAL @interface SENSFixed32Rules : GPBMessage
 
 @end
 
-#pragma mark - SENSFixed64Rules
+#pragma mark - SFixed64Rules
 
-typedef GPB_ENUM(SENSFixed64Rules_FieldNumber) {
-  SENSFixed64Rules_FieldNumber_Const_p = 1,
-  SENSFixed64Rules_FieldNumber_Lt = 2,
-  SENSFixed64Rules_FieldNumber_Lte = 3,
-  SENSFixed64Rules_FieldNumber_Gt = 4,
-  SENSFixed64Rules_FieldNumber_Gte = 5,
-  SENSFixed64Rules_FieldNumber_InArray = 6,
-  SENSFixed64Rules_FieldNumber_NotInArray = 7,
+typedef GPB_ENUM(SFixed64Rules_FieldNumber) {
+  SFixed64Rules_FieldNumber_Const_p = 1,
+  SFixed64Rules_FieldNumber_Lt = 2,
+  SFixed64Rules_FieldNumber_Lte = 3,
+  SFixed64Rules_FieldNumber_Gt = 4,
+  SFixed64Rules_FieldNumber_Gte = 5,
+  SFixed64Rules_FieldNumber_InArray = 6,
+  SFixed64Rules_FieldNumber_NotInArray = 7,
 };
 
 /**
  * SFixed64Rules describes the constraints applied to `sfixed64` values
  **/
-GPB_FINAL @interface SENSFixed64Rules : GPBMessage
+GPB_FINAL @interface SFixed64Rules : GPBMessage
 
 /** Const specifies that this field must be exactly the specified value */
 @property(nonatomic, readwrite) int64_t const_p;
@@ -1051,16 +1051,16 @@ GPB_FINAL @interface SENSFixed64Rules : GPBMessage
 
 @end
 
-#pragma mark - SENBoolRules
+#pragma mark - BoolRules
 
-typedef GPB_ENUM(SENBoolRules_FieldNumber) {
-  SENBoolRules_FieldNumber_Const_p = 1,
+typedef GPB_ENUM(BoolRules_FieldNumber) {
+  BoolRules_FieldNumber_Const_p = 1,
 };
 
 /**
  * BoolRules describes the constraints applied to `bool` values
  **/
-GPB_FINAL @interface SENBoolRules : GPBMessage
+GPB_FINAL @interface BoolRules : GPBMessage
 
 /** Const specifies that this field must be exactly the specified value */
 @property(nonatomic, readwrite) BOOL const_p;
@@ -1068,54 +1068,54 @@ GPB_FINAL @interface SENBoolRules : GPBMessage
 @property(nonatomic, readwrite) BOOL hasConst_p;
 @end
 
-#pragma mark - SENStringRules
+#pragma mark - StringRules
 
-typedef GPB_ENUM(SENStringRules_FieldNumber) {
-  SENStringRules_FieldNumber_Const_p = 1,
-  SENStringRules_FieldNumber_MinLen = 2,
-  SENStringRules_FieldNumber_MaxLen = 3,
-  SENStringRules_FieldNumber_MinBytes = 4,
-  SENStringRules_FieldNumber_MaxBytes = 5,
-  SENStringRules_FieldNumber_Pattern = 6,
-  SENStringRules_FieldNumber_Prefix = 7,
-  SENStringRules_FieldNumber_Suffix = 8,
-  SENStringRules_FieldNumber_Contains = 9,
-  SENStringRules_FieldNumber_InArray = 10,
-  SENStringRules_FieldNumber_NotInArray = 11,
-  SENStringRules_FieldNumber_Email = 12,
-  SENStringRules_FieldNumber_Hostname = 13,
-  SENStringRules_FieldNumber_Ip = 14,
-  SENStringRules_FieldNumber_Ipv4 = 15,
-  SENStringRules_FieldNumber_Ipv6 = 16,
-  SENStringRules_FieldNumber_Uri = 17,
-  SENStringRules_FieldNumber_UriRef = 18,
-  SENStringRules_FieldNumber_Len = 19,
-  SENStringRules_FieldNumber_LenBytes = 20,
-  SENStringRules_FieldNumber_Address = 21,
-  SENStringRules_FieldNumber_Uuid = 22,
-  SENStringRules_FieldNumber_NotContains = 23,
-  SENStringRules_FieldNumber_WellKnownRegex = 24,
-  SENStringRules_FieldNumber_Strict = 25,
+typedef GPB_ENUM(StringRules_FieldNumber) {
+  StringRules_FieldNumber_Const_p = 1,
+  StringRules_FieldNumber_MinLen = 2,
+  StringRules_FieldNumber_MaxLen = 3,
+  StringRules_FieldNumber_MinBytes = 4,
+  StringRules_FieldNumber_MaxBytes = 5,
+  StringRules_FieldNumber_Pattern = 6,
+  StringRules_FieldNumber_Prefix = 7,
+  StringRules_FieldNumber_Suffix = 8,
+  StringRules_FieldNumber_Contains = 9,
+  StringRules_FieldNumber_InArray = 10,
+  StringRules_FieldNumber_NotInArray = 11,
+  StringRules_FieldNumber_Email = 12,
+  StringRules_FieldNumber_Hostname = 13,
+  StringRules_FieldNumber_Ip = 14,
+  StringRules_FieldNumber_Ipv4 = 15,
+  StringRules_FieldNumber_Ipv6 = 16,
+  StringRules_FieldNumber_Uri = 17,
+  StringRules_FieldNumber_UriRef = 18,
+  StringRules_FieldNumber_Len = 19,
+  StringRules_FieldNumber_LenBytes = 20,
+  StringRules_FieldNumber_Address = 21,
+  StringRules_FieldNumber_Uuid = 22,
+  StringRules_FieldNumber_NotContains = 23,
+  StringRules_FieldNumber_WellKnownRegex = 24,
+  StringRules_FieldNumber_Strict = 25,
 };
 
-typedef GPB_ENUM(SENStringRules_WellKnown_OneOfCase) {
-  SENStringRules_WellKnown_OneOfCase_GPBUnsetOneOfCase = 0,
-  SENStringRules_WellKnown_OneOfCase_Email = 12,
-  SENStringRules_WellKnown_OneOfCase_Hostname = 13,
-  SENStringRules_WellKnown_OneOfCase_Ip = 14,
-  SENStringRules_WellKnown_OneOfCase_Ipv4 = 15,
-  SENStringRules_WellKnown_OneOfCase_Ipv6 = 16,
-  SENStringRules_WellKnown_OneOfCase_Uri = 17,
-  SENStringRules_WellKnown_OneOfCase_UriRef = 18,
-  SENStringRules_WellKnown_OneOfCase_Address = 21,
-  SENStringRules_WellKnown_OneOfCase_Uuid = 22,
-  SENStringRules_WellKnown_OneOfCase_WellKnownRegex = 24,
+typedef GPB_ENUM(StringRules_WellKnown_OneOfCase) {
+  StringRules_WellKnown_OneOfCase_GPBUnsetOneOfCase = 0,
+  StringRules_WellKnown_OneOfCase_Email = 12,
+  StringRules_WellKnown_OneOfCase_Hostname = 13,
+  StringRules_WellKnown_OneOfCase_Ip = 14,
+  StringRules_WellKnown_OneOfCase_Ipv4 = 15,
+  StringRules_WellKnown_OneOfCase_Ipv6 = 16,
+  StringRules_WellKnown_OneOfCase_Uri = 17,
+  StringRules_WellKnown_OneOfCase_UriRef = 18,
+  StringRules_WellKnown_OneOfCase_Address = 21,
+  StringRules_WellKnown_OneOfCase_Uuid = 22,
+  StringRules_WellKnown_OneOfCase_WellKnownRegex = 24,
 };
 
 /**
  * StringRules describe the constraints applied to `string` values
  **/
-GPB_FINAL @interface SENStringRules : GPBMessage
+GPB_FINAL @interface StringRules : GPBMessage
 
 /** Const specifies that this field must be exactly the specified value */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *const_p;
@@ -1228,7 +1228,7 @@ GPB_FINAL @interface SENStringRules : GPBMessage
  * WellKnown rules provide advanced constraints against common string
  * patterns
  **/
-@property(nonatomic, readonly) SENStringRules_WellKnown_OneOfCase wellKnownOneOfCase;
+@property(nonatomic, readonly) StringRules_WellKnown_OneOfCase wellKnownOneOfCase;
 
 /**
  * Email specifies that the field must be a valid email address as
@@ -1284,7 +1284,7 @@ GPB_FINAL @interface SENStringRules : GPBMessage
 @property(nonatomic, readwrite) BOOL uuid;
 
 /** WellKnownRegex specifies a common well known pattern defined as a regex. */
-@property(nonatomic, readwrite) SENKnownRegex wellKnownRegex;
+@property(nonatomic, readwrite) KnownRegex wellKnownRegex;
 
 /**
  * This applies to regexes HTTP_HEADER_NAME and HTTP_HEADER_VALUE to enable
@@ -1301,37 +1301,37 @@ GPB_FINAL @interface SENStringRules : GPBMessage
 /**
  * Clears whatever value was set for the oneof 'wellKnown'.
  **/
-void SENStringRules_ClearWellKnownOneOfCase(SENStringRules *message);
+void StringRules_ClearWellKnownOneOfCase(StringRules *message);
 
-#pragma mark - SENBytesRules
+#pragma mark - BytesRules
 
-typedef GPB_ENUM(SENBytesRules_FieldNumber) {
-  SENBytesRules_FieldNumber_Const_p = 1,
-  SENBytesRules_FieldNumber_MinLen = 2,
-  SENBytesRules_FieldNumber_MaxLen = 3,
-  SENBytesRules_FieldNumber_Pattern = 4,
-  SENBytesRules_FieldNumber_Prefix = 5,
-  SENBytesRules_FieldNumber_Suffix = 6,
-  SENBytesRules_FieldNumber_Contains = 7,
-  SENBytesRules_FieldNumber_InArray = 8,
-  SENBytesRules_FieldNumber_NotInArray = 9,
-  SENBytesRules_FieldNumber_Ip = 10,
-  SENBytesRules_FieldNumber_Ipv4 = 11,
-  SENBytesRules_FieldNumber_Ipv6 = 12,
-  SENBytesRules_FieldNumber_Len = 13,
+typedef GPB_ENUM(BytesRules_FieldNumber) {
+  BytesRules_FieldNumber_Const_p = 1,
+  BytesRules_FieldNumber_MinLen = 2,
+  BytesRules_FieldNumber_MaxLen = 3,
+  BytesRules_FieldNumber_Pattern = 4,
+  BytesRules_FieldNumber_Prefix = 5,
+  BytesRules_FieldNumber_Suffix = 6,
+  BytesRules_FieldNumber_Contains = 7,
+  BytesRules_FieldNumber_InArray = 8,
+  BytesRules_FieldNumber_NotInArray = 9,
+  BytesRules_FieldNumber_Ip = 10,
+  BytesRules_FieldNumber_Ipv4 = 11,
+  BytesRules_FieldNumber_Ipv6 = 12,
+  BytesRules_FieldNumber_Len = 13,
 };
 
-typedef GPB_ENUM(SENBytesRules_WellKnown_OneOfCase) {
-  SENBytesRules_WellKnown_OneOfCase_GPBUnsetOneOfCase = 0,
-  SENBytesRules_WellKnown_OneOfCase_Ip = 10,
-  SENBytesRules_WellKnown_OneOfCase_Ipv4 = 11,
-  SENBytesRules_WellKnown_OneOfCase_Ipv6 = 12,
+typedef GPB_ENUM(BytesRules_WellKnown_OneOfCase) {
+  BytesRules_WellKnown_OneOfCase_GPBUnsetOneOfCase = 0,
+  BytesRules_WellKnown_OneOfCase_Ip = 10,
+  BytesRules_WellKnown_OneOfCase_Ipv4 = 11,
+  BytesRules_WellKnown_OneOfCase_Ipv6 = 12,
 };
 
 /**
  * BytesRules describe the constraints applied to `bytes` values
  **/
-GPB_FINAL @interface SENBytesRules : GPBMessage
+GPB_FINAL @interface BytesRules : GPBMessage
 
 /** Const specifies that this field must be exactly the specified value */
 @property(nonatomic, readwrite, copy, null_resettable) NSData *const_p;
@@ -1409,7 +1409,7 @@ GPB_FINAL @interface SENBytesRules : GPBMessage
  * WellKnown rules provide advanced constraints against common byte
  * patterns
  **/
-@property(nonatomic, readonly) SENBytesRules_WellKnown_OneOfCase wellKnownOneOfCase;
+@property(nonatomic, readonly) BytesRules_WellKnown_OneOfCase wellKnownOneOfCase;
 
 /**
  * Ip specifies that the field must be a valid IP (v4 or v6) address in
@@ -1434,21 +1434,21 @@ GPB_FINAL @interface SENBytesRules : GPBMessage
 /**
  * Clears whatever value was set for the oneof 'wellKnown'.
  **/
-void SENBytesRules_ClearWellKnownOneOfCase(SENBytesRules *message);
+void BytesRules_ClearWellKnownOneOfCase(BytesRules *message);
 
-#pragma mark - SENEnumRules
+#pragma mark - EnumRules
 
-typedef GPB_ENUM(SENEnumRules_FieldNumber) {
-  SENEnumRules_FieldNumber_Const_p = 1,
-  SENEnumRules_FieldNumber_DefinedOnly = 2,
-  SENEnumRules_FieldNumber_InArray = 3,
-  SENEnumRules_FieldNumber_NotInArray = 4,
+typedef GPB_ENUM(EnumRules_FieldNumber) {
+  EnumRules_FieldNumber_Const_p = 1,
+  EnumRules_FieldNumber_DefinedOnly = 2,
+  EnumRules_FieldNumber_InArray = 3,
+  EnumRules_FieldNumber_NotInArray = 4,
 };
 
 /**
  * EnumRules describe the constraints applied to enum values
  **/
-GPB_FINAL @interface SENEnumRules : GPBMessage
+GPB_FINAL @interface EnumRules : GPBMessage
 
 /** Const specifies that this field must be exactly the specified value */
 @property(nonatomic, readwrite) int32_t const_p;
@@ -1479,18 +1479,18 @@ GPB_FINAL @interface SENEnumRules : GPBMessage
 
 @end
 
-#pragma mark - SENMessageRules
+#pragma mark - MessageRules
 
-typedef GPB_ENUM(SENMessageRules_FieldNumber) {
-  SENMessageRules_FieldNumber_Skip = 1,
-  SENMessageRules_FieldNumber_Required = 2,
+typedef GPB_ENUM(MessageRules_FieldNumber) {
+  MessageRules_FieldNumber_Skip = 1,
+  MessageRules_FieldNumber_Required = 2,
 };
 
 /**
  * MessageRules describe the constraints applied to embedded message values.
  * For message-type fields, validation is performed recursively.
  **/
-GPB_FINAL @interface SENMessageRules : GPBMessage
+GPB_FINAL @interface MessageRules : GPBMessage
 
 /**
  * Skip specifies that the validation rules of this field should not be
@@ -1505,19 +1505,19 @@ GPB_FINAL @interface SENMessageRules : GPBMessage
 @property(nonatomic, readwrite) BOOL hasRequired;
 @end
 
-#pragma mark - SENRepeatedRules
+#pragma mark - RepeatedRules
 
-typedef GPB_ENUM(SENRepeatedRules_FieldNumber) {
-  SENRepeatedRules_FieldNumber_MinItems = 1,
-  SENRepeatedRules_FieldNumber_MaxItems = 2,
-  SENRepeatedRules_FieldNumber_Unique = 3,
-  SENRepeatedRules_FieldNumber_Items = 4,
+typedef GPB_ENUM(RepeatedRules_FieldNumber) {
+  RepeatedRules_FieldNumber_MinItems = 1,
+  RepeatedRules_FieldNumber_MaxItems = 2,
+  RepeatedRules_FieldNumber_Unique = 3,
+  RepeatedRules_FieldNumber_Items = 4,
 };
 
 /**
  * RepeatedRules describe the constraints applied to `repeated` values
  **/
-GPB_FINAL @interface SENRepeatedRules : GPBMessage
+GPB_FINAL @interface RepeatedRules : GPBMessage
 
 /**
  * MinItems specifies that this field must have the specified number of
@@ -1546,26 +1546,26 @@ GPB_FINAL @interface SENRepeatedRules : GPBMessage
  * Repeated message fields will still execute validation against each item
  * unless skip is specified here.
  **/
-@property(nonatomic, readwrite, strong, null_resettable) SENFieldRules *items;
+@property(nonatomic, readwrite, strong, null_resettable) FieldRules *items;
 /** Test to see if @c items has been set. */
 @property(nonatomic, readwrite) BOOL hasItems;
 
 @end
 
-#pragma mark - SENMapRules
+#pragma mark - MapRules
 
-typedef GPB_ENUM(SENMapRules_FieldNumber) {
-  SENMapRules_FieldNumber_MinPairs = 1,
-  SENMapRules_FieldNumber_MaxPairs = 2,
-  SENMapRules_FieldNumber_NoSparse = 3,
-  SENMapRules_FieldNumber_Keys = 4,
-  SENMapRules_FieldNumber_Values = 5,
+typedef GPB_ENUM(MapRules_FieldNumber) {
+  MapRules_FieldNumber_MinPairs = 1,
+  MapRules_FieldNumber_MaxPairs = 2,
+  MapRules_FieldNumber_NoSparse = 3,
+  MapRules_FieldNumber_Keys = 4,
+  MapRules_FieldNumber_Values = 5,
 };
 
 /**
  * MapRules describe the constraints applied to `map` values
  **/
-GPB_FINAL @interface SENMapRules : GPBMessage
+GPB_FINAL @interface MapRules : GPBMessage
 
 /**
  * MinPairs specifies that this field must have the specified number of
@@ -1589,7 +1589,7 @@ GPB_FINAL @interface SENMapRules : GPBMessage
 
 @property(nonatomic, readwrite) BOOL hasNoSparse;
 /** Keys specifies the constraints to be applied to each key in the field. */
-@property(nonatomic, readwrite, strong, null_resettable) SENFieldRules *keys;
+@property(nonatomic, readwrite, strong, null_resettable) FieldRules *keys;
 /** Test to see if @c keys has been set. */
 @property(nonatomic, readwrite) BOOL hasKeys;
 
@@ -1598,25 +1598,25 @@ GPB_FINAL @interface SENMapRules : GPBMessage
  * in the field. Message values will still have their validations evaluated
  * unless skip is specified here.
  **/
-@property(nonatomic, readwrite, strong, null_resettable) SENFieldRules *values;
+@property(nonatomic, readwrite, strong, null_resettable) FieldRules *values;
 /** Test to see if @c values has been set. */
 @property(nonatomic, readwrite) BOOL hasValues;
 
 @end
 
-#pragma mark - SENAnyRules
+#pragma mark - AnyRules
 
-typedef GPB_ENUM(SENAnyRules_FieldNumber) {
-  SENAnyRules_FieldNumber_Required = 1,
-  SENAnyRules_FieldNumber_InArray = 2,
-  SENAnyRules_FieldNumber_NotInArray = 3,
+typedef GPB_ENUM(AnyRules_FieldNumber) {
+  AnyRules_FieldNumber_Required = 1,
+  AnyRules_FieldNumber_InArray = 2,
+  AnyRules_FieldNumber_NotInArray = 3,
 };
 
 /**
  * AnyRules describe constraints applied exclusively to the
  * `google.protobuf.Any` well-known type
  **/
-GPB_FINAL @interface SENAnyRules : GPBMessage
+GPB_FINAL @interface AnyRules : GPBMessage
 
 /** Required specifies that this field must be set */
 @property(nonatomic, readwrite) BOOL required;
@@ -1640,24 +1640,24 @@ GPB_FINAL @interface SENAnyRules : GPBMessage
 
 @end
 
-#pragma mark - SENDurationRules
+#pragma mark - DurationRules
 
-typedef GPB_ENUM(SENDurationRules_FieldNumber) {
-  SENDurationRules_FieldNumber_Required = 1,
-  SENDurationRules_FieldNumber_Const_p = 2,
-  SENDurationRules_FieldNumber_Lt = 3,
-  SENDurationRules_FieldNumber_Lte = 4,
-  SENDurationRules_FieldNumber_Gt = 5,
-  SENDurationRules_FieldNumber_Gte = 6,
-  SENDurationRules_FieldNumber_InArray = 7,
-  SENDurationRules_FieldNumber_NotInArray = 8,
+typedef GPB_ENUM(DurationRules_FieldNumber) {
+  DurationRules_FieldNumber_Required = 1,
+  DurationRules_FieldNumber_Const_p = 2,
+  DurationRules_FieldNumber_Lt = 3,
+  DurationRules_FieldNumber_Lte = 4,
+  DurationRules_FieldNumber_Gt = 5,
+  DurationRules_FieldNumber_Gte = 6,
+  DurationRules_FieldNumber_InArray = 7,
+  DurationRules_FieldNumber_NotInArray = 8,
 };
 
 /**
  * DurationRules describe the constraints applied exclusively to the
  * `google.protobuf.Duration` well-known type
  **/
-GPB_FINAL @interface SENDurationRules : GPBMessage
+GPB_FINAL @interface DurationRules : GPBMessage
 
 /** Required specifies that this field must be set */
 @property(nonatomic, readwrite) BOOL required;
@@ -1718,25 +1718,25 @@ GPB_FINAL @interface SENDurationRules : GPBMessage
 
 @end
 
-#pragma mark - SENTimestampRules
+#pragma mark - TimestampRules
 
-typedef GPB_ENUM(SENTimestampRules_FieldNumber) {
-  SENTimestampRules_FieldNumber_Required = 1,
-  SENTimestampRules_FieldNumber_Const_p = 2,
-  SENTimestampRules_FieldNumber_Lt = 3,
-  SENTimestampRules_FieldNumber_Lte = 4,
-  SENTimestampRules_FieldNumber_Gt = 5,
-  SENTimestampRules_FieldNumber_Gte = 6,
-  SENTimestampRules_FieldNumber_LtNow = 7,
-  SENTimestampRules_FieldNumber_GtNow = 8,
-  SENTimestampRules_FieldNumber_Within = 9,
+typedef GPB_ENUM(TimestampRules_FieldNumber) {
+  TimestampRules_FieldNumber_Required = 1,
+  TimestampRules_FieldNumber_Const_p = 2,
+  TimestampRules_FieldNumber_Lt = 3,
+  TimestampRules_FieldNumber_Lte = 4,
+  TimestampRules_FieldNumber_Gt = 5,
+  TimestampRules_FieldNumber_Gte = 6,
+  TimestampRules_FieldNumber_LtNow = 7,
+  TimestampRules_FieldNumber_GtNow = 8,
+  TimestampRules_FieldNumber_Within = 9,
 };
 
 /**
  * TimestampRules describe the constraints applied exclusively to the
  * `google.protobuf.Timestamp` well-known type
  **/
-GPB_FINAL @interface SENTimestampRules : GPBMessage
+GPB_FINAL @interface TimestampRules : GPBMessage
 
 /** Required specifies that this field must be set */
 @property(nonatomic, readwrite) BOOL required;
