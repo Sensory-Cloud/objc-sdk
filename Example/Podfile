@@ -1,7 +1,10 @@
+platform :ios, '10.0'
 use_frameworks!
+
 target 'objc-sdk_Tests' do
   pod 'objc-sdk', :path => '../'
-  
+  pod '!ProtoCompiler-gRPCPlugin', '~> 1.0'
+
   pod 'Specta'
     pod 'Expecta'
 end

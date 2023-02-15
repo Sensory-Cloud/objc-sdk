@@ -9,34 +9,44 @@
 Pod::Spec.new do |s|
   s.name             = 'objc-sdk'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of objc-sdk.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
+  s.summary          = 'Objective C version of the Sensory Cloud SDK'
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Objective C version of the Sensory Cloud SDK.
                        DESC
 
   s.homepage         = 'https://github.com/Niles Hacking/objc-sdk'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.license          = { :type => 'APACHE 2.0', :file => 'LICENSE' }
   s.author           = { 'Niles Hacking' => 'nhacking@sensoryinc.com' }
   s.source           = { :git => 'https://github.com/Niles Hacking/objc-sdk.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '10.0'
 
-  s.source_files = 'objc-sdk/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'objc-sdk' => ['objc-sdk/Assets/*.png']
-  # }
+  # Directory where all protobuf generated code lives
+  gen_path = 'objc-sdk/Generated'
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.source_files = 'objc-sdk/Classes/**/*'
+
+  # Include the generated protobuf message definitions
+  s.subspec 'Messages' do |ms|
+    ms.source_files = "#{gen_path}/**/*.pbobjc.{h,m}"
+    ms.header_mappings_dir = gen_path
+    ms.requires_arc = false
+    ms.dependency 'Protobuf'
+  end
+
+  # Include the generated gRPC service definitions
+  s.subspec 'Services' do |ss|
+    ss.source_files = "#{gen_path}/**/*.pbrpc.{h,m}"
+    ss.header_mappings_dir = gen_path
+    ss.requires_arc = false
+    ss.dependency 'gRPC-ProtoRPC'
+    ss.dependency "#{s.name}/Messages"
+  end
+
+  s.pod_target_xcconfig = {
+    # This is needed by all pods that depend on Protobuf:
+    'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1',
+    # This is needed by all pods that depend on gRPC-RxLibrary:
+    'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
+  }
 end
