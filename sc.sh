@@ -35,6 +35,7 @@ DESCRIPTOR_FILE="${PROTOC_PATH}/google/protobuf/descriptor.proto"
 # --- Helper Functions ---------------------------------------------
 
 gen_proto() {
+  # Delete previously generated files
   rm -rf ${GEN_PATH}
   mkdir -p ${GEN_PATH}
 
@@ -57,13 +58,17 @@ gen_proto() {
     ${DESCRIPTOR_FILE};
 }
 
-# Fixes the import paths in the generated protobuf files
 fix_proto() {
+  # Fixes the import paths in the generated files
   for x in $(find ${GEN_PATH} -iname "*.pb*");
   do
     sed -i '' 's:"\([a-zA-Z1-9]*/\)*\([a-zA-Z]*.pbobjc.h\)":"\2":g' $x
     sed -i '' 's:"\([a-zA-Z1-9]*/\)*\([a-zA-Z]*.pbrpc.h\)":"\2":g' $x
   done
+
+  # Flattens the generated files down into a single directory and cleans up the empty directories
+  find ${GEN_PATH} -mindepth 2 -type f -exec mv {} ${GEN_PATH} \;
+  find ${GEN_PATH} -type d -empty -delete
 }
 
 # --- Body ---------------------------------------------------------

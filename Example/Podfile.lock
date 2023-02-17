@@ -571,7 +571,6 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.24):
     - BoringSSL-GRPC/Interface (= 0.0.24)
   - BoringSSL-GRPC/Interface (0.0.24)
-  - Expecta (1.0.6)
   - gRPC-Core (1.49.0):
     - gRPC-Core/Implementation (= 1.49.0)
     - gRPC-Core/Interface (= 1.49.0)
@@ -633,21 +632,18 @@ PODS:
   - gRPC/Interface-Legacy (1.49.0):
     - gRPC-RxLibrary/Interface (= 1.49.0)
   - objc-sdk (0.1.0):
-    - objc-sdk/Messages (= 0.1.0)
-    - objc-sdk/Services (= 0.1.0)
-  - objc-sdk/Messages (0.1.0):
+    - objc-sdk/ProtoMessages (= 0.1.0)
+    - objc-sdk/ProtoServices (= 0.1.0)
+  - objc-sdk/ProtoMessages (0.1.0):
     - Protobuf
-  - objc-sdk/Services (0.1.0):
+  - objc-sdk/ProtoServices (0.1.0):
     - gRPC-ProtoRPC
-    - objc-sdk/Messages
+    - objc-sdk/ProtoMessages
   - Protobuf (3.21.12)
-  - Specta (2.0.0)
 
 DEPENDENCIES:
   - "!ProtoCompiler-gRPCPlugin (~> 1.0)"
-  - Expecta
   - objc-sdk (from `../`)
-  - Specta
 
 SPEC REPOS:
   trunk:
@@ -655,13 +651,11 @@ SPEC REPOS:
     - "!ProtoCompiler-gRPCPlugin"
     - abseil
     - BoringSSL-GRPC
-    - Expecta
     - gRPC
     - gRPC-Core
     - gRPC-ProtoRPC
     - gRPC-RxLibrary
     - Protobuf
-    - Specta
 
 EXTERNAL SOURCES:
   objc-sdk:
@@ -672,15 +666,13 @@ SPEC CHECKSUMS:
   "!ProtoCompiler-gRPCPlugin": 755f0ee414a0d5f0028e0dcfe98c23bdbc3e6fa3
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
-  Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
   gRPC: 64f36d689b2ecd99c4351f74e6f91347cdc65d9f
   gRPC-Core: 3a9fdb5967d42211e875826f3f6fc163ea02c2a1
   gRPC-ProtoRPC: 1c223e0f1732bb8d0b9e9e0ea60cc0fe995b8e2d
   gRPC-RxLibrary: 92327f150e11cf3b1c0f52e083944fd9f5cb5d1e
-  objc-sdk: 8159df31ef9693ac7f7c2cb23179d369d6590e3b
+  objc-sdk: ad2db17d684886c43b8f88726851d9a8df3f5eae
   Protobuf: 120350fc38646e2dedc26f49ecba778184ea1de2
-  Specta: b79d84043684b35ffdc2680df578dc318ec2efc2
 
-PODFILE CHECKSUM: 456ab94bd30b144e9b80e1fe00b95692fc38d955
+PODFILE CHECKSUM: ed64f20c1ed12af08b3893ee112db509c673e84d
 
 COCOAPODS: 1.11.3

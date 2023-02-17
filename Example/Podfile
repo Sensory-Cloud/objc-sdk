@@ -5,6 +5,4 @@ target 'objc-sdk_Tests' do
   pod 'objc-sdk', :path => '../'
   pod '!ProtoCompiler-gRPCPlugin', '~> 1.0'
 
-  pod 'Specta'
-    pod 'Expecta'
 end

@@ -2,7 +2,7 @@
 
 #ifdef __OBJC__
 
-  @import Specta;
-  @import Expecta;
+#import <XCTest/XCTest.h>
+#import <objc-sdk-umbrella.h>
 
 #endif

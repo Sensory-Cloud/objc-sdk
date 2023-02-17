@@ -27,7 +27,7 @@ Objective C version of the Sensory Cloud SDK.
   s.source_files = 'objc-sdk/Classes/**/*'
 
   # Include the generated protobuf message definitions
-  s.subspec 'Messages' do |ms|
+  s.subspec 'ProtoMessages' do |ms|
     ms.source_files = "#{gen_path}/**/*.pbobjc.{h,m}"
     ms.header_mappings_dir = gen_path
     ms.requires_arc = false
@@ -35,12 +35,12 @@ Objective C version of the Sensory Cloud SDK.
   end
 
   # Include the generated gRPC service definitions
-  s.subspec 'Services' do |ss|
+  s.subspec 'ProtoServices' do |ss|
     ss.source_files = "#{gen_path}/**/*.pbrpc.{h,m}"
     ss.header_mappings_dir = gen_path
     ss.requires_arc = false
     ss.dependency 'gRPC-ProtoRPC'
-    ss.dependency "#{s.name}/Messages"
+    ss.dependency "#{s.name}/ProtoMessages"
   end
 
   s.pod_target_xcconfig = {
