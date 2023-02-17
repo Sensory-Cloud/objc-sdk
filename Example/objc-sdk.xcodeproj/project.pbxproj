@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0369132029A01CE000F99597 /* HealthServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0369131F29A01CE000F99597 /* HealthServiceTests.m */; };
+		0369132829A0305100F99597 /* HealthServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0369132729A0305100F99597 /* HealthServiceTests.m */; };
 		1C6372C15C4B48F29398B602 /* Pods_objc_sdk_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D75F7830268CAF54F0CB13D /* Pods_objc_sdk_Tests.framework */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -18,7 +18,7 @@
 /* Begin PBXFileReference section */
 		01403F7075EEE8CA2F879DA2 /* objc-sdk.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "objc-sdk.podspec"; path = "../objc-sdk.podspec"; sourceTree = "<group>"; };
 		0369131429A01B2000F99597 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		0369131F29A01CE000F99597 /* HealthServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthServiceTests.m; sourceTree = "<group>"; };
+		0369132729A0305100F99597 /* HealthServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HealthServiceTests.m; path = Services/HealthServiceTests.m; sourceTree = "<group>"; };
 		0B0E6ACB930715C150657C60 /* Pods-objc-sdk_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objc-sdk_Tests.release.xcconfig"; path = "Target Support Files/Pods-objc-sdk_Tests/Pods-objc-sdk_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		5D75F7830268CAF54F0CB13D /* Pods_objc_sdk_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_objc_sdk_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -48,14 +48,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0369131E29A01CA700F99597 /* service */ = {
+		0369132429A0303500F99597 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				0369131F29A01CE000F99597 /* HealthServiceTests.m */,
+				0369132729A0305100F99597 /* HealthServiceTests.m */,
 			);
-			name = service;
-			path = "/Users/niles/objc-sdk/Example/Tests/service";
-			sourceTree = "<absolute>";
+			name = Services;
+			sourceTree = "<group>";
 		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
@@ -91,7 +90,7 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				0369131E29A01CA700F99597 /* service */,
+				0369132429A0303500F99597 /* Services */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
 			path = Tests;
@@ -250,7 +249,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0369132029A01CE000F99597 /* HealthServiceTests.m in Sources */,
+				0369132829A0305100F99597 /* HealthServiceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
