@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0369132829A0305100F99597 /* HealthServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0369132729A0305100F99597 /* HealthServiceTests.m */; };
+		039683E729A55B4F00E909B8 /* KeychainManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 039683E629A55B4F00E909B8 /* KeychainManagerTests.m */; };
+		039683F029A55E7700E909B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 039683EF29A55E7700E909B8 /* AppDelegate.m */; };
+		039683F329A55E7700E909B8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 039683F229A55E7700E909B8 /* SceneDelegate.m */; };
+		039683F629A55E7700E909B8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 039683F529A55E7700E909B8 /* ViewController.m */; };
+		039683F929A55E7700E909B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 039683F729A55E7700E909B8 /* Main.storyboard */; };
+		039683FB29A55E7800E909B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 039683FA29A55E7800E909B8 /* Assets.xcassets */; };
+		039683FE29A55E7800E909B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 039683FC29A55E7800E909B8 /* LaunchScreen.storyboard */; };
+		0396840129A55E7800E909B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0396840029A55E7800E909B8 /* main.m */; };
 		1C6372C15C4B48F29398B602 /* Pods_objc_sdk_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D75F7830268CAF54F0CB13D /* Pods_objc_sdk_Tests.framework */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -15,10 +23,34 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0396840529A55E9100E909B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6003F582195388D10070C39A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 039683EB29A55E7600E909B8;
+			remoteInfo = "objc-sdk-test-app";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		01403F7075EEE8CA2F879DA2 /* objc-sdk.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "objc-sdk.podspec"; path = "../objc-sdk.podspec"; sourceTree = "<group>"; };
 		0369131429A01B2000F99597 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		0369132729A0305100F99597 /* HealthServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HealthServiceTests.m; path = Services/HealthServiceTests.m; sourceTree = "<group>"; };
+		039683E629A55B4F00E909B8 /* KeychainManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainManagerTests.m; path = TokenManager/KeychainManagerTests.m; sourceTree = "<group>"; };
+		039683EC29A55E7600E909B8 /* objc-sdk-test-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "objc-sdk-test-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		039683EE29A55E7700E909B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		039683EF29A55E7700E909B8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		039683F129A55E7700E909B8 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		039683F229A55E7700E909B8 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		039683F429A55E7700E909B8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		039683F529A55E7700E909B8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		039683F829A55E7700E909B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		039683FA29A55E7800E909B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		039683FD29A55E7800E909B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		039683FF29A55E7800E909B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0396840029A55E7800E909B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0396840729A55EA200E909B8 /* objc-sdk-test-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "objc-sdk-test-app.entitlements"; sourceTree = "<group>"; };
 		0B0E6ACB930715C150657C60 /* Pods-objc-sdk_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objc-sdk_Tests.release.xcconfig"; path = "Target Support Files/Pods-objc-sdk_Tests/Pods-objc-sdk_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		5D75F7830268CAF54F0CB13D /* Pods_objc_sdk_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_objc_sdk_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -34,6 +66,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		039683E929A55E7600E909B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6003F5AB195388D20070C39A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -56,11 +95,39 @@
 			name = Services;
 			sourceTree = "<group>";
 		};
+		039683E529A55B3E00E909B8 /* TokenManager */ = {
+			isa = PBXGroup;
+			children = (
+				039683E629A55B4F00E909B8 /* KeychainManagerTests.m */,
+			);
+			name = TokenManager;
+			sourceTree = "<group>";
+		};
+		039683ED29A55E7700E909B8 /* objc-sdk-test-app */ = {
+			isa = PBXGroup;
+			children = (
+				0396840729A55EA200E909B8 /* objc-sdk-test-app.entitlements */,
+				039683EE29A55E7700E909B8 /* AppDelegate.h */,
+				039683EF29A55E7700E909B8 /* AppDelegate.m */,
+				039683F129A55E7700E909B8 /* SceneDelegate.h */,
+				039683F229A55E7700E909B8 /* SceneDelegate.m */,
+				039683F429A55E7700E909B8 /* ViewController.h */,
+				039683F529A55E7700E909B8 /* ViewController.m */,
+				039683F729A55E7700E909B8 /* Main.storyboard */,
+				039683FA29A55E7800E909B8 /* Assets.xcassets */,
+				039683FC29A55E7800E909B8 /* LaunchScreen.storyboard */,
+				039683FF29A55E7800E909B8 /* Info.plist */,
+				0396840029A55E7800E909B8 /* main.m */,
+			);
+			path = "objc-sdk-test-app";
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F5B5195388D20070C39A /* Tests */,
+				039683ED29A55E7700E909B8 /* objc-sdk-test-app */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
 				ED01668F5A61569638F408EE /* Pods */,
@@ -71,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				6003F5AE195388D20070C39A /* objc-sdk_Tests.xctest */,
+				039683EC29A55E7600E909B8 /* objc-sdk-test-app.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -90,6 +158,7 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				039683E529A55B3E00E909B8 /* TokenManager */,
 				0369132429A0303500F99597 /* Services */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
@@ -128,6 +197,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		039683EB29A55E7600E909B8 /* objc-sdk-test-app */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0396840229A55E7800E909B8 /* Build configuration list for PBXNativeTarget "objc-sdk-test-app" */;
+			buildPhases = (
+				039683E829A55E7600E909B8 /* Sources */,
+				039683E929A55E7600E909B8 /* Frameworks */,
+				039683EA29A55E7600E909B8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "objc-sdk-test-app";
+			productName = "objc-sdk-test-app";
+			productReference = 039683EC29A55E7600E909B8 /* objc-sdk-test-app.app */;
+			productType = "com.apple.product-type.application";
+		};
 		6003F5AD195388D20070C39A /* objc-sdk_Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "objc-sdk_Tests" */;
@@ -141,6 +227,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0396840629A55E9100E909B8 /* PBXTargetDependency */,
 			);
 			name = "objc-sdk_Tests";
 			productName = "objc-sdkTests";
@@ -156,6 +243,16 @@
 				CLASSPREFIX = SENSORYCLOUD;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Niles Hacking";
+				TargetAttributes = {
+					039683EB29A55E7600E909B8 = {
+						CreatedOnToolsVersion = 14.2;
+						DevelopmentTeam = JG89NXSP49;
+						ProvisioningStyle = Automatic;
+					};
+					6003F5AD195388D20070C39A = {
+						TestTargetID = 039683EB29A55E7600E909B8;
+					};
+				};
 			};
 			buildConfigurationList = 6003F585195388D10070C39A /* Build configuration list for PBXProject "objc-sdk" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -172,11 +269,22 @@
 			projectRoot = "";
 			targets = (
 				6003F5AD195388D20070C39A /* objc-sdk_Tests */,
+				039683EB29A55E7600E909B8 /* objc-sdk-test-app */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		039683EA29A55E7600E909B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				039683FE29A55E7800E909B8 /* LaunchScreen.storyboard in Resources */,
+				039683FB29A55E7800E909B8 /* Assets.xcassets in Resources */,
+				039683F929A55E7700E909B8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6003F5AC195388D20070C39A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -245,17 +353,53 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		039683E829A55E7600E909B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				039683F629A55E7700E909B8 /* ViewController.m in Sources */,
+				039683F029A55E7700E909B8 /* AppDelegate.m in Sources */,
+				0396840129A55E7800E909B8 /* main.m in Sources */,
+				039683F329A55E7700E909B8 /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6003F5AA195388D20070C39A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				0369132829A0305100F99597 /* HealthServiceTests.m in Sources */,
+				039683E729A55B4F00E909B8 /* KeychainManagerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0396840629A55E9100E909B8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 039683EB29A55E7600E909B8 /* objc-sdk-test-app */;
+			targetProxy = 0396840529A55E9100E909B8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		039683F729A55E7700E909B8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				039683F829A55E7700E909B8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		039683FC29A55E7800E909B8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				039683FD29A55E7800E909B8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		6003F5B8195388D20070C39A /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -267,6 +411,107 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0396840329A55E7800E909B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "objc-sdk-test-app/objc-sdk-test-app.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = JG89NXSP49;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "objc-sdk-test-app/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "sensorycloud.ai.objc-sdk-test-app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0396840429A55E7800E909B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "objc-sdk-test-app/objc-sdk-test-app.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = JG89NXSP49;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "objc-sdk-test-app/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "sensorycloud.ai.objc-sdk-test-app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		6003F5BD195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -360,6 +605,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/objc-sdk-test-app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/objc-sdk-test-app";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -380,6 +626,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/objc-sdk-test-app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/objc-sdk-test-app";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
@@ -387,6 +634,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0396840229A55E7800E909B8 /* Build configuration list for PBXNativeTarget "objc-sdk-test-app" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0396840329A55E7800E909B8 /* Debug */,
+				0396840429A55E7800E909B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6003F585195388D10070C39A /* Build configuration list for PBXProject "objc-sdk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
