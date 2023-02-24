@@ -9,15 +9,20 @@
 #import "AudioService.h"
 #import "GRPCClient/GRPCTransport.h"
 #import "Audio.pbrpc.h"
+#import "TokenManager.h"
 
 // TODO: rm
 static NSString * const kHostAddress = @"localhost:50050";
+
+@interface SENAudioService ()
+@property SENTokenManager* tokenManager;
+@end
 
 @implementation SENAudioService
 
 @synthesize audioConfig;
 
--(id)init {
+-(id)init: (SENTokenManager*)tokenManager {
     if (self = [super init]) {
         SENGAAudioConfig *config = [SENGAAudioConfig message];
         config.encoding = SENGAAudioConfig_AudioEncoding_Linear16;
@@ -25,23 +30,39 @@ static NSString * const kHostAddress = @"localhost:50050";
         config.audioChannelCount = 1;
         config.languageCode = [[NSLocale preferredLanguages] objectAtIndex:0];
         self.audioConfig = config;
+        self.tokenManager = tokenManager;
     }
     return self;
 }
 
-- (void)getModels: (GRPCUnaryResponseHandler<SENGAGetModelsResponse*>*)handler {
-    SENGAAudioModels *service = [self getAudioModelsService];
+- (void)getModels: (void (^)(SENGAGetModelsResponse*, NSError*))handler {
+    NSError* error;
+    SENGAAudioModels* service = [self getAudioModelsService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        handler(nil, error);
+        return;
+    }
 
-    SENGAGetModelsRequest *request = [SENGAGetModelsRequest message];
+    SENGAGetModelsRequest* request = [SENGAGetModelsRequest message];
 
-    [[service getModelsWithMessage:request responseHandler:handler callOptions:nil] start];
+    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:nil];
+    [[service getModelsWithMessage:request responseHandler:rspHandler callOptions:headers] start];
 }
 
 - (GRPCStreamingProtoCall*)createEnrollmentWithConfig: (SENGACreateEnrollmentConfig*) enrollmentConfig
                                               handler: (id<GRPCProtoResponseHandler>) handler
 {
-    SENGAAudioBiometrics *service = [self getAudioBiometricsService];
-    GRPCStreamingProtoCall *call = [service createEnrollmentWithResponseHandler:handler callOptions:nil];
+    NSError* error;
+    SENGAAudioBiometrics* service = [self getAudioBiometricsService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
+    GRPCStreamingProtoCall* call = [service createEnrollmentWithResponseHandler:handler callOptions:headers];
     [call start];
 
     // TODO: override the device ID set in the passed in config
@@ -49,7 +70,7 @@ static NSString * const kHostAddress = @"localhost:50050";
         enrollmentConfig.audio = self.audioConfig;
     }
 
-    SENGACreateEnrollmentRequest *request = [SENGACreateEnrollmentRequest message];
+    SENGACreateEnrollmentRequest* request = [SENGACreateEnrollmentRequest message];
     request.config = enrollmentConfig;
     [call writeMessage:request];
 
@@ -59,15 +80,23 @@ static NSString * const kHostAddress = @"localhost:50050";
 - (GRPCStreamingProtoCall*)authenticateWithConfig: (SENGAAuthenticateConfig*) authConfig
                                            handler: (id<GRPCProtoResponseHandler>) handler
 {
-    SENGAAudioBiometrics *service = [self getAudioBiometricsService];
-    GRPCStreamingProtoCall *call = [service authenticateWithResponseHandler:handler callOptions:nil];
+    NSError* error;
+    SENGAAudioBiometrics* service = [self getAudioBiometricsService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
+    GRPCStreamingProtoCall* call = [service authenticateWithResponseHandler:handler callOptions:headers];
     [call start];
 
     if (!authConfig.hasAudio) {
         authConfig.audio = self.audioConfig;
     }
 
-    SENGAAuthenticateRequest *request = [SENGAAuthenticateRequest message];
+    SENGAAuthenticateRequest* request = [SENGAAuthenticateRequest message];
     request.config = authConfig;
     [call writeMessage:request];
 
@@ -77,15 +106,23 @@ static NSString * const kHostAddress = @"localhost:50050";
 - (GRPCStreamingProtoCall*)validateTriggerWithConfig: (SENGAValidateEventConfig*) config
                                              handler: (id<GRPCProtoResponseHandler>) handler
 {
-    SENGAAudioEvents *service = [self getAudioEventsService];
-    GRPCStreamingProtoCall *call = [service validateEventWithResponseHandler:handler callOptions:nil];
+    NSError* error;
+    SENGAAudioEvents* service = [self getAudioEventsService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
+    GRPCStreamingProtoCall* call = [service validateEventWithResponseHandler:handler callOptions:headers];
     [call start];
 
     if (!config.hasAudio) {
         config.audio = self.audioConfig;
     }
 
-    SENGAValidateEventRequest *request = [SENGAValidateEventRequest message];
+    SENGAValidateEventRequest* request = [SENGAValidateEventRequest message];
     request.config = config;
     [call writeMessage:request];
 
@@ -95,15 +132,23 @@ static NSString * const kHostAddress = @"localhost:50050";
 - (GRPCStreamingProtoCall*)createEnrolledEventWithConfig: (SENGACreateEnrollmentEventConfig*) config
                                                  handler: (id<GRPCProtoResponseHandler>) handler
 {
-    SENGAAudioEvents *service = [self getAudioEventsService];
-    GRPCStreamingProtoCall *call = [service createEnrolledEventWithResponseHandler:handler callOptions:nil];
+    NSError* error;
+    SENGAAudioEvents* service = [self getAudioEventsService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
+    GRPCStreamingProtoCall* call = [service createEnrolledEventWithResponseHandler:handler callOptions:headers];
     [call start];
 
     if (!config.hasAudio) {
         config.audio = self.audioConfig;
     }
 
-    SENGACreateEnrolledEventRequest *request = [SENGACreateEnrolledEventRequest message];
+    SENGACreateEnrolledEventRequest* request = [SENGACreateEnrolledEventRequest message];
     request.config = config;
     [call writeMessage:request];
 
@@ -113,15 +158,23 @@ static NSString * const kHostAddress = @"localhost:50050";
 - (GRPCStreamingProtoCall*)validateEnrolledEventWithConfig: (SENGAValidateEnrolledEventConfig*) config
                                                    handler: (id<GRPCProtoResponseHandler>) handler
 {
-    SENGAAudioEvents *service = [self getAudioEventsService];
-    GRPCStreamingProtoCall *call = [service validateEventWithResponseHandler:handler callOptions:nil];
+    NSError* error;
+    SENGAAudioEvents* service = [self getAudioEventsService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
+    GRPCStreamingProtoCall* call = [service validateEventWithResponseHandler:handler callOptions:headers];
     [call start];
 
     if (!config.hasAudio) {
         config.audio = self.audioConfig;
     }
 
-    SENGAValidateEnrolledEventRequest *request = [SENGAValidateEnrolledEventRequest message];
+    SENGAValidateEnrolledEventRequest* request = [SENGAValidateEnrolledEventRequest message];
     request.config = config;
     [call writeMessage:request];
 
@@ -131,15 +184,23 @@ static NSString * const kHostAddress = @"localhost:50050";
 - (GRPCStreamingProtoCall*)transcribeAudioWithConfig: (SENGATranscribeConfig*) config
                                              handler: (id<GRPCProtoResponseHandler>) handler
 {
-    SENGAAudioTranscriptions *service = [self getAudioTranscriptionsService];
-    GRPCStreamingProtoCall *call = [service transcribeWithResponseHandler:handler callOptions:nil];
+    NSError* error;
+    SENGAAudioTranscriptions* service = [self getAudioTranscriptionsService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
+    GRPCStreamingProtoCall* call = [service transcribeWithResponseHandler:handler callOptions:headers];
     [call start];
 
     if (!config.hasAudio) {
         config.audio = self.audioConfig;
     }
 
-    SENGATranscribeRequest *request = [SENGATranscribeRequest message];
+    SENGATranscribeRequest* request = [SENGATranscribeRequest message];
     request.config = config;
     [call writeMessage:request];
 
@@ -150,13 +211,21 @@ static NSString * const kHostAddress = @"localhost:50050";
                   config: (SENGAVoiceSynthesisConfig*) config
                  handler: (id<GRPCProtoResponseHandler>) handler
 {
+    NSError* error;
     SENGAAudioSynthesis *service = [self getAudioSynthesisService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return;
+    }
 
-    SENGASynthesizeSpeechRequest *request = [SENGASynthesizeSpeechRequest message];
+    SENGASynthesizeSpeechRequest* request = [SENGASynthesizeSpeechRequest message];
     request.phrase = phrase;
     request.config = config;
 
-    [[service synthesizeSpeechWithMessage:request responseHandler:handler callOptions:nil] start];
+    [[service synthesizeSpeechWithMessage:request responseHandler:handler callOptions:headers] start];
 }
 
 - (SENGAAudioModels*)getAudioModelsService {

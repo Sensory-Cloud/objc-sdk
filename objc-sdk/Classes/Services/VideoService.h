@@ -8,7 +8,7 @@
 #ifndef VideoService_h
 #define VideoService_h
 
-@class GRPCUnaryResponseHandler<ResponseType>;
+@class SENTokenManager;
 @class GRPCStreamingProtoCall;
 @class GRPCProtoResponseHandler;
 @class SENGVGetModelsResponse;
@@ -18,7 +18,9 @@
 
 @interface SENVideoService : NSObject
 
-- (void)getModels: (GRPCUnaryResponseHandler<SENGVGetModelsResponse*>*)handler;
+- (id)init: (SENTokenManager*)tokenManager;
+
+- (void)getModels: (void (^)(SENGVGetModelsResponse*, NSError*))handler;
 
 - (GRPCStreamingProtoCall*)createEnrollmentWithConfig: (SENGVCreateEnrollmentConfig*) enrollmentConfig
                                               handler: (GRPCProtoResponseHandler*) handler;

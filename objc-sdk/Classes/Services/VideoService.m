@@ -9,29 +9,56 @@
 #import "VideoService.h"
 #import "GRPCClient/GRPCTransport.h"
 #import "Video.pbrpc.h"
+#import "TokenManager.h"
 
 // TODO: rm
 static NSString * const kHostAddress = @"localhost:50050";
 
+@interface SENVideoService ()
+@property SENTokenManager* tokenManager;
+@end
+
 @implementation SENVideoService
 
-- (void)getModels: (GRPCUnaryResponseHandler<SENGVGetModelsResponse*>*)handler {
-    SENGVVideoModels *service = [self getVideoModelsService];
+- (id)init: (SENTokenManager*)tokenManager {
+    if (self = [super init]) {
+        self.tokenManager = tokenManager;
+    }
+    return self;
+}
 
-    SENGVGetModelsRequest *request = [SENGVGetModelsRequest message];
+- (void)getModels: (void (^)(SENGVGetModelsResponse*, NSError*))handler {
+    NSError* error;
+    SENGVVideoModels* service = [self getVideoModelsService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        handler(nil, error);
+        return;
+    }
 
-    [[service getModelsWithMessage:request responseHandler:handler callOptions:nil] start];
+    SENGVGetModelsRequest* request = [SENGVGetModelsRequest message];
+
+    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:nil];
+    [[service getModelsWithMessage:request responseHandler:rspHandler callOptions:headers] start];
 }
 
 - (GRPCStreamingProtoCall*)createEnrollmentWithConfig: (SENGVCreateEnrollmentConfig*) enrollmentConfig
                                               handler: (id<GRPCProtoResponseHandler>) handler
 {
-    SENGVVideoBiometrics *service = [self getVideoBiometricsService];
-    GRPCStreamingProtoCall *call = [service createEnrollmentWithResponseHandler:handler callOptions:nil];
+    NSError* error;
+    SENGVVideoBiometrics* service = [self getVideoBiometricsService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
+    GRPCStreamingProtoCall* call = [service createEnrollmentWithResponseHandler:handler callOptions:headers];
     [call start];
 
     // TODO: override the device ID set in the passed in config
-    SENGVCreateEnrollmentRequest *request = [SENGVCreateEnrollmentRequest message];
+    SENGVCreateEnrollmentRequest* request = [SENGVCreateEnrollmentRequest message];
     request.config = enrollmentConfig;
     [call writeMessage:request];
 
@@ -41,11 +68,19 @@ static NSString * const kHostAddress = @"localhost:50050";
 - (GRPCStreamingProtoCall*)authenticateWithConfig: (SENGVAuthenticateConfig*) authConfig
                                           handler: (id<GRPCProtoResponseHandler>) handler
 {
+    NSError* error;
     SENGVVideoBiometrics *service = [self getVideoBiometricsService];
-    GRPCStreamingProtoCall *call = [service authenticateWithResponseHandler:handler callOptions:nil];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
+    GRPCStreamingProtoCall* call = [service authenticateWithResponseHandler:handler callOptions:headers];
     [call start];
 
-    SENGVAuthenticateRequest *request = [SENGVAuthenticateRequest message];
+    SENGVAuthenticateRequest* request = [SENGVAuthenticateRequest message];
     request.config = authConfig;
     [call writeMessage:request];
 
@@ -55,8 +90,16 @@ static NSString * const kHostAddress = @"localhost:50050";
 - (GRPCStreamingProtoCall*)validateLivenessWithConfig: (SENGVValidateRecognitionConfig*) config
                                               handler: (id<GRPCProtoResponseHandler>) handler
 {
-    SENGVVideoRecognition *service = [self getVideoRecognitionService];
-    GRPCStreamingProtoCall *call = [service validateLivenessWithResponseHandler:handler callOptions:nil];
+    NSError* error;
+    SENGVVideoRecognition* service = [self getVideoRecognitionService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
+    GRPCStreamingProtoCall* call = [service validateLivenessWithResponseHandler:handler callOptions:headers];
     [call start];
 
     SENGVValidateRecognitionRequest *request = [SENGVValidateRecognitionRequest message];

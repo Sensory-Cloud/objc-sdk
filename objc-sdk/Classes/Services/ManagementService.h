@@ -8,34 +8,36 @@
 #ifndef ManagementService_h
 #define ManagementService_h
 
-@class GRPCUnaryResponseHandler<ResponseType>;
+@class SENTokenManager;
 @class SENGEnrollmentResponse;
 @class SENGEnrollmentGroupResponse;
 
 @interface SENManagementService : NSObject
 
+- (id)init: (SENTokenManager*)tokenManager;
+
 - (void)getEnrollments: (NSString*)userId
-               handler: (GRPCUnaryResponseHandler<SENGEnrollmentResponse*>*)handler;
+               handler: (void (^)(SENGEnrollmentResponse*, NSError*))handler;
 
 - (void)deleteEnrollment: (NSString*)enrollment
-                 handler: (GRPCUnaryResponseHandler<SENGEnrollmentResponse*>*)handler;
+                 handler: (void (^)(SENGEnrollmentResponse*, NSError*))handler;
 
 - (void)getEnrollmentGroups: (NSString*)userId
-                    handler: (GRPCUnaryResponseHandler<SENGEnrollmentGroupResponse*>*)handler;
+                    handler: (void (^)(SENGEnrollmentGroupResponse*, NSError*))handler;
 
 - (void)createEnrollmentGroup: (NSString*)userId
                       groupId: (NSString*)groupId
                     groupName: (NSString*)groupName
                   description: (NSString*)description
                     modelName: (NSString*)modelName
-                      handler: (GRPCUnaryResponseHandler<SENGEnrollmentGroupResponse*>*)handler;
+                      handler: (void (^)(SENGEnrollmentGroupResponse*, NSError*))handler;
 
 - (void)appendEnrollmentGroup: (NSString*)groupId
                   enrollments: (NSMutableArray<NSString*>*)enrollments
-                      handler: (GRPCUnaryResponseHandler<SENGEnrollmentGroupResponse*>*)handler;
+                      handler: (void (^)(SENGEnrollmentGroupResponse*, NSError*))handler;
 
 - (void)deleteEnrollmentGroup: (NSString*)groupId
-                      handler: (GRPCUnaryResponseHandler<SENGEnrollmentGroupResponse*>*)handler;
+                      handler: (void (^)(SENGEnrollmentGroupResponse*, NSError*))handler;
 
 @end
 

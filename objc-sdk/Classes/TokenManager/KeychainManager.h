@@ -8,24 +8,26 @@
 #ifndef KeychainManager_h
 #define KeychainManager_h
 
-@interface SENKeychainManager : NSObject
+#import "SecureCredentialStore.h"
+
+@interface SENKeychainManager : NSObject <SENSecureCredentialStore>
 
 - (bool)saveStringWithTag: (NSString*) tag
                     value: (NSString*)value
-                 errorPtr:(out NSError **)error;
+                 errorPtr: (out NSError **)error;
 
 - (bool)saveDataWithTag: (NSString*)tag
                    data: (NSData*)data
-               errorPtr:(out NSError **)error;
+               errorPtr: (out NSError**)error;
 
 - (NSString*)getStringWithTag: (NSString*)tag
-                     errorPtr:(out NSError **)error;
+                     errorPtr: (out NSError**)error;
 
 - (NSData*)getDataWithTag: (NSString*)tag
-                 errorPtr:(out NSError **)error;
+                 errorPtr: (out NSError**)error;
 
 - (bool)deleteEntryWithTag: (NSString*)tag
-                  errorPtr:(out NSError **)error;
+                  errorPtr: (out NSError**)error;
 
 @end
 

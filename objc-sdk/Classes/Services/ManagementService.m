@@ -9,37 +9,70 @@
 #import "ManagementService.h"
 #import "GRPCClient/GRPCTransport.h"
 #import "Enrollment.pbrpc.h"
+#import "TokenManager.h"
 
 // TODO: rm
 static NSString * const kHostAddress = @"localhost:50050";
 
+@interface SENManagementService ()
+@property SENTokenManager* tokenManager;
+@end
+
 @implementation SENManagementService
 
-- (void)getEnrollments: (NSString*)userId handler:(GRPCUnaryResponseHandler<SENGEnrollmentResponse*>*)handler {
-    SENGEnrollmentService *service = [self getEnrollmentService];
-
-    SENGGetEnrollmentsRequest *request = [SENGGetEnrollmentsRequest message];
-    request.userId = userId;
-
-    [[service getEnrollmentsWithMessage:request responseHandler:handler callOptions:nil] start];
+- (id)init: (SENTokenManager*)tokenManager {
+    if (self = [super init]) {
+        self.tokenManager = tokenManager;
+    }
+    return self;
 }
 
-- (void)deleteEnrollment: (NSString*)enrollment handler:(GRPCUnaryResponseHandler<SENGEnrollmentResponse*>*)handler {
-    SENGEnrollmentService *service = [self getEnrollmentService];
+- (void)getEnrollments: (NSString*)userId handler:(void (^)(SENGEnrollmentResponse*, NSError*))handler {
+    NSError* error;
+    SENGEnrollmentService* service = [self getEnrollmentService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        handler(nil, error);
+        return;
+    }
 
-    SENGDeleteEnrollmentRequest *request = [SENGDeleteEnrollmentRequest message];
+    SENGGetEnrollmentsRequest* request = [SENGGetEnrollmentsRequest message];
+    request.userId = userId;
+
+    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:nil];
+    [[service getEnrollmentsWithMessage:request responseHandler:rspHandler callOptions:headers] start];
+}
+
+- (void)deleteEnrollment: (NSString*)enrollment handler:(void (^)(SENGEnrollmentResponse*, NSError*))handler {
+    NSError* error;
+    SENGEnrollmentService* service = [self getEnrollmentService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        handler(nil, error);
+        return;
+    }
+
+    SENGDeleteEnrollmentRequest* request = [SENGDeleteEnrollmentRequest message];
     request.id_p = enrollment;
 
-    [[service deleteEnrollmentWithMessage:request responseHandler:handler callOptions:nil] start];
+    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:nil];
+    [[service deleteEnrollmentWithMessage:request responseHandler:rspHandler callOptions:headers] start];
 }
 
-- (void)getEnrollmentGroups: (NSString*)userId handler:(GRPCUnaryResponseHandler<SENGEnrollmentGroupResponse*>*)handler {
-    SENGEnrollmentService *service = [self getEnrollmentService];
+- (void)getEnrollmentGroups: (NSString*)userId handler:(void (^)(SENGEnrollmentGroupResponse*, NSError*))handler {
+    NSError* error;
+    SENGEnrollmentService* service = [self getEnrollmentService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        handler(nil, error);
+        return;
+    }
 
-    SENGGetEnrollmentsRequest *request = [SENGGetEnrollmentsRequest message];
+    SENGGetEnrollmentsRequest* request = [SENGGetEnrollmentsRequest message];
     request.userId = userId;
 
-    [[service getEnrollmentGroupsWithMessage:request responseHandler:handler callOptions:nil] start];
+    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:nil];
+    [[service getEnrollmentGroupsWithMessage:request responseHandler:rspHandler callOptions:headers] start];
 }
 
 - (void)createEnrollmentGroup: (NSString*)userId
@@ -47,40 +80,61 @@ static NSString * const kHostAddress = @"localhost:50050";
                     groupName: (NSString*)groupName
                   description: (NSString*)description
                     modelName: (NSString*)modelName
-                      handler: (GRPCUnaryResponseHandler<SENGEnrollmentGroupResponse*>*)handler
+                      handler: (void (^)(SENGEnrollmentGroupResponse*, NSError*))handler
 {
-    SENGEnrollmentService *service = [self getEnrollmentService];
+    NSError* error;
+    SENGEnrollmentService* service = [self getEnrollmentService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        handler(nil, error);
+        return;
+    }
 
-    SENGCreateEnrollmentGroupRequest *request = [SENGCreateEnrollmentGroupRequest message];
+    SENGCreateEnrollmentGroupRequest* request = [SENGCreateEnrollmentGroupRequest message];
     request.id_p = groupId;
     request.name = groupName;
     request.description_p = description;
     request.modelName = modelName;
     request.userId = userId.lowercaseString;
 
-    [[service createEnrollmentGroupWithMessage:request responseHandler:handler callOptions:nil] start];
+    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:nil];
+    [[service createEnrollmentGroupWithMessage:request responseHandler:rspHandler callOptions:headers] start];
 }
 
 - (void)appendEnrollmentGroup: (NSString*)groupId
                   enrollments: (NSMutableArray<NSString*>*)enrollments
-                      handler: (GRPCUnaryResponseHandler<SENGEnrollmentGroupResponse*>*)handler
+                      handler: (void (^)(SENGEnrollmentGroupResponse*, NSError*))handler
 {
-    SENGEnrollmentService *service = [self getEnrollmentService];
+    NSError* error;
+    SENGEnrollmentService* service = [self getEnrollmentService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        handler(nil, error);
+        return;
+    }
 
-    SENGAppendEnrollmentGroupRequest *request = [SENGAppendEnrollmentGroupRequest message];
+    SENGAppendEnrollmentGroupRequest* request = [SENGAppendEnrollmentGroupRequest message];
     request.groupId = groupId;
     request.enrollmentIdsArray = enrollments;
 
-    [[service appendEnrollmentGroupWithMessage:request responseHandler:handler callOptions:nil] start];
+    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:nil];
+    [[service appendEnrollmentGroupWithMessage:request responseHandler:rspHandler callOptions:headers] start];
 }
 
-- (void)deleteEnrollmentGroup: (NSString*)groupId handler: (GRPCUnaryResponseHandler<SENGEnrollmentGroupResponse*>*)handler {
-    SENGEnrollmentService *service = [self getEnrollmentService];
+- (void)deleteEnrollmentGroup: (NSString*)groupId handler: (void (^)(SENGEnrollmentGroupResponse*, NSError*))handler {
+    NSError* error;
+    SENGEnrollmentService* service = [self getEnrollmentService];
+    GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
+    if (headers == nil) {
+        handler(nil, error);
+        return;
+    }
 
-    SENGDeleteEnrollmentGroupRequest *request = [SENGDeleteEnrollmentGroupRequest message];
+    SENGDeleteEnrollmentGroupRequest* request = [SENGDeleteEnrollmentGroupRequest message];
     request.id_p = groupId;
 
-    [[service deleteEnrollmentGroupWithMessage:request responseHandler:handler callOptions:nil] start];
+    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:nil];
+    [[service deleteEnrollmentGroupWithMessage:request responseHandler:rspHandler callOptions:headers] start];
 }
 
 - (SENGEnrollmentService*)getEnrollmentService {

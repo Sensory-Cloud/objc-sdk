@@ -10,11 +10,37 @@
 #import "GRPCClient/GRPCTransport.h"
 #import "Oauth.pbrpc.h"
 #import "Device.pbrpc.h"
+#import "SecureCredentialStore.h"
 
 // TODO: rm
 static NSString * const kHostAddress = @"localhost:50050";
 
+@interface SENOAuthService ()
+@property (readwrite, weak) id<SENSecureCredentialStore> credentialStore;
+@end
+
 @implementation SENOAuthService
+
+-(id)init: (id<SENSecureCredentialStore>)credentialStore {
+    if (self = [super init]) {
+        self.credentialStore = credentialStore;
+    }
+    return self;
+}
+
+- (NSString*) generateClientId {
+    return [[NSUUID UUID] UUIDString];
+}
+
+- (NSString*) generateClientSecret {
+    NSMutableData *data = [NSMutableData dataWithLength:32];
+    OSStatus status = SecRandomCopyBytes(kSecRandomDefault, 32, data.mutableBytes);
+    if (status != errSecSuccess) {
+        // TODO: better error handling
+        NSLog(@"Insecure client secret generation");
+    }
+    return [data base64EncodedStringWithOptions:0];
+}
 
 - (void)enrollDevice: (NSString*)name
           credential: (NSString*)credential
@@ -37,17 +63,28 @@ static NSString * const kHostAddress = @"localhost:50050";
     [[service enrollDeviceWithMessage:request responseHandler:handler callOptions:nil] start];
 }
 
-- (void)getToken: (NSString*)clientId
-          secret: (NSString*)secret
-         handler: (GRPCUnaryResponseHandler<SENGTokenResponse*>*)handler
+- (void)getToken: (void (^)(SENGTokenResponse*, NSError*))handler
 {
     SENGOauthService *service = [self getOAuthService];
 
+    NSError* error;
+    NSString* clientId = [[self credentialStore] getClientId: &error];
+    if (error != nil) {
+        handler(nil, error);
+        return;
+    }
+    NSString* clientSecret = [[self credentialStore] getClientSecret: &error];
+    if (error != nil) {
+        handler(nil, error);
+        return;
+    }
+
     SENGTokenRequest *request = [SENGTokenRequest message];
     request.clientId = clientId;
-    request.secret = secret;
+    request.secret = clientSecret;
 
-    [[service getTokenWithMessage:request responseHandler:handler callOptions:nil] start];
+    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:nil];
+    [[service getTokenWithMessage:request responseHandler:rspHandler callOptions:nil] start];
 }
 
 - (void)renewDeviceCredential: (NSString*)clientId

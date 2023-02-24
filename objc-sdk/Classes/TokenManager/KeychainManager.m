@@ -9,20 +9,36 @@
 #import "KeychainManager.h"
 
 static NSString * const kErrorDomain = @"ai.SensoryCloud.KeychainManager";
+static NSString * const kClientIdTag = @"Sensory_Client_ID";
+static NSString * const kClientSecretTag = @"Sensory_Client_Secret";
 
 @implementation SENKeychainManager
 
-- (bool)saveStringWithTag: (NSString*) tag value: (NSString*)value errorPtr:(out NSError **)error {
+- (bool)saveCredentials: (NSString*) clientId secret:(NSString*) secret errorPtr:(out NSError**)error {
+    if (![self saveStringWithTag:kClientIdTag value:clientId errorPtr:error]) {
+        return FALSE;
+    }
+    if (![self saveStringWithTag:kClientSecretTag value:secret errorPtr:error]) {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+- (nonnull NSString *)getClientId:(out NSError**)error {
+    return [self getStringWithTag:kClientIdTag errorPtr:error];
+}
+
+- (nonnull NSString *)getClientSecret:(out NSError**)error {
+    return [self getStringWithTag:kClientSecretTag errorPtr:error];
+}
+
+- (bool)saveStringWithTag: (NSString*)tag value: (NSString*)value errorPtr:(out NSError**)error {
     NSData* data = [value dataUsingEncoding:NSUTF8StringEncoding];
     return [self saveDataWithTag:tag data:data errorPtr:error];
 }
 
-- (bool)saveDataWithTag: (NSString*)tag data: (NSData*)data errorPtr:(out NSError **)error {
-    NSError* deleteError;
-    if (![self deleteEntryWithTag:tag errorPtr:&deleteError]) {
-        if (error != nil) {
-            *error = deleteError;
-        }
+- (bool)saveDataWithTag: (NSString*)tag data: (NSData*)data errorPtr:(out NSError**)error {
+    if (![self deleteEntryWithTag:tag errorPtr:error]) {
         return FALSE;
     }
 
@@ -42,13 +58,9 @@ static NSString * const kErrorDomain = @"ai.SensoryCloud.KeychainManager";
     return TRUE;
 }
 
-- (NSString*)getStringWithTag: (NSString*)tag errorPtr:(out NSError **)error {
-    NSError* getError;
-    NSData* resultData = [self getDataWithTag:tag errorPtr:&getError];
-    if (getError != nil) {
-        if (error != nil) {
-            *error = getError;
-        }
+- (NSString*)getStringWithTag: (NSString*)tag errorPtr:(out NSError**)error {
+    NSData* resultData = [self getDataWithTag:tag errorPtr:error];
+    if (resultData == nil) {
         return nil;
     }
 
@@ -56,7 +68,7 @@ static NSString * const kErrorDomain = @"ai.SensoryCloud.KeychainManager";
     return result;
 }
 
-- (NSData*)getDataWithTag: (NSString*)tag errorPtr:(out NSError **)error {
+- (NSData*)getDataWithTag: (NSString*)tag errorPtr:(out NSError**)error {
     NSDictionary *query = @{ (id)kSecClass: (id)kSecClassKey,
                              (id)kSecAttrApplicationTag: tag,
                              (id)kSecReturnData: @YES,
@@ -73,7 +85,7 @@ static NSString * const kErrorDomain = @"ai.SensoryCloud.KeychainManager";
     return (__bridge NSData *)result;
 }
 
-- (bool)deleteEntryWithTag: (NSString*)tag errorPtr:(out NSError **)error {
+- (bool)deleteEntryWithTag: (NSString*)tag errorPtr:(out NSError**)error {
     NSDictionary *query = @{ (id)kSecClass: (id)kSecClassKey,
                              (id)kSecAttrApplicationTag: tag,
     };

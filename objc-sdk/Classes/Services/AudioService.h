@@ -8,7 +8,7 @@
 #ifndef AudioService_h
 #define AudioService_h
 
-@class GRPCUnaryResponseHandler<ResponseType>;
+@class SENTokenManager;
 @class GRPCStreamingProtoCall;
 @class GRPCProtoResponseHandler;
 @class SENGAAudioConfig;
@@ -25,9 +25,9 @@
 
 @property SENGAAudioConfig *audioConfig;
 
-- (id)init;
+- (id)init: (SENTokenManager*)tokenManager;
 
-- (void)getModels: (GRPCUnaryResponseHandler<SENGAGetModelsResponse*>*)handler;
+- (void)getModels: (void (^)(SENGAGetModelsResponse*, NSError*))handler;
 
 - (GRPCStreamingProtoCall*)createEnrollmentWithConfig: (SENGACreateEnrollmentConfig*) enrollmentConfig
                                               handler: (GRPCProtoResponseHandler*) handler;

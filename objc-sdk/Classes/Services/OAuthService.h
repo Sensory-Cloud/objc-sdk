@@ -8,11 +8,22 @@
 #ifndef OAuthService_h
 #define OAuthService_h
 
+#import "SecureCredentialStore.h"
+
 @class GRPCUnaryResponseHandler<ResponseType>;
+@class SENKeychainManager;
 @class SENGDeviceResponse;
 @class SENGTokenResponse;
 
 @interface SENOAuthService : NSObject
+
+@property (readonly, weak) id<SENSecureCredentialStore> credentialStore;
+
+-(id)init: (id<SENSecureCredentialStore>)credentialStore;
+
+- (NSString*) generateClientId;
+
+- (NSString*) generateClientSecret;
 
 - (void)enrollDevice: (NSString*)name
           credential: (NSString*)credential
@@ -20,9 +31,7 @@
         clientSecret: (NSString*)clientSecret
              handler: (GRPCUnaryResponseHandler<SENGDeviceResponse*>*)handler;
 
-- (void)getToken: (NSString*)clientId
-          secret: (NSString*)secret
-         handler: (GRPCUnaryResponseHandler<SENGTokenResponse*>*)handler;
+- (void)getToken: (void (^)(SENGTokenResponse*, NSError*))handler;
 
 - (void)renewDeviceCredential: (NSString*)clientId
                    credential: (NSString*)credential
