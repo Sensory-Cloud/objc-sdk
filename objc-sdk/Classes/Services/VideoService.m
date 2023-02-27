@@ -10,9 +10,7 @@
 #import "GRPCClient/GRPCTransport.h"
 #import "Video.pbrpc.h"
 #import "TokenManager.h"
-
-// TODO: rm
-static NSString * const kHostAddress = @"localhost:50050";
+#import "Initializer.h"
 
 @interface SENVideoService ()
 @property SENTokenManager* tokenManager;
@@ -29,7 +27,11 @@ static NSString * const kHostAddress = @"localhost:50050";
 
 - (void)getModels: (void (^)(SENGVGetModelsResponse*, NSError*))handler {
     NSError* error;
-    SENGVVideoModels* service = [self getVideoModelsService];
+    SENGVVideoModels* service = [self getVideoModelsService: &error];
+    if (service == nil) {
+        handler(nil, error);
+        return;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         handler(nil, error);
@@ -46,7 +48,13 @@ static NSString * const kHostAddress = @"localhost:50050";
                                               handler: (id<GRPCProtoResponseHandler>) handler
 {
     NSError* error;
-    SENGVVideoBiometrics* service = [self getVideoBiometricsService];
+    SENGVVideoBiometrics* service = [self getVideoBiometricsService: &error];
+    if (service == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
@@ -54,10 +62,19 @@ static NSString * const kHostAddress = @"localhost:50050";
         }
         return nil;
     }
+    if (enrollmentConfig.deviceId == nil) {
+        struct SENInitConfig* config = SENInitializer.sharedConfig;
+        if (config == nil) {
+            if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+                [handler didCloseWithTrailingMetadata:nil error:error];
+            }
+            return nil;
+        }
+        enrollmentConfig.deviceId = config->deviceId;
+    }
     GRPCStreamingProtoCall* call = [service createEnrollmentWithResponseHandler:handler callOptions:headers];
     [call start];
 
-    // TODO: override the device ID set in the passed in config
     SENGVCreateEnrollmentRequest* request = [SENGVCreateEnrollmentRequest message];
     request.config = enrollmentConfig;
     [call writeMessage:request];
@@ -69,7 +86,13 @@ static NSString * const kHostAddress = @"localhost:50050";
                                           handler: (id<GRPCProtoResponseHandler>) handler
 {
     NSError* error;
-    SENGVVideoBiometrics *service = [self getVideoBiometricsService];
+    SENGVVideoBiometrics *service = [self getVideoBiometricsService: &error];
+    if (service == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
@@ -91,7 +114,13 @@ static NSString * const kHostAddress = @"localhost:50050";
                                               handler: (id<GRPCProtoResponseHandler>) handler
 {
     NSError* error;
-    SENGVVideoRecognition* service = [self getVideoRecognitionService];
+    SENGVVideoRecognition* service = [self getVideoRecognitionService: &error];
+    if (service == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
@@ -109,27 +138,63 @@ static NSString * const kHostAddress = @"localhost:50050";
     return call;
 }
 
-- (SENGVVideoModels*)getVideoModelsService {
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transport = GRPCDefaultTransportImplList.core_insecure;
-    SENGVVideoModels *service = [[SENGVVideoModels alloc] initWithHost:kHostAddress callOptions:options];
+- (SENGVVideoModels*)getVideoModelsService: (out NSError**)error {
+    struct SENInitConfig* config = SENInitializer.sharedConfig;
+    if (config == nil) {
+        if (error != nil) {
+            *error = [SENInitializer getNotInitializedError];
+        }
+        return nil;
+    }
 
+    GRPCMutableCallOptions* options = [[GRPCMutableCallOptions alloc] init];
+    if (config->isSecure) {
+        options.transport = GRPCDefaultTransportImplList.core_secure;
+    } else {
+        options.transport = GRPCDefaultTransportImplList.core_insecure;
+    }
+
+    SENGVVideoModels* service = [[SENGVVideoModels alloc] initWithHost:config->fullyQualifiedDomainName callOptions:options];
     return service;
 }
 
-- (SENGVVideoBiometrics*)getVideoBiometricsService {
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transport = GRPCDefaultTransportImplList.core_insecure;
-    SENGVVideoBiometrics *service = [[SENGVVideoBiometrics alloc] initWithHost:kHostAddress callOptions:options];
+- (SENGVVideoBiometrics*)getVideoBiometricsService: (out NSError**)error {
+    struct SENInitConfig* config = SENInitializer.sharedConfig;
+    if (config == nil) {
+        if (error != nil) {
+            *error = [SENInitializer getNotInitializedError];
+        }
+        return nil;
+    }
 
+    GRPCMutableCallOptions* options = [[GRPCMutableCallOptions alloc] init];
+    if (config->isSecure) {
+        options.transport = GRPCDefaultTransportImplList.core_secure;
+    } else {
+        options.transport = GRPCDefaultTransportImplList.core_insecure;
+    }
+
+    SENGVVideoBiometrics* service = [[SENGVVideoBiometrics alloc] initWithHost:config->fullyQualifiedDomainName callOptions:options];
     return service;
 }
 
-- (SENGVVideoRecognition*)getVideoRecognitionService {
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transport = GRPCDefaultTransportImplList.core_insecure;
-    SENGVVideoRecognition *service = [[SENGVVideoRecognition alloc] initWithHost:kHostAddress callOptions:options];
+- (SENGVVideoRecognition*)getVideoRecognitionService: (out NSError**)error {
+    struct SENInitConfig* config = SENInitializer.sharedConfig;
+    if (config == nil) {
+        if (error != nil) {
+            *error = [SENInitializer getNotInitializedError];
+        }
+        return nil;
+    }
 
+    GRPCMutableCallOptions* options = [[GRPCMutableCallOptions alloc] init];
+    if (config->isSecure) {
+        options.transport = GRPCDefaultTransportImplList.core_secure;
+    } else {
+        options.transport = GRPCDefaultTransportImplList.core_insecure;
+    }
+
+    SENGVVideoRecognition* service = [[SENGVVideoRecognition alloc] initWithHost:config->fullyQualifiedDomainName callOptions:options];
     return service;
 }
 

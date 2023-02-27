@@ -8,12 +8,15 @@
 #ifndef HealthService_h
 #define HealthService_h
 
-@class GRPCUnaryResponseHandler<ResponseType>;
 @class SENGServerHealthResponse;
 
 @interface SENHealthService : NSObject
 
-- (void)getHealth: (GRPCUnaryResponseHandler<SENGServerHealthResponse*>*)handler;
+- (void)getHealth: (void (^)(SENGServerHealthResponse*, NSError*))handler;
+
+- (void)getHealthForFQDN: (NSString*)fqdn
+                isSecure: (bool)isSecure
+                 handler: (void (^)(SENGServerHealthResponse*, NSError*))handler;
 
 @end
 

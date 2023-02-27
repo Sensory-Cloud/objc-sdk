@@ -16,9 +16,7 @@
     XCTestExpectation *expectResponse = [self expectationWithDescription: @"Server response should be received"];
 
     SENHealthService *service = [SENHealthService alloc];
-    GRPCUnaryResponseHandler *handler =
-    [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:
-     ^(SENGServerHealthResponse *response, NSError *error) {
+    void (^handler)(SENGServerHealthResponse*, NSError*) = ^void (SENGServerHealthResponse* response, NSError* error) {
         if (response) {
             NSLog(@"Success");
             [expectResponse fulfill];
@@ -26,7 +24,7 @@
             NSLog(@"Error: %@", error);
             XCTFail(@"An error should not be produced");
         }
-    } responseDispatchQueue:nil];
+    };
     [service getHealth:handler];
 
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {

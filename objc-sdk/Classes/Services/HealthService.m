@@ -9,26 +9,36 @@
 #import "HealthService.h"
 #import "GRPCClient/GRPCTransport.h"
 #import "Health.pbrpc.h"
-
-// TODO: rm
-static NSString * const kHostAddress = @"localhost:50050";
+#import "Initializer.h"
 
 @implementation SENHealthService
 
-- (void)getHealth: (GRPCUnaryResponseHandler<SENGServerHealthResponse*>*)handler {
-    SENGHealthService *service = [self getHealthService];
+- (void)getHealth: (void (^)(SENGServerHealthResponse*, NSError*))handler {
+    struct SENInitConfig* config = SENInitializer.sharedConfig;
+    if (config == nil) {
+        handler(nil, [SENInitializer getNotInitializedError]);
+        return;
+    }
+
+    [self getHealthForFQDN:config->fullyQualifiedDomainName isSecure:config->isSecure handler:handler];
+}
+
+- (void)getHealthForFQDN: (NSString*)fqdn
+                isSecure: (bool)isSecure
+                 handler: (void (^)(SENGServerHealthResponse*, NSError*))handler
+{
+    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
+    if (isSecure) {
+        options.transport = GRPCDefaultTransportImplList.core_insecure;
+    } else {
+        options.transport = GRPCDefaultTransportImplList.core_secure;
+    }
+    SENGHealthService *service = [[SENGHealthService alloc] initWithHost:fqdn callOptions:options];
 
     SENGHealthRequest *request = [SENGHealthRequest message];
 
-    [[service getHealthWithMessage:request responseHandler:handler callOptions:nil] start];
-}
-
-- (SENGHealthService*)getHealthService {
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transport = GRPCDefaultTransportImplList.core_insecure;
-    SENGHealthService *service = [[SENGHealthService alloc] initWithHost:kHostAddress callOptions:options];
-
-    return service;
+    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:nil];
+    [[service getHealthWithMessage:request responseHandler:rspHandler callOptions:nil] start];
 }
 
 @end

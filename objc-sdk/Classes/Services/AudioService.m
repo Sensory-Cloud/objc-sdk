@@ -10,9 +10,7 @@
 #import "GRPCClient/GRPCTransport.h"
 #import "Audio.pbrpc.h"
 #import "TokenManager.h"
-
-// TODO: rm
-static NSString * const kHostAddress = @"localhost:50050";
+#import "Initializer.h"
 
 @interface SENAudioService ()
 @property SENTokenManager* tokenManager;
@@ -37,7 +35,11 @@ static NSString * const kHostAddress = @"localhost:50050";
 
 - (void)getModels: (void (^)(SENGAGetModelsResponse*, NSError*))handler {
     NSError* error;
-    SENGAAudioModels* service = [self getAudioModelsService];
+    SENGAAudioModels* service = [self getAudioModelsService: &error];
+    if (service == nil) {
+        handler(nil, error);
+        return;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         handler(nil, error);
@@ -54,7 +56,13 @@ static NSString * const kHostAddress = @"localhost:50050";
                                               handler: (id<GRPCProtoResponseHandler>) handler
 {
     NSError* error;
-    SENGAAudioBiometrics* service = [self getAudioBiometricsService];
+    SENGAAudioBiometrics* service = [self getAudioBiometricsService: &error];
+    if (service == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
@@ -62,10 +70,19 @@ static NSString * const kHostAddress = @"localhost:50050";
         }
         return nil;
     }
+    if (enrollmentConfig.deviceId == nil) {
+        struct SENInitConfig* config = SENInitializer.sharedConfig;
+        if (config == nil) {
+            if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+                [handler didCloseWithTrailingMetadata:nil error:error];
+            }
+            return nil;
+        }
+        enrollmentConfig.deviceId = config->deviceId;
+    }
     GRPCStreamingProtoCall* call = [service createEnrollmentWithResponseHandler:handler callOptions:headers];
     [call start];
 
-    // TODO: override the device ID set in the passed in config
     if (!enrollmentConfig.hasAudio) {
         enrollmentConfig.audio = self.audioConfig;
     }
@@ -81,7 +98,13 @@ static NSString * const kHostAddress = @"localhost:50050";
                                            handler: (id<GRPCProtoResponseHandler>) handler
 {
     NSError* error;
-    SENGAAudioBiometrics* service = [self getAudioBiometricsService];
+    SENGAAudioBiometrics* service = [self getAudioBiometricsService: &error];
+    if (service == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
@@ -107,7 +130,13 @@ static NSString * const kHostAddress = @"localhost:50050";
                                              handler: (id<GRPCProtoResponseHandler>) handler
 {
     NSError* error;
-    SENGAAudioEvents* service = [self getAudioEventsService];
+    SENGAAudioEvents* service = [self getAudioEventsService: &error];
+    if (service == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
@@ -133,7 +162,13 @@ static NSString * const kHostAddress = @"localhost:50050";
                                                  handler: (id<GRPCProtoResponseHandler>) handler
 {
     NSError* error;
-    SENGAAudioEvents* service = [self getAudioEventsService];
+    SENGAAudioEvents* service = [self getAudioEventsService: &error];
+    if (service == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
@@ -159,7 +194,13 @@ static NSString * const kHostAddress = @"localhost:50050";
                                                    handler: (id<GRPCProtoResponseHandler>) handler
 {
     NSError* error;
-    SENGAAudioEvents* service = [self getAudioEventsService];
+    SENGAAudioEvents* service = [self getAudioEventsService: &error];
+    if (service == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
@@ -185,7 +226,13 @@ static NSString * const kHostAddress = @"localhost:50050";
                                              handler: (id<GRPCProtoResponseHandler>) handler
 {
     NSError* error;
-    SENGAAudioTranscriptions* service = [self getAudioTranscriptionsService];
+    SENGAAudioTranscriptions* service = [self getAudioTranscriptionsService: &error];
+    if (service == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return nil;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
@@ -212,7 +259,13 @@ static NSString * const kHostAddress = @"localhost:50050";
                  handler: (id<GRPCProtoResponseHandler>) handler
 {
     NSError* error;
-    SENGAAudioSynthesis *service = [self getAudioSynthesisService];
+    SENGAAudioSynthesis *service = [self getAudioSynthesisService: &error];
+    if (service == nil) {
+        if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
+            [handler didCloseWithTrailingMetadata:nil error:error];
+        }
+        return;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
@@ -228,43 +281,103 @@ static NSString * const kHostAddress = @"localhost:50050";
     [[service synthesizeSpeechWithMessage:request responseHandler:handler callOptions:headers] start];
 }
 
-- (SENGAAudioModels*)getAudioModelsService {
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transport = GRPCDefaultTransportImplList.core_insecure;
-    SENGAAudioModels *service = [[SENGAAudioModels alloc] initWithHost:kHostAddress callOptions:options];
+- (SENGAAudioModels*)getAudioModelsService: (out NSError**)error {
+    struct SENInitConfig* config = SENInitializer.sharedConfig;
+    if (config == nil) {
+        if (error != nil) {
+            *error = [SENInitializer getNotInitializedError];
+        }
+        return nil;
+    }
 
+    GRPCMutableCallOptions* options = [[GRPCMutableCallOptions alloc] init];
+    if (config->isSecure) {
+        options.transport = GRPCDefaultTransportImplList.core_secure;
+    } else {
+        options.transport = GRPCDefaultTransportImplList.core_insecure;
+    }
+
+    SENGAAudioModels* service = [[SENGAAudioModels alloc] initWithHost:config->fullyQualifiedDomainName callOptions:options];
     return service;
 }
 
-- (SENGAAudioBiometrics*)getAudioBiometricsService {
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transport = GRPCDefaultTransportImplList.core_insecure;
-    SENGAAudioBiometrics *service = [[SENGAAudioBiometrics alloc] initWithHost:kHostAddress callOptions:options];
+- (SENGAAudioBiometrics*)getAudioBiometricsService: (out NSError**)error {
+    struct SENInitConfig* config = SENInitializer.sharedConfig;
+    if (config == nil) {
+        if (error != nil) {
+            *error = [SENInitializer getNotInitializedError];
+        }
+        return nil;
+    }
 
+    GRPCMutableCallOptions* options = [[GRPCMutableCallOptions alloc] init];
+    if (config->isSecure) {
+        options.transport = GRPCDefaultTransportImplList.core_secure;
+    } else {
+        options.transport = GRPCDefaultTransportImplList.core_insecure;
+    }
+
+    SENGAAudioBiometrics* service = [[SENGAAudioBiometrics alloc] initWithHost:config->fullyQualifiedDomainName callOptions:options];
     return service;
 }
 
-- (SENGAAudioEvents*)getAudioEventsService {
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transport = GRPCDefaultTransportImplList.core_insecure;
-    SENGAAudioEvents *service = [[SENGAAudioEvents alloc] initWithHost:kHostAddress callOptions:options];
+- (SENGAAudioEvents*)getAudioEventsService: (out NSError**)error {
+    struct SENInitConfig* config = SENInitializer.sharedConfig;
+    if (config == nil) {
+        if (error != nil) {
+            *error = [SENInitializer getNotInitializedError];
+        }
+        return nil;
+    }
 
+    GRPCMutableCallOptions* options = [[GRPCMutableCallOptions alloc] init];
+    if (config->isSecure) {
+        options.transport = GRPCDefaultTransportImplList.core_secure;
+    } else {
+        options.transport = GRPCDefaultTransportImplList.core_insecure;
+    }
+
+    SENGAAudioEvents* service = [[SENGAAudioEvents alloc] initWithHost:config->fullyQualifiedDomainName callOptions:options];
     return service;
 }
 
-- (SENGAAudioTranscriptions*)getAudioTranscriptionsService {
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transport = GRPCDefaultTransportImplList.core_insecure;
-    SENGAAudioTranscriptions *service = [[SENGAAudioTranscriptions alloc] initWithHost:kHostAddress callOptions:options];
+- (SENGAAudioTranscriptions*)getAudioTranscriptionsService: (out NSError**)error {
+    struct SENInitConfig* config = SENInitializer.sharedConfig;
+    if (config == nil) {
+        if (error != nil) {
+            *error = [SENInitializer getNotInitializedError];
+        }
+        return nil;
+    }
 
+    GRPCMutableCallOptions* options = [[GRPCMutableCallOptions alloc] init];
+    if (config->isSecure) {
+        options.transport = GRPCDefaultTransportImplList.core_secure;
+    } else {
+        options.transport = GRPCDefaultTransportImplList.core_insecure;
+    }
+
+    SENGAAudioTranscriptions* service = [[SENGAAudioTranscriptions alloc] initWithHost:config->fullyQualifiedDomainName callOptions:options];
     return service;
 }
 
-- (SENGAAudioSynthesis*)getAudioSynthesisService {
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transport = GRPCDefaultTransportImplList.core_insecure;
-    SENGAAudioSynthesis *service = [[SENGAAudioSynthesis alloc] initWithHost:kHostAddress callOptions:options];
+- (SENGAAudioSynthesis*)getAudioSynthesisService: (out NSError**)error {
+    struct SENInitConfig* config = SENInitializer.sharedConfig;
+    if (config == nil) {
+        if (error != nil) {
+            *error = [SENInitializer getNotInitializedError];
+        }
+        return nil;
+    }
 
+    GRPCMutableCallOptions* options = [[GRPCMutableCallOptions alloc] init];
+    if (config->isSecure) {
+        options.transport = GRPCDefaultTransportImplList.core_secure;
+    } else {
+        options.transport = GRPCDefaultTransportImplList.core_insecure;
+    }
+
+    SENGAAudioSynthesis* service = [[SENGAAudioSynthesis alloc] initWithHost:config->fullyQualifiedDomainName callOptions:options];
     return service;
 }
 @end

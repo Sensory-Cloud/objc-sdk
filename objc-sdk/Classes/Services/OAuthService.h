@@ -23,19 +23,21 @@
 
 - (NSString*) generateClientId;
 
-- (NSString*) generateClientSecret;
+- (NSString*) generateClientSecret: (out NSError**)error;
 
 - (void)enrollDevice: (NSString*)name
           credential: (NSString*)credential
             clientId: (NSString*)clientId
         clientSecret: (NSString*)clientSecret
-             handler: (GRPCUnaryResponseHandler<SENGDeviceResponse*>*)handler;
+             handler: (void (^)(SENGDeviceResponse*, NSError*))handler;
 
 - (void)getToken: (void (^)(SENGTokenResponse*, NSError*))handler;
 
 - (void)renewDeviceCredential: (NSString*)clientId
                    credential: (NSString*)credential
-                      handler: (GRPCUnaryResponseHandler<SENGDeviceResponse*>*)handler;
+                      handler: (void (^)(SENGDeviceResponse*, NSError*))handler;
+
+- (void)getWhoAmI: (void (^)(SENGDeviceResponse*, NSError*))handler;
 
 @end
 

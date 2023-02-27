@@ -10,9 +10,7 @@
 #import "GRPCClient/GRPCTransport.h"
 #import "Enrollment.pbrpc.h"
 #import "TokenManager.h"
-
-// TODO: rm
-static NSString * const kHostAddress = @"localhost:50050";
+#import "Initializer.h"
 
 @interface SENManagementService ()
 @property SENTokenManager* tokenManager;
@@ -29,7 +27,11 @@ static NSString * const kHostAddress = @"localhost:50050";
 
 - (void)getEnrollments: (NSString*)userId handler:(void (^)(SENGEnrollmentResponse*, NSError*))handler {
     NSError* error;
-    SENGEnrollmentService* service = [self getEnrollmentService];
+    SENGEnrollmentService* service = [self getEnrollmentService: &error];
+    if (service == nil) {
+        handler(nil, error);
+        return;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         handler(nil, error);
@@ -45,7 +47,11 @@ static NSString * const kHostAddress = @"localhost:50050";
 
 - (void)deleteEnrollment: (NSString*)enrollment handler:(void (^)(SENGEnrollmentResponse*, NSError*))handler {
     NSError* error;
-    SENGEnrollmentService* service = [self getEnrollmentService];
+    SENGEnrollmentService* service = [self getEnrollmentService: &error];
+    if (service == nil) {
+        handler(nil, error);
+        return;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         handler(nil, error);
@@ -61,7 +67,11 @@ static NSString * const kHostAddress = @"localhost:50050";
 
 - (void)getEnrollmentGroups: (NSString*)userId handler:(void (^)(SENGEnrollmentGroupResponse*, NSError*))handler {
     NSError* error;
-    SENGEnrollmentService* service = [self getEnrollmentService];
+    SENGEnrollmentService* service = [self getEnrollmentService: &error];
+    if (service == nil) {
+        handler(nil, error);
+        return;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         handler(nil, error);
@@ -83,7 +93,11 @@ static NSString * const kHostAddress = @"localhost:50050";
                       handler: (void (^)(SENGEnrollmentGroupResponse*, NSError*))handler
 {
     NSError* error;
-    SENGEnrollmentService* service = [self getEnrollmentService];
+    SENGEnrollmentService* service = [self getEnrollmentService: &error];
+    if (service == nil) {
+        handler(nil, error);
+        return;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         handler(nil, error);
@@ -106,7 +120,11 @@ static NSString * const kHostAddress = @"localhost:50050";
                       handler: (void (^)(SENGEnrollmentGroupResponse*, NSError*))handler
 {
     NSError* error;
-    SENGEnrollmentService* service = [self getEnrollmentService];
+    SENGEnrollmentService* service = [self getEnrollmentService: &error];
+    if (service == nil) {
+        handler(nil, error);
+        return;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         handler(nil, error);
@@ -123,7 +141,11 @@ static NSString * const kHostAddress = @"localhost:50050";
 
 - (void)deleteEnrollmentGroup: (NSString*)groupId handler: (void (^)(SENGEnrollmentGroupResponse*, NSError*))handler {
     NSError* error;
-    SENGEnrollmentService* service = [self getEnrollmentService];
+    SENGEnrollmentService* service = [self getEnrollmentService: &error];
+    if (service == nil) {
+        handler(nil, error);
+        return;
+    }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
     if (headers == nil) {
         handler(nil, error);
@@ -137,11 +159,23 @@ static NSString * const kHostAddress = @"localhost:50050";
     [[service deleteEnrollmentGroupWithMessage:request responseHandler:rspHandler callOptions:headers] start];
 }
 
-- (SENGEnrollmentService*)getEnrollmentService {
-    GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
-    options.transport = GRPCDefaultTransportImplList.core_insecure;
-    SENGEnrollmentService *service = [[SENGEnrollmentService alloc] initWithHost:kHostAddress callOptions:options];
+- (SENGEnrollmentService*)getEnrollmentService: (out NSError**)error {
+    struct SENInitConfig* config = SENInitializer.sharedConfig;
+    if (config == nil) {
+        if (error != nil) {
+            *error = [SENInitializer getNotInitializedError];
+        }
+        return nil;
+    }
 
+    GRPCMutableCallOptions* options = [[GRPCMutableCallOptions alloc] init];
+    if (config->isSecure) {
+        options.transport = GRPCDefaultTransportImplList.core_secure;
+    } else {
+        options.transport = GRPCDefaultTransportImplList.core_insecure;
+    }
+
+    SENGEnrollmentService* service = [[SENGEnrollmentService alloc] initWithHost:config->fullyQualifiedDomainName callOptions:options];
     return service;
 }
 
