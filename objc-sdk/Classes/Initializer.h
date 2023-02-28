@@ -8,6 +8,8 @@
 #ifndef Initializer_h
 #define Initializer_h
 
+#import "JWTSigner.h"
+
 @class SENOAuthService;
 @class SENGDeviceResponse;
 
@@ -33,6 +35,7 @@ struct SENInitConfig {
 
 + (void) initializeWithConfig: (struct SENInitConfig*)config
                  oAuthService: (SENOAuthService*)service
+                    jwtSigner: (id<SENJWTSigner>) jwtSigner
                       handler: (void (^)(SENGDeviceResponse*, NSError*))handler;
 
 + (NSError*)getNotInitializedError;

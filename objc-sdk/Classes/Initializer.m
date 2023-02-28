@@ -27,6 +27,7 @@ static struct SENInitConfig* _sharedConfig;
 
 + (void) initializeWithConfig: (struct SENInitConfig*)config
                  oAuthService: (SENOAuthService*)service
+                    jwtSigner: (id<SENJWTSigner>)jwtSigner
                       handler: (void (^)(SENGDeviceResponse*, NSError*))handler {
     [SENInitializer setSharedConfig: config];
 
@@ -39,23 +40,6 @@ static struct SENInitConfig* _sharedConfig;
         return;
     }
 
-    NSString* credential = @"";
-    switch(config->enrollmentType) {
-    case kNone:
-        break;
-    case kSharedSecret:
-        credential = config->credential;
-        break;
-    case kJWT: {
-        NSString* description = @"JWT enrollment is currently not supported by the SDK";
-        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: description};
-        NSError* error = [NSError errorWithDomain:kErrorDomain code:GRPCErrorCodeUnimplemented userInfo:userInfo];
-        [SENInitializer setSharedConfig: nil];
-        handler(nil, error);
-        return;
-        }
-    }
-
     NSError* generationError;
     NSString* clientId = [service generateClientId];
     NSString* clientSecret = [service generateClientSecret: &generationError];
@@ -63,6 +47,35 @@ static struct SENInitConfig* _sharedConfig;
         [SENInitializer setSharedConfig: nil];
         handler(nil, generationError);
         return;
+    }
+
+    NSString* credential = @"";
+    switch(config->enrollmentType) {
+    case kNone:
+        break;
+    case kSharedSecret:
+        credential = config->credential;
+        break;
+    case kJWT:
+        if (jwtSigner == nil) {
+            NSString* description = @"JWT signer must not be nil for the jwt enrollment type";
+            NSDictionary *userInfo = @{NSLocalizedDescriptionKey: description};
+            NSError* error = [NSError errorWithDomain:kErrorDomain code:GRPCErrorCodeUnimplemented userInfo:userInfo];
+            [SENInitializer setSharedConfig: nil];
+            handler(nil, error);
+            return;
+        }
+
+        NSError* signError;
+        credential = [jwtSigner signJWTWithKey:credential
+                                    deviceName:config->deviceName
+                                      tenantId:config->tenantId
+                                      clientId:clientId
+                                      errorPtr:&signError];
+        if (signError != nil) {
+            handler(nil, signError);
+            return;
+        }
     }
 
     void (^rspHandler)(SENGDeviceResponse*, NSError*) = ^void (SENGDeviceResponse* response, NSError* error) {
