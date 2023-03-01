@@ -102,8 +102,7 @@ static NSString * const kErrorDomain = @"ai.SensoryCloud.OAuthService";
     [[service getTokenWithMessage:request responseHandler:rspHandler callOptions:nil] start];
 }
 
-- (void)renewDeviceCredential: (NSString*)clientId
-                   credential: (NSString*)credential
+- (void)renewDeviceCredential: (NSString*)credential
                       handler: (void (^)(SENGDeviceResponse*, NSError*))handler
 {
     NSError* error;
@@ -112,7 +111,11 @@ static NSString * const kErrorDomain = @"ai.SensoryCloud.OAuthService";
         handler(nil, error);
         return;
     }
-
+    NSString* clientId = [[self credentialStore] getClientId: &error];
+    if (error != nil) {
+        handler(nil, error);
+        return;
+    }
     struct SENInitConfig* config = SENInitializer.sharedConfig;
     if (config == nil) {
         handler(nil, [SENInitializer getNotInitializedError]);
