@@ -17,6 +17,7 @@ static NSString * const kErrorDomain = @"ai.SensoryCloud.OAuthService";
 
 @interface SENOAuthService ()
 @property (readwrite, weak) id<SENSecureCredentialStore> credentialStore;
+@property dispatch_queue_t responseQueue;
 @end
 
 @implementation SENOAuthService
@@ -24,6 +25,8 @@ static NSString * const kErrorDomain = @"ai.SensoryCloud.OAuthService";
 -(id)init: (id<SENSecureCredentialStore>)credentialStore {
     if (self = [super init]) {
         self.credentialStore = credentialStore;
+        dispatch_queue_attr_t qos = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_USER_INITIATED, -1);
+        self.responseQueue = dispatch_queue_create("oauthServiceQueue", qos);
     }
     return self;
 }
@@ -56,8 +59,8 @@ static NSString * const kErrorDomain = @"ai.SensoryCloud.OAuthService";
         handler(nil, error);
     }
 
-    struct SENInitConfig* config = SENInitializer.sharedConfig;
-    if (config == nil) {
+    struct SENInitConfig config = SENInitializer.sharedConfig;
+    if (config.fullyQualifiedDomainName == nil || [config.fullyQualifiedDomainName isEqual:@""]) {
         handler(nil, [SENInitializer getNotInitializedError]);
         return;
     }
@@ -66,13 +69,13 @@ static NSString * const kErrorDomain = @"ai.SensoryCloud.OAuthService";
     SENGGenericClient *client = [SENGGenericClient message];
     client.clientId = clientId;
     client.secret = clientSecret;
-    request.name = config->deviceName;
-    request.deviceId = config->deviceId;
-    request.tenantId = config->tenantId;
+    request.name = config.deviceName;
+    request.deviceId = config.deviceId;
+    request.tenantId = config.tenantId;
     request.client = client;
     request.credential = credential;
 
-    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:nil];
+    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:self.responseQueue];
     [[service enrollDeviceWithMessage:request responseHandler:rspHandler callOptions:nil] start];
 }
 
@@ -98,7 +101,7 @@ static NSString * const kErrorDomain = @"ai.SensoryCloud.OAuthService";
     request.clientId = clientId;
     request.secret = clientSecret;
 
-    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:nil];
+    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:self.responseQueue];
     [[service getTokenWithMessage:request responseHandler:rspHandler callOptions:nil] start];
 }
 
@@ -116,23 +119,29 @@ static NSString * const kErrorDomain = @"ai.SensoryCloud.OAuthService";
         handler(nil, error);
         return;
     }
-    struct SENInitConfig* config = SENInitializer.sharedConfig;
-    if (config == nil) {
+    struct SENInitConfig config = SENInitializer.sharedConfig;
+    if (config.fullyQualifiedDomainName == nil || [config.fullyQualifiedDomainName isEqual:@""]) {
         handler(nil, [SENInitializer getNotInitializedError]);
         return;
     }
 
     SENGRenewDeviceCredentialRequest *request = [SENGRenewDeviceCredentialRequest message];
-    request.deviceId = config->deviceId;
+    request.deviceId = config.deviceId;
     request.clientId = clientId;
-    request.tenantId = config->tenantId;
+    request.tenantId = config.tenantId;
     request.credential = credential;
 
-    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:nil];
+    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:self.responseQueue];
     [[service renewDeviceCredentialWithMessage:request responseHandler:rspHandler callOptions:nil] start];
 }
 
 - (void)getWhoAmI: (void (^)(SENGDeviceResponse*, NSError*))handler {
+    struct SENInitConfig config = SENInitializer.sharedConfig;
+    if (config.fullyQualifiedDomainName == nil || [config.fullyQualifiedDomainName isEqual:@""]) {
+        handler(nil, [SENInitializer getNotInitializedError]);
+        return;
+    }
+
     void (^getTokenHandler)(SENGTokenResponse*, NSError*) = ^void (SENGTokenResponse* response, NSError* error) {
         if (response == nil) {
             handler(nil, error);
@@ -146,9 +155,14 @@ static NSString * const kErrorDomain = @"ai.SensoryCloud.OAuthService";
         }
         GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
         options.oauth2AccessToken = response.accessToken;
+        if (config.isSecure) {
+            options.transport = GRPCDefaultTransportImplList.core_secure;
+        } else {
+            options.transport = GRPCDefaultTransportImplList.core_insecure;
+        }
         SENGWhoAmIRequest *request = [SENGWhoAmIRequest message];
 
-        GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:nil];
+        GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:self.responseQueue];
         [[service getWhoAmIWithMessage:request responseHandler:rspHandler callOptions:options] start];
     };
 
@@ -156,8 +170,8 @@ static NSString * const kErrorDomain = @"ai.SensoryCloud.OAuthService";
 }
 
 - (SENGDeviceService*)getDeviceService: (out NSError**)error {
-    struct SENInitConfig* config = SENInitializer.sharedConfig;
-    if (config == nil) {
+    struct SENInitConfig config = SENInitializer.sharedConfig;
+    if (config.fullyQualifiedDomainName == nil || [config.fullyQualifiedDomainName isEqual:@""]) {
         if (error != nil) {
             *error = [SENInitializer getNotInitializedError];
         }
@@ -165,19 +179,19 @@ static NSString * const kErrorDomain = @"ai.SensoryCloud.OAuthService";
     }
 
     GRPCMutableCallOptions* options = [[GRPCMutableCallOptions alloc] init];
-    if (config->isSecure) {
+    if (config.isSecure) {
         options.transport = GRPCDefaultTransportImplList.core_secure;
     } else {
         options.transport = GRPCDefaultTransportImplList.core_insecure;
     }
 
-    SENGDeviceService* service = [[SENGDeviceService alloc] initWithHost:config->fullyQualifiedDomainName callOptions:options];
+    SENGDeviceService* service = [[SENGDeviceService alloc] initWithHost:config.fullyQualifiedDomainName callOptions:options];
     return service;
 }
 
 - (SENGOauthService*)getOAuthService: (out NSError**)error {
-    struct SENInitConfig* config = SENInitializer.sharedConfig;
-    if (config == nil) {
+    struct SENInitConfig config = SENInitializer.sharedConfig;
+    if (config.fullyQualifiedDomainName == nil || [config.fullyQualifiedDomainName isEqual:@""]) {
         if (error != nil) {
             *error = [SENInitializer getNotInitializedError];
         }
@@ -185,13 +199,13 @@ static NSString * const kErrorDomain = @"ai.SensoryCloud.OAuthService";
     }
 
     GRPCMutableCallOptions* options = [[GRPCMutableCallOptions alloc] init];
-    if (config->isSecure) {
+    if (config.isSecure) {
         options.transport = GRPCDefaultTransportImplList.core_secure;
     } else {
         options.transport = GRPCDefaultTransportImplList.core_insecure;
     }
 
-    SENGOauthService* service = [[SENGOauthService alloc] initWithHost:config->fullyQualifiedDomainName callOptions:options];
+    SENGOauthService* service = [[SENGOauthService alloc] initWithHost:config.fullyQualifiedDomainName callOptions:options];
     return service;
 }
 

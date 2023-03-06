@@ -8,9 +8,10 @@
 #ifndef AudioService_h
 #define AudioService_h
 
+#import <ProtoRPC/ProtoRPC.h>
+
 @class SENTokenManager;
 @class GRPCStreamingProtoCall;
-@class GRPCProtoResponseHandler;
 @class SENGAAudioConfig;
 @class SENGAGetModelsResponse;
 @class SENGACreateEnrollmentConfig;
@@ -56,7 +57,7 @@
 ///   - handler: Handler callback that will be called with the server's responses
 /// - Returns: Call object that can be used to send requests to the server and to close the stream once the request is finished
 - (GRPCStreamingProtoCall*)createEnrollmentWithConfig: (SENGACreateEnrollmentConfig*) enrollmentConfig
-                                              handler: (GRPCProtoResponseHandler*) handler;
+                                              handler: (id<GRPCProtoResponseHandler>) handler;
 
 /// Opens a bidirectional stream for the purpose of authentication against audio enrollments
 ///
@@ -76,7 +77,7 @@
 ///   - handler: Handler callback that will be called with the server's responses
 /// - Returns: Call object that can be used to send requests to the server and to close the stream once the request is finished
 - (GRPCStreamingProtoCall*)authenticateWithConfig: (SENGAAuthenticateConfig*) authConfig
-                                          handler: (GRPCProtoResponseHandler*) handler;
+                                          handler: (id<GRPCProtoResponseHandler>) handler;
 
 /// Opens a bidirectional stream for the purpose of audio event validation
 ///
@@ -92,7 +93,7 @@
 ///   - handler: Handler callback that will be called with the server's responses
 /// - Returns: Call object that can be used to send requests to the server and to close the stream once the request is finished
 - (GRPCStreamingProtoCall*)validateTriggerWithConfig: (SENGAValidateEventConfig*) config
-                                             handler: (GRPCProtoResponseHandler*) handler;
+                                             handler: (id<GRPCProtoResponseHandler>) handler;
 
 /// Opens a bidirectional stream for the purpose of creating an enrolled audio event
 ///
@@ -108,7 +109,7 @@
 ///   - handler: Handler callback that will be called with the server's responses
 /// - Returns: Call object that can be used to send requests to the server and to close the stream once the request is finished
 - (GRPCStreamingProtoCall*)createEnrolledEventWithConfig: (SENGACreateEnrollmentEventConfig*) config
-                                                 handler: (GRPCProtoResponseHandler*) handler;
+                                                 handler: (id<GRPCProtoResponseHandler>) handler;
 
 /// Opens a bidirectional stream for the purpose of authentication agains an enrolled audio event
 ///
@@ -128,7 +129,7 @@
 ///   - handler: Handler callback that will be called with the server's responses
 /// - Returns: Call object that can be used to send requests to the server and to close the stream once the request is finished
 - (GRPCStreamingProtoCall*)validateEnrolledEventWithConfig: (SENGAValidateEnrolledEventConfig*) config
-                                                   handler: (GRPCProtoResponseHandler*) handler;
+                                                   handler: (id<GRPCProtoResponseHandler>) handler;
 
 /// Opens a bidirectional stream to the server that provides a transcription of the provided audio data
 ///
@@ -148,7 +149,7 @@
 ///   - handler: Handler callback that will be called with the server's responses
 /// - Returns: Call object that can be used to send requests to the server and to close the stream once the request is finished
 - (GRPCStreamingProtoCall*)transcribeAudioWithConfig: (SENGATranscribeConfig*) config
-                                             handler: (GRPCProtoResponseHandler*) handler;
+                                             handler: (id<GRPCProtoResponseHandler>) handler;
 
 /// Sends a request to Sensory Cloud to synthesize speech
 ///
@@ -162,7 +163,7 @@
 ///   - handler: Handler callback that will be called with the server's responses
 - (void)synthesizeSpeech: (NSString*) phrase
                   config: (SENGAVoiceSynthesisConfig*) config
-                 handler: (GRPCProtoResponseHandler*) handler;
+                 handler: (id<GRPCProtoResponseHandler>) handler;
 
 @end
 

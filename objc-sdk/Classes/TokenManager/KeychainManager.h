@@ -15,6 +15,12 @@
 /// This should be used as the `SENSecureCredentialStore` when initializing `SENOAuthService`
 @interface SENKeychainManager : NSObject <SENSecureCredentialStore>
 
+/// Deletes the locally saved client credentials
+///
+/// No error is generated if there are no saved credentials when this is called
+/// - Parameter error: error pointer, set if an error occurs while deleting
+- (bool)deleteSavedCredentials: (out NSError**)error;
+
 /// Saves a string to Apple Keychain
 ///
 /// - Parameters:

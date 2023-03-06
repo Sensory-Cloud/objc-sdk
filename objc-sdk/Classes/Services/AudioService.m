@@ -14,6 +14,7 @@
 
 @interface SENAudioService ()
 @property SENTokenManager* tokenManager;
+@property dispatch_queue_t responseQueue;
 @end
 
 @implementation SENAudioService
@@ -29,6 +30,8 @@
         config.languageCode = [[NSLocale preferredLanguages] objectAtIndex:0];
         self.audioConfig = config;
         self.tokenManager = tokenManager;
+        dispatch_queue_attr_t qos = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_USER_INITIATED, -1);
+        self.responseQueue = dispatch_queue_create("audioServiceQueue", qos);
     }
     return self;
 }
@@ -36,19 +39,19 @@
 - (void)getModels: (void (^)(SENGAGetModelsResponse*, NSError*))handler {
     NSError* error;
     SENGAAudioModels* service = [self getAudioModelsService: &error];
-    if (service == nil) {
+    if (error != nil) {
         handler(nil, error);
         return;
     }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
-    if (headers == nil) {
+    if (error != nil) {
         handler(nil, error);
         return;
     }
 
     SENGAGetModelsRequest* request = [SENGAGetModelsRequest message];
 
-    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:nil];
+    GRPCUnaryResponseHandler* rspHandler = [[GRPCUnaryResponseHandler alloc] initWithResponseHandler:handler responseDispatchQueue:self.responseQueue];
     [[service getModelsWithMessage:request responseHandler:rspHandler callOptions:headers] start];
 }
 
@@ -57,28 +60,28 @@
 {
     NSError* error;
     SENGAAudioBiometrics* service = [self getAudioBiometricsService: &error];
-    if (service == nil) {
+    if (error != nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
             [handler didCloseWithTrailingMetadata:nil error:error];
         }
         return nil;
     }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
-    if (headers == nil) {
+    if (error != nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
             [handler didCloseWithTrailingMetadata:nil error:error];
         }
         return nil;
     }
-    if (enrollmentConfig.deviceId == nil) {
-        struct SENInitConfig* config = SENInitializer.sharedConfig;
-        if (config == nil) {
+    if (enrollmentConfig.deviceId == nil || [enrollmentConfig.deviceId isEqual:@""]) {
+        struct SENInitConfig config = SENInitializer.sharedConfig;
+        if (config.fullyQualifiedDomainName == nil || [config.fullyQualifiedDomainName isEqual:@""]) {
             if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
                 [handler didCloseWithTrailingMetadata:nil error:error];
             }
             return nil;
         }
-        enrollmentConfig.deviceId = config->deviceId;
+        enrollmentConfig.deviceId = config.deviceId;
     }
     GRPCStreamingProtoCall* call = [service createEnrollmentWithResponseHandler:handler callOptions:headers];
     [call start];
@@ -99,14 +102,14 @@
 {
     NSError* error;
     SENGAAudioBiometrics* service = [self getAudioBiometricsService: &error];
-    if (service == nil) {
+    if (error != nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
             [handler didCloseWithTrailingMetadata:nil error:error];
         }
         return nil;
     }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
-    if (headers == nil) {
+    if (error != nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
             [handler didCloseWithTrailingMetadata:nil error:error];
         }
@@ -126,19 +129,19 @@
     return call;
 }
 
-- (GRPCStreamingProtoCall*)validateTriggerWithConfig: (SENGAValidateEventConfig*) config
+- (GRPCStreamingProtoCall*) validateTriggerWithConfig: (SENGAValidateEventConfig*) config
                                              handler: (id<GRPCProtoResponseHandler>) handler
 {
     NSError* error;
     SENGAAudioEvents* service = [self getAudioEventsService: &error];
-    if (service == nil) {
+    if (error != nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
             [handler didCloseWithTrailingMetadata:nil error:error];
         }
         return nil;
     }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
-    if (headers == nil) {
+    if (error != nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
             [handler didCloseWithTrailingMetadata:nil error:error];
         }
@@ -163,14 +166,14 @@
 {
     NSError* error;
     SENGAAudioEvents* service = [self getAudioEventsService: &error];
-    if (service == nil) {
+    if (error != nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
             [handler didCloseWithTrailingMetadata:nil error:error];
         }
         return nil;
     }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
-    if (headers == nil) {
+    if (error != nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
             [handler didCloseWithTrailingMetadata:nil error:error];
         }
@@ -195,14 +198,14 @@
 {
     NSError* error;
     SENGAAudioEvents* service = [self getAudioEventsService: &error];
-    if (service == nil) {
+    if (error != nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
             [handler didCloseWithTrailingMetadata:nil error:error];
         }
         return nil;
     }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
-    if (headers == nil) {
+    if (error != nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
             [handler didCloseWithTrailingMetadata:nil error:error];
         }
@@ -227,14 +230,14 @@
 {
     NSError* error;
     SENGAAudioTranscriptions* service = [self getAudioTranscriptionsService: &error];
-    if (service == nil) {
+    if (error != nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
             [handler didCloseWithTrailingMetadata:nil error:error];
         }
         return nil;
     }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
-    if (headers == nil) {
+    if (error != nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
             [handler didCloseWithTrailingMetadata:nil error:error];
         }
@@ -260,14 +263,14 @@
 {
     NSError* error;
     SENGAAudioSynthesis *service = [self getAudioSynthesisService: &error];
-    if (service == nil) {
+    if (error != nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
             [handler didCloseWithTrailingMetadata:nil error:error];
         }
         return;
     }
     GRPCMutableCallOptions* headers = [[self tokenManager] getAuthorizationMetadata:&error];
-    if (headers == nil) {
+    if (error != nil) {
         if ([handler respondsToSelector:@selector(didCloseWithTrailingMetadata:error:)]) {
             [handler didCloseWithTrailingMetadata:nil error:error];
         }
@@ -282,8 +285,8 @@
 }
 
 - (SENGAAudioModels*)getAudioModelsService: (out NSError**)error {
-    struct SENInitConfig* config = SENInitializer.sharedConfig;
-    if (config == nil) {
+    struct SENInitConfig config = SENInitializer.sharedConfig;
+    if (config.fullyQualifiedDomainName == nil || [config.fullyQualifiedDomainName isEqual:@""]) {
         if (error != nil) {
             *error = [SENInitializer getNotInitializedError];
         }
@@ -291,19 +294,19 @@
     }
 
     GRPCMutableCallOptions* options = [[GRPCMutableCallOptions alloc] init];
-    if (config->isSecure) {
+    if (config.isSecure) {
         options.transport = GRPCDefaultTransportImplList.core_secure;
     } else {
         options.transport = GRPCDefaultTransportImplList.core_insecure;
     }
 
-    SENGAAudioModels* service = [[SENGAAudioModels alloc] initWithHost:config->fullyQualifiedDomainName callOptions:options];
+    SENGAAudioModels* service = [[SENGAAudioModels alloc] initWithHost:config.fullyQualifiedDomainName callOptions:options];
     return service;
 }
 
 - (SENGAAudioBiometrics*)getAudioBiometricsService: (out NSError**)error {
-    struct SENInitConfig* config = SENInitializer.sharedConfig;
-    if (config == nil) {
+    struct SENInitConfig config = SENInitializer.sharedConfig;
+    if (config.fullyQualifiedDomainName == nil || [config.fullyQualifiedDomainName isEqual:@""]) {
         if (error != nil) {
             *error = [SENInitializer getNotInitializedError];
         }
@@ -311,19 +314,19 @@
     }
 
     GRPCMutableCallOptions* options = [[GRPCMutableCallOptions alloc] init];
-    if (config->isSecure) {
+    if (config.isSecure) {
         options.transport = GRPCDefaultTransportImplList.core_secure;
     } else {
         options.transport = GRPCDefaultTransportImplList.core_insecure;
     }
 
-    SENGAAudioBiometrics* service = [[SENGAAudioBiometrics alloc] initWithHost:config->fullyQualifiedDomainName callOptions:options];
+    SENGAAudioBiometrics* service = [[SENGAAudioBiometrics alloc] initWithHost:config.fullyQualifiedDomainName callOptions:options];
     return service;
 }
 
 - (SENGAAudioEvents*)getAudioEventsService: (out NSError**)error {
-    struct SENInitConfig* config = SENInitializer.sharedConfig;
-    if (config == nil) {
+    struct SENInitConfig config = SENInitializer.sharedConfig;
+    if (config.fullyQualifiedDomainName == nil || [config.fullyQualifiedDomainName isEqual:@""]) {
         if (error != nil) {
             *error = [SENInitializer getNotInitializedError];
         }
@@ -331,19 +334,19 @@
     }
 
     GRPCMutableCallOptions* options = [[GRPCMutableCallOptions alloc] init];
-    if (config->isSecure) {
+    if (config.isSecure) {
         options.transport = GRPCDefaultTransportImplList.core_secure;
     } else {
         options.transport = GRPCDefaultTransportImplList.core_insecure;
     }
 
-    SENGAAudioEvents* service = [[SENGAAudioEvents alloc] initWithHost:config->fullyQualifiedDomainName callOptions:options];
+    SENGAAudioEvents* service = [[SENGAAudioEvents alloc] initWithHost:config.fullyQualifiedDomainName callOptions:options];
     return service;
 }
 
 - (SENGAAudioTranscriptions*)getAudioTranscriptionsService: (out NSError**)error {
-    struct SENInitConfig* config = SENInitializer.sharedConfig;
-    if (config == nil) {
+    struct SENInitConfig config = SENInitializer.sharedConfig;
+    if (config.fullyQualifiedDomainName == nil || [config.fullyQualifiedDomainName isEqual:@""]) {
         if (error != nil) {
             *error = [SENInitializer getNotInitializedError];
         }
@@ -351,19 +354,19 @@
     }
 
     GRPCMutableCallOptions* options = [[GRPCMutableCallOptions alloc] init];
-    if (config->isSecure) {
+    if (config.isSecure) {
         options.transport = GRPCDefaultTransportImplList.core_secure;
     } else {
         options.transport = GRPCDefaultTransportImplList.core_insecure;
     }
 
-    SENGAAudioTranscriptions* service = [[SENGAAudioTranscriptions alloc] initWithHost:config->fullyQualifiedDomainName callOptions:options];
+    SENGAAudioTranscriptions* service = [[SENGAAudioTranscriptions alloc] initWithHost:config.fullyQualifiedDomainName callOptions:options];
     return service;
 }
 
 - (SENGAAudioSynthesis*)getAudioSynthesisService: (out NSError**)error {
-    struct SENInitConfig* config = SENInitializer.sharedConfig;
-    if (config == nil) {
+    struct SENInitConfig config = SENInitializer.sharedConfig;
+    if (config.fullyQualifiedDomainName == nil || [config.fullyQualifiedDomainName isEqual:@""]) {
         if (error != nil) {
             *error = [SENInitializer getNotInitializedError];
         }
@@ -371,13 +374,13 @@
     }
 
     GRPCMutableCallOptions* options = [[GRPCMutableCallOptions alloc] init];
-    if (config->isSecure) {
+    if (config.isSecure) {
         options.transport = GRPCDefaultTransportImplList.core_secure;
     } else {
         options.transport = GRPCDefaultTransportImplList.core_insecure;
     }
 
-    SENGAAudioSynthesis* service = [[SENGAAudioSynthesis alloc] initWithHost:config->fullyQualifiedDomainName callOptions:options];
+    SENGAAudioSynthesis* service = [[SENGAAudioSynthesis alloc] initWithHost:config.fullyQualifiedDomainName callOptions:options];
     return service;
 }
 @end

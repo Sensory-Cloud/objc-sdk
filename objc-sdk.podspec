@@ -19,7 +19,7 @@ Objective C version of the Sensory Cloud SDK.
   s.author           = { 'Niles Hacking' => 'nhacking@sensoryinc.com' }
   s.source           = { :git => 'https://github.com/Niles Hacking/objc-sdk.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '13.0'
 
   # Directory where all protobuf generated code lives
   gen_path = 'objc-sdk/Generated'

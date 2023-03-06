@@ -14,13 +14,13 @@
 @implementation SENHealthService
 
 - (void)getHealth: (void (^)(SENGServerHealthResponse*, NSError*))handler {
-    struct SENInitConfig* config = SENInitializer.sharedConfig;
-    if (config == nil) {
+    struct SENInitConfig config = SENInitializer.sharedConfig;
+    if (config.fullyQualifiedDomainName == nil || [config.fullyQualifiedDomainName isEqual:@""]) {
         handler(nil, [SENInitializer getNotInitializedError]);
         return;
     }
 
-    [self getHealthForFQDN:config->fullyQualifiedDomainName isSecure:config->isSecure handler:handler];
+    [self getHealthForFQDN:config.fullyQualifiedDomainName isSecure:config.isSecure handler:handler];
 }
 
 - (void)getHealthForFQDN: (NSString*)fqdn

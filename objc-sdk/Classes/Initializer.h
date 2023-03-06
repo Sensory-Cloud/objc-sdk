@@ -55,7 +55,7 @@ struct SENInitConfig {
 /// Configuration object that the SDK has been initialized with
 ///
 /// This should not be directly set, and instead is set when `initializeWithConfig` is called
-+ (struct SENInitConfig*)sharedConfig;
++ (struct SENInitConfig)sharedConfig;
 
 /// Initializes the SDK from an initialization object
 ///
@@ -64,7 +64,7 @@ struct SENInitConfig {
 ///   - service: OAuth service to register the device with
 ///   - jwtSigner: Signer to be used for creating an enrollment JWT, may be `nil` if enrollment type is not `kJWT`
 ///   - handler: Handler that will be called once initialization has been completed. The response will be `nil` if the device has been previously enrolled
-+ (void) initializeWithConfig: (struct SENInitConfig*)config
++ (void) initializeWithConfig: (struct SENInitConfig)config
                  oAuthService: (SENOAuthService*)service
                     jwtSigner: (id<SENJWTSigner>) jwtSigner
                       handler: (void (^)(SENGDeviceResponse*, NSError*))handler;

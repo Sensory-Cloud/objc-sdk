@@ -32,6 +32,16 @@ static NSString * const kClientSecretTag = @"Sensory_Client_Secret";
     return [self getStringWithTag:kClientSecretTag errorPtr:error];
 }
 
+- (bool)deleteSavedCredentials: (out NSError**)error {
+    if (![self deleteEntryWithTag:kClientIdTag errorPtr:error]) {
+        return FALSE;
+    }
+    if (![self deleteEntryWithTag:kClientSecretTag errorPtr:error]) {
+        return FALSE;
+    }
+    return TRUE;
+}
+
 - (bool)saveStringWithTag: (NSString*)tag value: (NSString*)value errorPtr:(out NSError**)error {
     NSData* data = [value dataUsingEncoding:NSUTF8StringEncoding];
     return [self saveDataWithTag:tag data:data errorPtr:error];
@@ -102,10 +112,7 @@ static NSString * const kClientSecretTag = @"Sensory_Client_Secret";
 
 - (NSError*)generateErrorWithDescription: (NSString*)description status:(OSStatus)status {
     NSString *statusStr = [NSString stringWithFormat:@"%d", status];
-    NSString *statusMsg = statusStr;
-    if (@available(iOS 11.3, *)) {
-        statusMsg = (__bridge_transfer NSString*) SecCopyErrorMessageString(status, nil);
-    }
+    NSString *statusMsg = (__bridge_transfer NSString*) SecCopyErrorMessageString(status, nil);
     NSDictionary *userInfo = @{NSLocalizedDescriptionKey: description, @"osStatus": statusStr, @"statusMsg": statusMsg};
     return [NSError errorWithDomain: kErrorDomain code:status userInfo:userInfo];
 }

@@ -10,7 +10,35 @@
 
 @end
 
+NSString* prevClientId;
+NSString* prevClientSecret;
+
 @implementation KeychainManagerTests
+
++ (void)setUp {
+    SENKeychainManager* manager = [SENKeychainManager alloc];
+
+    NSString* clientId = [manager getClientId:nil];
+    if (clientId != nil) {
+        prevClientId = clientId;
+    }
+    NSString* clientSecret = [manager getClientSecret:nil];
+    if (clientSecret != nil) {
+        prevClientSecret = clientSecret;
+    }
+
+    [manager deleteEntryWithTag:@"Sensory_Client_ID" errorPtr:nil];
+    [manager deleteEntryWithTag:@"Sensory_Client_Secret" errorPtr:nil];
+}
+
++ (void)tearDown {
+    if (prevClientId == nil || prevClientSecret == nil) {
+        return;
+    }
+
+    SENKeychainManager* manager = [SENKeychainManager alloc];
+    [manager saveCredentials:prevClientId secret:prevClientSecret errorPtr:nil];
+}
 
 - (void)testSaveGetDeleteData {
     SENKeychainManager *manager = [SENKeychainManager alloc];
@@ -86,6 +114,39 @@
 
     XCTAssertNil(result);
     XCTAssertNotNil(error);
+}
+
+- (void)testSaveGetCredentials {
+    SENKeychainManager *manager = [SENKeychainManager alloc];
+
+    NSError* error;
+    NSString* clientId = [manager getClientId:&error];
+
+    XCTAssertNil(clientId);
+    XCTAssertNotNil(error);
+
+    NSString* clientSecret = [manager getClientSecret:&error];
+
+    XCTAssertNil(clientSecret);
+    XCTAssertNotNil(error);
+
+    NSString* mockClientId = @"Mock client id";
+    NSString* mockSecret = @"Mock client secret";
+    error = nil;
+    bool status = [manager saveCredentials:mockClientId secret:mockSecret errorPtr:&error];
+
+    XCTAssertTrue(status);
+    XCTAssertNil(error);
+
+    clientId = [manager getClientId:&error];
+
+    XCTAssertTrue([clientId isEqualToString:mockClientId]);
+    XCTAssertNil(error);
+
+    clientSecret = [manager getClientSecret:&error];
+
+    XCTAssertTrue([clientSecret isEqualToString:mockSecret]);
+    XCTAssertNil(error);
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "OAuthService.h"
 #import "GRPCClient/GRPCTransport.h"
 #import "Oauth.pbrpc.h"
+#import "Initializer.h"
 
 static NSString * const kErrorDomain = @"ai.SensoryCloud.TokenManager";
 static float const kExpirationBuffer = 300.0; // 5 minutes
@@ -43,12 +44,25 @@ static float const kExpirationBuffer = 300.0; // 5 minutes
 }
 
 -(GRPCMutableCallOptions*)getAuthorizationMetadata: (out NSError**)error {
+    struct SENInitConfig config = SENInitializer.sharedConfig;
+    if (config.fullyQualifiedDomainName == nil || [config.fullyQualifiedDomainName isEqual:@""]) {
+        if (error != nil) {
+            *error = [SENInitializer getNotInitializedError];
+        }
+        return nil;
+    }
+
     NSString* token = [self getAccessToken:error];
     if (token == nil) {
         return nil;
     }
     GRPCMutableCallOptions *options = [[GRPCMutableCallOptions alloc] init];
     options.oauth2AccessToken = token;
+    if (config.isSecure) {
+        options.transport = GRPCDefaultTransportImplList.core_secure;
+    } else {
+        options.transport = GRPCDefaultTransportImplList.core_insecure;
+    }
     return options;
 }
 
@@ -58,8 +72,8 @@ static float const kExpirationBuffer = 300.0; // 5 minutes
 }
 
 -(bool)fetchNewToken: (out NSError**)error {
-    __block __weak SENGTokenResponse* tokenResponse = nil;
-    __block __weak NSError* errorResponse = nil;
+    __block SENGTokenResponse* tokenResponse = nil;
+    __block NSError* errorResponse = nil;
 
     dispatch_group_t fetchTokenGroup = dispatch_group_create();
     dispatch_group_enter(fetchTokenGroup);
@@ -71,9 +85,9 @@ static float const kExpirationBuffer = 300.0; // 5 minutes
     }];
 
     // Generous timeout here as the oauth service should always call the handler first even if the server isn't responding
-    dispatch_group_wait(fetchTokenGroup, DISPATCH_TIME_NOW + (120 * NSEC_PER_SEC));
+    dispatch_group_wait(fetchTokenGroup, dispatch_time(DISPATCH_TIME_NOW, 120 * NSEC_PER_SEC));
 
-    if (tokenResponse == nil) {
+    if (tokenResponse.accessToken == nil) {
         if (errorResponse == nil) {
             NSString* description = @"No response received when fetching OAuth token";
             NSDictionary *userInfo = @{NSLocalizedDescriptionKey: description};
