@@ -11,7 +11,7 @@
 #import "GRPCClient/GRPCTransport.h"
 #import "Oauth.pbrpc.h"
 
-static NSString * const kErrorDomain = @"ai.sensoryCloud.Initializer";
+static NSString * const kErrorDomain = @"ai.SensoryCloud.Initializer";
 
 @implementation SENInitializer
 

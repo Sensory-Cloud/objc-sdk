@@ -9,7 +9,7 @@
 #import "AudioStreamInteractor.h"
 #import <AVFoundation/AVFoundation.h>
 
-static NSString * const kErrorDomain = @"ai.sensorycloud.AudioStreamInteractor";
+static NSString * const kErrorDomain = @"ai.SensoryCloudloud.AudioStreamInteractor";
 
 // Bus 1 is audio input
 AudioUnitElement bus1 = 1;
@@ -85,17 +85,20 @@ Float64 audioSampleRate = 16000;
     if (!configured) {
         if (error != nil) {
             *error = [self generateErrorWithDescription:@"AudioStreamInteractor must be configured first" status:errSecInvalidAction];
-        }        return false;
+        }
+        return false;
     }
 
     OSStatus status = AudioOutputUnitStart(self->microphoneUnit);
     if (status != noErr) {
         if (error != nil) {
             *error = [self generateErrorWithDescription:@"Could not start microphone recording" status:status];
-        }        return false;
+        }
+        return false;
     }
     return true;
 }
+
 
 -(bool) stopRecording: (out NSError**)error {
     if (self->microphoneUnit == nil) {

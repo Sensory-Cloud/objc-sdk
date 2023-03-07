@@ -23,13 +23,14 @@
     [super viewDidLoad];
 
     // Ensure microphone privileges are allowed before starting the example
-    // Ensure there is a purpose string in the `Info.plist` file with the key `NSMicrophoneUsageDescription` for the system to allow microphone permissions
+    // Ensure there is a purpose string in the `Info.plist` file with the key `NSMicrophoneUsageDescription`
+    // for the system to allow microphone permissions
     self.interactor = [SENAudioStreamInteractor sharedInstance];
     [[self interactor] requestAudioPermission:^(BOOL microphoneAllowed) {
         if (microphoneAllowed) {
             [self startAudioExample];
         } else {
-            NSLog(@"microphone permissions not allowed");
+            NSLog(@"Microphone permissions not allowed");
         }
     }];
 }
@@ -37,13 +38,13 @@
 // Ensure any open GRPC stream and audio recording are stopped when the view is dismissed
 - (void) viewWillDisappear:(BOOL)animated {
     // Close any open GRPC stream
-    if (self.call != nil) {
+    if (self.call) {
         [self.call finish];
         self.call = nil;
     }
 
     // Stop audio recording (It is safe to call this even if the audio interactor is not currently recording)
-    if (self.interactor != nil) {
+    if (self.interactor) {
         NSError* audioError;
         if (![[self interactor] stopRecording:&audioError]) {
             NSLog(@"Failed to stop audio recording: %@", audioError.description);
@@ -53,7 +54,7 @@
 
 - (void)startAudioExample {
     // Initialize audio service
-    // NOTE: in a production app, the same tokenManager instance should be
+    // NOTE: In a production app, the same tokenManager instance should be
     //       shared between every initialized service
     SENKeychainManager* credentialStore = [SENKeychainManager alloc];
     SENOAuthService* oauthService = [[SENOAuthService alloc] init: credentialStore];
@@ -61,7 +62,7 @@
     SENAudioService* audioService = [[SENAudioService alloc] init: tokenManager];
     self.audioService = audioService;
 
-    // Setup a dispatch queue that will receive audio updates from the audio stream interactor
+    // Setup a dispatch queue that will receive updates from the GRPC stream
     dispatch_queue_attr_t qos = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_USER_INTERACTIVE, -1);
     dispatchQueue = dispatch_queue_create("GRPCStreamingQueue", qos);
 
@@ -138,7 +139,7 @@
 // SENAudioStreamDelegate protocol conformance, will be called with audio data as the microphone collects it
 - (void)didProcessAudio:(NSData *)data {
     // Ignore the update if there is no open GRPC stream
-    if ([self call] == nil) {
+    if (![self call]) {
         return;
     }
 

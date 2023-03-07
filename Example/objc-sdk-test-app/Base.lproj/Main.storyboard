@@ -87,13 +87,25 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Vision Examples" id="5Dk-x8-TZg">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="sUH-PO-vnr">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Utm-Fe-20P" style="IBUITableViewCellStyleDefault" id="sUH-PO-vnr">
                                         <rect key="frame" x="0.0" y="171.66666793823242" width="393" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sUH-PO-vnr" id="rnl-HM-VYZ">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Validate Liveness" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Utm-Fe-20P">
+                                                    <rect key="frame" x="20" y="0.0" width="353" height="43.666667938232422"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Okx-zw-zkY" kind="show" id="3bm-te-FwK"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -109,6 +121,37 @@
             </objects>
             <point key="canvasLocation" x="3834.3511450381679" y="-13.380281690140846"/>
         </scene>
+        <!--Validate Liveness-->
+        <scene sceneID="JG4-8n-Q5V">
+            <objects>
+                <viewController id="Okx-zw-zkY" customClass="ValidateLivenessExampleViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9yL-j4-Qgk">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAa-yr-D3p">
+                                <rect key="frame" x="30" y="133" width="333" height="655"/>
+                                <color key="backgroundColor" systemColor="systemGray2Color"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="UXK-wA-Gya"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="UXK-wA-Gya" firstAttribute="trailing" secondItem="eAa-yr-D3p" secondAttribute="trailing" constant="30" id="1mS-xb-eQM"/>
+                            <constraint firstItem="eAa-yr-D3p" firstAttribute="leading" secondItem="UXK-wA-Gya" secondAttribute="leading" constant="30" id="Qjw-QK-uR7"/>
+                            <constraint firstItem="eAa-yr-D3p" firstAttribute="top" secondItem="UXK-wA-Gya" secondAttribute="top" constant="30" id="TV9-hz-YRD"/>
+                            <constraint firstItem="UXK-wA-Gya" firstAttribute="bottom" secondItem="eAa-yr-D3p" secondAttribute="bottom" constant="30" id="mL7-9N-30R"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Validate Liveness" id="VJp-b4-1Tx"/>
+                    <connections>
+                        <outlet property="previewView" destination="eAa-yr-D3p" id="WCK-mP-1cA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WKm-rs-d8Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4815" y="396"/>
+        </scene>
         <!--Validate Trigger-->
         <scene sceneID="gCE-nF-Eov">
             <objects>
@@ -123,7 +166,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7aX-qH-m7t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4815" y="-13"/>
+            <point key="canvasLocation" x="4815" y="-399"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dyh-84-Uz9">
@@ -147,6 +190,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		03648D0029B134C300119E1B /* config.ini in Resources */ = {isa = PBXBuildFile; fileRef = 03648CFF29B134C300119E1B /* config.ini */; };
 		03648D0429B1550A00119E1B /* ValidateTriggerExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D0329B1550A00119E1B /* ValidateTriggerExampleViewController.m */; };
+		03648D1429B6A89C00119E1B /* ValidateLivenessExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D1329B6A89C00119E1B /* ValidateLivenessExampleViewController.m */; };
 		0369132829A0305100F99597 /* HealthServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0369132729A0305100F99597 /* HealthServiceTests.m */; };
 		039683E729A55B4F00E909B8 /* KeychainManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 039683E629A55B4F00E909B8 /* KeychainManagerTests.m */; };
 		039683F029A55E7700E909B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 039683EF29A55E7700E909B8 /* AppDelegate.m */; };
@@ -41,6 +42,8 @@
 		03648CFF29B134C300119E1B /* config.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.ini; sourceTree = "<group>"; };
 		03648D0229B154ED00119E1B /* ValidateTriggerExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ValidateTriggerExampleViewController.h; sourceTree = "<group>"; };
 		03648D0329B1550A00119E1B /* ValidateTriggerExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ValidateTriggerExampleViewController.m; sourceTree = "<group>"; };
+		03648D1229B6A88200119E1B /* ValidateLivenessExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ValidateLivenessExampleViewController.h; sourceTree = "<group>"; };
+		03648D1329B6A89C00119E1B /* ValidateLivenessExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ValidateLivenessExampleViewController.m; sourceTree = "<group>"; };
 		0369131429A01B2000F99597 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		0369132729A0305100F99597 /* HealthServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HealthServiceTests.m; path = Services/HealthServiceTests.m; sourceTree = "<group>"; };
 		039683E629A55B4F00E909B8 /* KeychainManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainManagerTests.m; path = TokenManager/KeychainManagerTests.m; sourceTree = "<group>"; };
@@ -106,6 +109,15 @@
 			path = Audio;
 			sourceTree = "<group>";
 		};
+		03648D1129B6A85100119E1B /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				03648D1229B6A88200119E1B /* ValidateLivenessExampleViewController.h */,
+				03648D1329B6A89C00119E1B /* ValidateLivenessExampleViewController.m */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
 		0369132429A0303500F99597 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +156,7 @@
 		0396841A29B1039F00E909B8 /* Examples */ = {
 			isa = PBXGroup;
 			children = (
+				03648D1129B6A85100119E1B /* Video */,
 				03648D0129B154D400119E1B /* Audio */,
 				0396841C29B104C900E909B8 /* LoginExampleViewController.h */,
 				0396841D29B1052C00E909B8 /* LoginExampleViewController.m */,
@@ -446,6 +459,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03648D1429B6A89C00119E1B /* ValidateLivenessExampleViewController.m in Sources */,
 				039683F029A55E7700E909B8 /* AppDelegate.m in Sources */,
 				0396841E29B1052C00E909B8 /* LoginExampleViewController.m in Sources */,
 				03648D0429B1550A00119E1B /* ValidateTriggerExampleViewController.m in Sources */,

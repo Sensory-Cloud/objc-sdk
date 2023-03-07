@@ -22,7 +22,7 @@
 @interface SENAudioStreamInteractor : NSObject
 
 /// Shared instance
-+ (instancetype) sharedInstance;
++(instancetype) sharedInstance;
 
 /// Delegate property that will receive audio data
 @property (nonatomic, weak) id<SENAudioStreamDelegate> delegate;
@@ -35,7 +35,7 @@
 
 /// Configures and sets up the Audio Stream Interactor
 ///
-/// This *must* be called *after* getting audio record permissions for the user and *before* any audio can be recorded
+/// This *must* be called *after* getting audio record permissions from the user and *before* any audio can be recorded
 /// Any call made to this after the initial configure call will result in a NOP
 /// - Parameter error: Error pointer, set if an error occurs
 /// - Returns: Success boolean, true if no error occurred

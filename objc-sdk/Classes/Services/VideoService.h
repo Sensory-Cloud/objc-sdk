@@ -8,6 +8,8 @@
 #ifndef VideoService_h
 #define VideoService_h
 
+#import <ProtoRPC/ProtoRPC.h>
+
 @class SENTokenManager;
 @class GRPCStreamingProtoCall;
 @class GRPCProtoResponseHandler;
@@ -49,7 +51,7 @@
 ///   - handler: Handler callback that will be called with the server's responses
 /// - Returns: Call object that can be used to send requests to the server and to close the stream once the request is finished
 - (GRPCStreamingProtoCall*)createEnrollmentWithConfig: (SENGVCreateEnrollmentConfig*) enrollmentConfig
-                                              handler: (GRPCProtoResponseHandler*) handler;
+                                              handler: (id<GRPCProtoResponseHandler>) handler;
 
 /// Opens a bidirectional stream for the purpose of video authentication
 ///
@@ -68,7 +70,7 @@
 ///   - handler: Handler callback that will be called with the server's responses
 /// - Returns: Call object that can be used to send requests to the server and to close the stream once the request is finished
 - (GRPCStreamingProtoCall*)authenticateWithConfig: (SENGVAuthenticateConfig*) authConfig
-                                          handler: (GRPCProtoResponseHandler*) handler;
+                                          handler: (id<GRPCProtoResponseHandler>) handler;
 
 /// Opens a bidirectional stream for the purpose of validating liveness
 ///
@@ -82,7 +84,7 @@
 ///   - handler: Handler callback that will be called with the server's responses
 /// - Returns: Call object that can be used to send requests to the server and close the stream once the request is finished
 - (GRPCStreamingProtoCall*)validateLivenessWithConfig: (SENGVValidateRecognitionConfig*) config
-                                              handler: (GRPCProtoResponseHandler*) handler;
+                                              handler: (id<GRPCProtoResponseHandler>) handler;
 
 @end
 

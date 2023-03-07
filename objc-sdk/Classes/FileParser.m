@@ -10,7 +10,7 @@
 #import "GRPCClient/GRPCTransport.h"
 #import "Initializer.h"
 
-static NSString * const kErrorDomain = @"ai.sensoryCloud.FileParser";
+static NSString * const kErrorDomain = @"ai.SensoryCloud.FileParser";
 
 static NSString * const kConfigKeyFQDN = @"fullyQualifiedDomainName";
 static NSString * const kConfigKeyIsSecure = @"isSecure";
