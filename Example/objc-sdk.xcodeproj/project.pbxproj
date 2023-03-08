@@ -81,9 +81,9 @@
 		039683FD29A55E7800E909B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		039683FF29A55E7800E909B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0396840029A55E7800E909B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0396840729A55EA200E909B8 /* objc-sdk-test-app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "objc-sdk-test-app.entitlements"; sourceTree = "<group>"; };
 		0396841C29B104C900E909B8 /* LoginExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginExampleViewController.h; sourceTree = "<group>"; };
 		0396841D29B1052C00E909B8 /* LoginExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginExampleViewController.m; sourceTree = "<group>"; };
+		039C1FEC29B942AD003EFAA2 /* SensoryCloudExampleApp.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SensoryCloudExampleApp.entitlements; sourceTree = "<group>"; };
 		0BC58BD170FC24615C356BAC /* Pods-objc-sdk_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objc-sdk_Tests.release.xcconfig"; path = "Target Support Files/Pods-objc-sdk_Tests/Pods-objc-sdk_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		26281C4C8A3FB53EEBD83F14 /* Pods-SensoryCloudTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensoryCloudTests.release.xcconfig"; path = "Target Support Files/Pods-SensoryCloudTests/Pods-SensoryCloudTests.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -188,9 +188,9 @@
 		039683ED29A55E7700E909B8 /* SensoryCloudExampleApp */ = {
 			isa = PBXGroup;
 			children = (
+				039C1FEC29B942AD003EFAA2 /* SensoryCloudExampleApp.entitlements */,
 				03648CFF29B134C300119E1B /* config.ini */,
 				0396841A29B1039F00E909B8 /* Examples */,
-				0396840729A55EA200E909B8 /* objc-sdk-test-app.entitlements */,
 				039683EE29A55E7700E909B8 /* AppDelegate.h */,
 				039683EF29A55E7700E909B8 /* AppDelegate.m */,
 				039683F129A55E7700E909B8 /* SceneDelegate.h */,

@@ -1,15 +1,15 @@
 Pod::Spec.new do |s|
   s.name             = 'SensoryCloud'
-  s.version          = '0.1.0'
+  s.version          = '1.0.0'
   s.summary          = 'Objective C version of the Sensory Cloud SDK'
   s.description      = <<-DESC
-Objective C version of the Sensory Cloud SDK.
-                       DESC
+Sensory Cloud Objective C SDK. Created to make communicating with Sensory Cloud easy on an iOS app!
+  DESC
 
-  s.homepage         = 'https://github.com/Niles Hacking/objc-sdk'
+  s.homepage         = 'https://github.com/Sensory-Cloud/objc-sdk'
   s.license          = { :type => 'APACHE 2.0', :file => 'LICENSE' }
   s.author           = { 'Niles Hacking' => 'nhacking@sensoryinc.com' }
-  s.source           = { :git => 'https://github.com/Niles Hacking/objc-sdk.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/Sensory-Cloud/objc-sdk.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '13.0'
 

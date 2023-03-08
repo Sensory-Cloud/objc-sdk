@@ -632,12 +632,12 @@ PODS:
   - gRPC/Interface-Legacy (1.49.0):
     - gRPC-RxLibrary/Interface (= 1.49.0)
   - Protobuf (3.21.12)
-  - SensoryCloud (0.1.0):
-    - SensoryCloud/ProtoMessages (= 0.1.0)
-    - SensoryCloud/ProtoServices (= 0.1.0)
-  - SensoryCloud/ProtoMessages (0.1.0):
+  - SensoryCloud (1.0.0):
+    - SensoryCloud/ProtoMessages (= 1.0.0)
+    - SensoryCloud/ProtoServices (= 1.0.0)
+  - SensoryCloud/ProtoMessages (1.0.0):
     - Protobuf
-  - SensoryCloud/ProtoServices (0.1.0):
+  - SensoryCloud/ProtoServices (1.0.0):
     - gRPC-ProtoRPC
     - SensoryCloud/ProtoMessages
 
@@ -671,7 +671,7 @@ SPEC CHECKSUMS:
   gRPC-ProtoRPC: 1c223e0f1732bb8d0b9e9e0ea60cc0fe995b8e2d
   gRPC-RxLibrary: 92327f150e11cf3b1c0f52e083944fd9f5cb5d1e
   Protobuf: 120350fc38646e2dedc26f49ecba778184ea1de2
-  SensoryCloud: 07031b9677c0bd49b3a29d087a284d50ef957fbc
+  SensoryCloud: 1ff21e92164ef914c8437450eee5a61d192442a7
 
 PODFILE CHECKSUM: 2962eaf82c2dc447189448e9fc2c8371ea84bc29
 
