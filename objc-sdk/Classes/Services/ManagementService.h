@@ -9,7 +9,9 @@
 #define ManagementService_h
 
 @class SENTokenManager;
+@class SENGGetEnrollmentsResponse;
 @class SENGEnrollmentResponse;
+@class SENGGetEnrollmentGroupsResponse;
 @class SENGEnrollmentGroupResponse;
 
 /// A collection of GRPC service calls for managing existing enrollments and enrollment groups
@@ -25,7 +27,7 @@
 ///   - userId: UserID to fetch enrollments for
 ///   - handler: Handler callback that will be called with the server's response
 - (void)getEnrollments: (NSString*)userId
-               handler: (void (^)(SENGEnrollmentResponse*, NSError*))handler;
+               handler: (void (^)(SENGGetEnrollmentsResponse*, NSError*))handler;
 
 /// Requests the deletion of an enrollment
 ///
@@ -42,7 +44,7 @@
 ///   - userId: UserID to fetch enrollment groups for
 ///   - handler: Handler callback that will be called with the server's response
 - (void)getEnrollmentGroups: (NSString*)userId
-                    handler: (void (^)(SENGEnrollmentGroupResponse*, NSError*))handler;
+                    handler: (void (^)(SENGGetEnrollmentGroupsResponse*, NSError*))handler;
 
 /// Creates a new group of enrollments that can be used for group authentication
 ///

@@ -28,7 +28,7 @@
     return self;
 }
 
-- (void)getEnrollments: (NSString*)userId handler:(void (^)(SENGEnrollmentResponse*, NSError*))handler {
+- (void)getEnrollments: (NSString*)userId handler:(void (^)(SENGGetEnrollmentsResponse*, NSError*))handler {
     NSError* error;
     SENGEnrollmentService* service = [self getEnrollmentService: &error];
     if (error != nil) {
@@ -68,7 +68,7 @@
     [[service deleteEnrollmentWithMessage:request responseHandler:rspHandler callOptions:headers] start];
 }
 
-- (void)getEnrollmentGroups: (NSString*)userId handler:(void (^)(SENGEnrollmentGroupResponse*, NSError*))handler {
+- (void)getEnrollmentGroups: (NSString*)userId handler:(void (^)(SENGGetEnrollmentGroupsResponse*, NSError*))handler {
     NSError* error;
     SENGEnrollmentService* service = [self getEnrollmentService: &error];
     if (error != nil) {
