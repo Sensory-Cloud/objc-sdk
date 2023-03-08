@@ -14,6 +14,8 @@
 		03648D1A29B7D81000119E1B /* AudioAuthenticationExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D1929B7D81000119E1B /* AudioAuthenticationExampleViewController.m */; };
 		03648D1D29B7DB1700119E1B /* AudioTranscriptionExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D1C29B7DB1700119E1B /* AudioTranscriptionExampleViewController.m */; };
 		03648D2429B8F05400119E1B /* VoiceSynthesisExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D2329B8F05400119E1B /* VoiceSynthesisExampleViewController.m */; };
+		03648D2729B8F83D00119E1B /* VisionEnrollmentExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D2629B8F83D00119E1B /* VisionEnrollmentExampleViewController.m */; };
+		03648D2A29B8FC4F00119E1B /* VisionAuthenticationExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D2929B8FC4F00119E1B /* VisionAuthenticationExampleViewController.m */; };
 		0369132829A0305100F99597 /* HealthServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0369132729A0305100F99597 /* HealthServiceTests.m */; };
 		039683E729A55B4F00E909B8 /* KeychainManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 039683E629A55B4F00E909B8 /* KeychainManagerTests.m */; };
 		039683F029A55E7700E909B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 039683EF29A55E7700E909B8 /* AppDelegate.m */; };
@@ -56,6 +58,10 @@
 		03648D1C29B7DB1700119E1B /* AudioTranscriptionExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioTranscriptionExampleViewController.m; sourceTree = "<group>"; };
 		03648D2229B8EFFE00119E1B /* VoiceSynthesisExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoiceSynthesisExampleViewController.h; sourceTree = "<group>"; };
 		03648D2329B8F05400119E1B /* VoiceSynthesisExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceSynthesisExampleViewController.m; sourceTree = "<group>"; };
+		03648D2529B8F80A00119E1B /* VisionEnrollmentExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VisionEnrollmentExampleViewController.h; sourceTree = "<group>"; };
+		03648D2629B8F83D00119E1B /* VisionEnrollmentExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VisionEnrollmentExampleViewController.m; sourceTree = "<group>"; };
+		03648D2829B8FBFF00119E1B /* VisionAuthenticationExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VisionAuthenticationExampleViewController.h; sourceTree = "<group>"; };
+		03648D2929B8FC4F00119E1B /* VisionAuthenticationExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VisionAuthenticationExampleViewController.m; sourceTree = "<group>"; };
 		0369131429A01B2000F99597 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		0369132729A0305100F99597 /* HealthServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HealthServiceTests.m; path = Services/HealthServiceTests.m; sourceTree = "<group>"; };
 		039683E629A55B4F00E909B8 /* KeychainManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainManagerTests.m; path = TokenManager/KeychainManagerTests.m; sourceTree = "<group>"; };
@@ -134,6 +140,10 @@
 			children = (
 				03648D1229B6A88200119E1B /* ValidateLivenessExampleViewController.h */,
 				03648D1329B6A89C00119E1B /* ValidateLivenessExampleViewController.m */,
+				03648D2529B8F80A00119E1B /* VisionEnrollmentExampleViewController.h */,
+				03648D2629B8F83D00119E1B /* VisionEnrollmentExampleViewController.m */,
+				03648D2829B8FBFF00119E1B /* VisionAuthenticationExampleViewController.h */,
+				03648D2929B8FC4F00119E1B /* VisionAuthenticationExampleViewController.m */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -482,7 +492,9 @@
 				03648D1429B6A89C00119E1B /* ValidateLivenessExampleViewController.m in Sources */,
 				039683F029A55E7700E909B8 /* AppDelegate.m in Sources */,
 				03648D1A29B7D81000119E1B /* AudioAuthenticationExampleViewController.m in Sources */,
+				03648D2729B8F83D00119E1B /* VisionEnrollmentExampleViewController.m in Sources */,
 				0396841E29B1052C00E909B8 /* LoginExampleViewController.m in Sources */,
+				03648D2A29B8FC4F00119E1B /* VisionAuthenticationExampleViewController.m in Sources */,
 				03648D1D29B7DB1700119E1B /* AudioTranscriptionExampleViewController.m in Sources */,
 				03648D2429B8F05400119E1B /* VoiceSynthesisExampleViewController.m in Sources */,
 				03648D1729B7D07800119E1B /* AudioEnrollmentExampleViewController.m in Sources */,

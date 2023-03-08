@@ -1,21 +1,21 @@
 //
-//  ValidateLivenessExampleViewController.m
+//  VisionAuthenticationExampleViewController.m
 //  objc-sdk-test-app
 //
-//  Created by Niles Hacking on 3/6/23.
+//  Created by Niles Hacking on 3/8/23.
 //  Copyright © 2023 Niles Hacking. All rights reserved.
 //
 
-#import "ValidateLivenessExampleViewController.h"
+#import "VisionAuthenticationExampleViewController.h"
 #import <objc-sdk-umbrella.h>
 
-@interface ValidateLivenessExampleViewController ()
+@interface VisionAuthenticationExampleViewController ()
 @property GRPCStreamingProtoCall* call;
 @property SENVideoStreamInteractor* interactor;
 @property SENVideoService* videoService;
 @end
 
-@implementation ValidateLivenessExampleViewController
+@implementation VisionAuthenticationExampleViewController
 
 @synthesize dispatchQueue;
 
@@ -37,7 +37,10 @@
 
 // Ensure any open GRPC stream and video recording are stopped when the view is dismissed
 - (void)viewWillDisappear:(BOOL)animated {
-    [self stopVideoExample];
+    if (self.call) {
+        [self.call finish];
+        self.call = nil;
+    }
 }
 
 - (void)startVideoExample {
@@ -64,16 +67,15 @@
     }
     [self setupCameraPreview];
 
-    // Create the configuration object for liveness validation
-    // Available models can be received from the [videoService getModels:] call
-    // User ID is a device generated identifier (usually a UUID) that should remain constant for all calls made by the same user
-    SENGVValidateRecognitionConfig* config = [SENGVValidateRecognitionConfig message];
-    config.modelName = @"face_liveness";
-    config.userId = @"My-User-ID";
-    config.threshold = SENGVRecognitionThreshold_Medium;
+    // Create the configuration object for vision authentication
+    // EnrollmentIds are returned when the enrollment is first created,
+    // enrollmentIds are also returned from the [managementService getEnrollments:] call.
+    SENGVAuthenticateConfig* config = [SENGVAuthenticateConfig message];
+    config.enrollmentId = @"Enrollment-ID-to-auth-against";
+    config.isLivenessEnabled = false;
 
-    // Open the GRPC stream for liveness validation
-    GRPCStreamingProtoCall* call = [videoService validateLivenessWithConfig:config handler:self];
+    // Open the GRPC stream for vision authentication
+    GRPCStreamingProtoCall* call = [videoService authenticateWithConfig:config handler:self];
     self.call = call;
 
     // Start the video recording
@@ -84,14 +86,6 @@
     }
     // Take an initial photo to upload to the server
     [interactor takePhoto];
-}
-
-// Remember to stop recording and close the GRPC stream once liveness processing is finished
--(void)stopVideoExample {
-    if (self.call) {
-        [self.call finish];
-        self.call = nil;
-    }
 }
 
 // Sets up a UIView to show the camera preview
@@ -109,19 +103,20 @@
 
 // GRPCProtoResponseHandler protocol conformance, will be called with every response from the server
 - (void)didReceiveProtoMessage:(GPBMessage *)message {
-    SENGVLivenessRecognitionResponse* response = (SENGVLivenessRecognitionResponse*)message;
+    SENGVAuthenticateResponse* response = (SENGVAuthenticateResponse*)message;
     if (response == nil) {
         return;
     }
 
-    // response.isAlive tells if the frame was determined to be live
-    // response.score tells Sensory's confidence in the result
-    if (response.isAlive) {
-        NSLog(@"Frame is live");
-    }
+    // response.success will be true after a successful authentication
+    if (response.success) {
+        NSLog(@"Successful Authentication");
 
-    // Upload the next video frame
-    [self.interactor takePhoto];
+        // The server will automatically close the GRPC stream once enrollment is complete
+    } else {
+        // Upload the next video frame until the enrollment is complete
+        [self.interactor takePhoto];
+    }
 }
 
 // GRPCProtoResponseHandler protocol conformance, will be called once the stream is closed
@@ -147,7 +142,7 @@
     }
 
     // Send the video data to the server for processing
-    SENGVValidateRecognitionRequest* request = [SENGVValidateRecognitionRequest message];
+    SENGVAuthenticateRequest* request = [SENGVAuthenticateRequest message];
     request.imageContent = photo;
     [[self call] writeMessage:request];
 }
@@ -158,3 +153,4 @@
 }
 
 @end
+
