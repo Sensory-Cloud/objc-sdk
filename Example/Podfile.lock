@@ -631,19 +631,19 @@ PODS:
     - gRPC/Interface-Legacy (= 1.49.0)
   - gRPC/Interface-Legacy (1.49.0):
     - gRPC-RxLibrary/Interface (= 1.49.0)
-  - objc-sdk (0.1.0):
-    - objc-sdk/ProtoMessages (= 0.1.0)
-    - objc-sdk/ProtoServices (= 0.1.0)
-  - objc-sdk/ProtoMessages (0.1.0):
-    - Protobuf
-  - objc-sdk/ProtoServices (0.1.0):
-    - gRPC-ProtoRPC
-    - objc-sdk/ProtoMessages
   - Protobuf (3.21.12)
+  - SensoryCloud (0.1.0):
+    - SensoryCloud/ProtoMessages (= 0.1.0)
+    - SensoryCloud/ProtoServices (= 0.1.0)
+  - SensoryCloud/ProtoMessages (0.1.0):
+    - Protobuf
+  - SensoryCloud/ProtoServices (0.1.0):
+    - gRPC-ProtoRPC
+    - SensoryCloud/ProtoMessages
 
 DEPENDENCIES:
   - "!ProtoCompiler-gRPCPlugin (~> 1.0)"
-  - objc-sdk (from `../`)
+  - SensoryCloud (from `../`)
 
 SPEC REPOS:
   trunk:
@@ -658,7 +658,7 @@ SPEC REPOS:
     - Protobuf
 
 EXTERNAL SOURCES:
-  objc-sdk:
+  SensoryCloud:
     :path: "../"
 
 SPEC CHECKSUMS:
@@ -670,9 +670,9 @@ SPEC CHECKSUMS:
   gRPC-Core: 3a9fdb5967d42211e875826f3f6fc163ea02c2a1
   gRPC-ProtoRPC: 1c223e0f1732bb8d0b9e9e0ea60cc0fe995b8e2d
   gRPC-RxLibrary: 92327f150e11cf3b1c0f52e083944fd9f5cb5d1e
-  objc-sdk: c5be0c9484b19ba6b34c93b9e09f8010ddb61625
   Protobuf: 120350fc38646e2dedc26f49ecba778184ea1de2
+  SensoryCloud: 07031b9677c0bd49b3a29d087a284d50ef957fbc
 
-PODFILE CHECKSUM: 04362523568cddb2d77cfcc441ab05d683f02890
+PODFILE CHECKSUM: 2962eaf82c2dc447189448e9fc2c8371ea84bc29
 
 COCOAPODS: 1.11.3

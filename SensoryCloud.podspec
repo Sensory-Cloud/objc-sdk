@@ -1,13 +1,5 @@
-#
-# Be sure to run `pod lib lint objc-sdk.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
-  s.name             = 'objc-sdk'
+  s.name             = 'SensoryCloud'
   s.version          = '0.1.0'
   s.summary          = 'Objective C version of the Sensory Cloud SDK'
   s.description      = <<-DESC
@@ -22,9 +14,9 @@ Objective C version of the Sensory Cloud SDK.
   s.ios.deployment_target = '13.0'
 
   # Directory where all protobuf generated code lives
-  gen_path = 'objc-sdk/Generated'
+  gen_path = 'SensoryCloud/Generated'
 
-  s.source_files = 'objc-sdk/Classes/**/*'
+  s.source_files = 'SensoryCloud/Classes/**/*'
 
   # Include the generated protobuf message definitions
   s.subspec 'ProtoMessages' do |ms|

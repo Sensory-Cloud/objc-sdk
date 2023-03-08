@@ -3,6 +3,6 @@
 #ifdef __OBJC__
 
 #import <XCTest/XCTest.h>
-#import <objc-sdk-umbrella.h>
+#import <SensoryCloud/SensoryCloud-umbrella.h>
 
 #endif

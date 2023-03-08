@@ -1,21 +1,21 @@
 //
-//  VisionAuthenticationExampleViewController.m
+//  VisionEnrollmentExampleViewController.m
 //  objc-sdk-test-app
 //
 //  Created by Niles Hacking on 3/8/23.
 //  Copyright © 2023 Niles Hacking. All rights reserved.
 //
 
-#import "VisionAuthenticationExampleViewController.h"
-#import <objc-sdk-umbrella.h>
+#import "VisionEnrollmentExampleViewController.h"
+#import <SensoryCloud/SensoryCloud-umbrella.h>
 
-@interface VisionAuthenticationExampleViewController ()
+@interface VisionEnrollmentExampleViewController ()
 @property GRPCStreamingProtoCall* call;
 @property SENVideoStreamInteractor* interactor;
 @property SENVideoService* videoService;
 @end
 
-@implementation VisionAuthenticationExampleViewController
+@implementation VisionEnrollmentExampleViewController
 
 @synthesize dispatchQueue;
 
@@ -67,15 +67,17 @@
     }
     [self setupCameraPreview];
 
-    // Create the configuration object for vision authentication
-    // EnrollmentIds are returned when the enrollment is first created,
-    // enrollmentIds are also returned from the [managementService getEnrollments:] call.
-    SENGVAuthenticateConfig* config = [SENGVAuthenticateConfig message];
-    config.enrollmentId = @"Enrollment-ID-to-auth-against";
+    // Create the configuration object for vision enrollment
+    // Available models can be received from the [videoService getModels:] call
+    // User ID is a device generated identifier (usually a UUID) that should remain constant for all calls made by the same user
+    SENGVCreateEnrollmentConfig* config = [SENGVCreateEnrollmentConfig message];
+    config.modelName = @"face_recognition";
+    config.userId = @"My-User-ID";
+    config.description_p = @"My vision enrollment";
     config.isLivenessEnabled = false;
 
-    // Open the GRPC stream for vision authentication
-    GRPCStreamingProtoCall* call = [videoService authenticateWithConfig:config handler:self];
+    // Open the GRPC stream for vision enrollment
+    GRPCStreamingProtoCall* call = [videoService createEnrollmentWithConfig:config handler:self];
     self.call = call;
 
     // Start the video recording
@@ -103,14 +105,19 @@
 
 // GRPCProtoResponseHandler protocol conformance, will be called with every response from the server
 - (void)didReceiveProtoMessage:(GPBMessage *)message {
-    SENGVAuthenticateResponse* response = (SENGVAuthenticateResponse*)message;
+    SENGVCreateEnrollmentResponse* response = (SENGVCreateEnrollmentResponse*)message;
     if (response == nil) {
         return;
     }
 
-    // response.success will be true after a successful authentication
-    if (response.success) {
-        NSLog(@"Successful Authentication");
+    // The response contains info about the enrollment status
+    // - percentComplete
+    // - isAlive - (only when liveness is enabled) tells if the frame was determined to be live
+    NSLog(@"Percent enrollment complete: %lld", response.percentComplete);
+
+    // The response will include an enrollment ID once enrollment is complete
+    if (![response.enrollmentId isEqualToString:@""]) {
+        NSLog(@"Enrollment complete");
 
         // The server will automatically close the GRPC stream once enrollment is complete
     } else {
@@ -142,7 +149,7 @@
     }
 
     // Send the video data to the server for processing
-    SENGVAuthenticateRequest* request = [SENGVAuthenticateRequest message];
+    SENGVCreateEnrollmentRequest* request = [SENGVCreateEnrollmentRequest message];
     request.imageContent = photo;
     [[self call] writeMessage:request];
 }
@@ -153,4 +160,3 @@
 }
 
 @end
-

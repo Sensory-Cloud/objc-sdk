@@ -7,7 +7,7 @@
 //
 
 #import "LoginExampleViewController.h"
-#import <objc_sdk/objc-sdk-umbrella.h>
+#import <SensoryCloud/SensoryCloud-umbrella.h>
 
 @implementation LoginExampleViewController
 

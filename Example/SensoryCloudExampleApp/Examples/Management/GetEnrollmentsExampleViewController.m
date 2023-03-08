@@ -7,7 +7,7 @@
 //
 
 #import "GetEnrollmentsExampleViewController.h"
-#import <objc-sdk-umbrella.h>
+#import <SensoryCloud/SensoryCloud-umbrella.h>
 
 @interface GetEnrollmentsExampleViewController ()
 @property SENManagementService* managementService;

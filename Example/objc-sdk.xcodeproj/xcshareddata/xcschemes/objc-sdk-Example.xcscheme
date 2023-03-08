@@ -42,8 +42,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6003F5AD195388D20070C39A"
-               BuildableName = "objc-sdk_Tests.xctest"
-               BlueprintName = "objc-sdk_Tests"
+               BuildableName = "SensoryCloudTests.xctest"
+               BlueprintName = "SensoryCloudTests"
                ReferencedContainer = "container:objc-sdk.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -64,8 +64,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "039683EB29A55E7600E909B8"
-            BuildableName = "objc-sdk-test-app.app"
-            BlueprintName = "objc-sdk-test-app"
+            BuildableName = "SensoryCloudExampleApp.app"
+            BlueprintName = "SensoryCloudExampleApp"
             ReferencedContainer = "container:objc-sdk.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

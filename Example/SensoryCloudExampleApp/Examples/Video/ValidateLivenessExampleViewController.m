@@ -1,21 +1,21 @@
 //
-//  VisionEnrollmentExampleViewController.m
+//  ValidateLivenessExampleViewController.m
 //  objc-sdk-test-app
 //
-//  Created by Niles Hacking on 3/8/23.
+//  Created by Niles Hacking on 3/6/23.
 //  Copyright © 2023 Niles Hacking. All rights reserved.
 //
 
-#import "VisionEnrollmentExampleViewController.h"
-#import <objc-sdk-umbrella.h>
+#import "ValidateLivenessExampleViewController.h"
+#import <SensoryCloud/SensoryCloud-umbrella.h>
 
-@interface VisionEnrollmentExampleViewController ()
+@interface ValidateLivenessExampleViewController ()
 @property GRPCStreamingProtoCall* call;
 @property SENVideoStreamInteractor* interactor;
 @property SENVideoService* videoService;
 @end
 
-@implementation VisionEnrollmentExampleViewController
+@implementation ValidateLivenessExampleViewController
 
 @synthesize dispatchQueue;
 
@@ -37,10 +37,7 @@
 
 // Ensure any open GRPC stream and video recording are stopped when the view is dismissed
 - (void)viewWillDisappear:(BOOL)animated {
-    if (self.call) {
-        [self.call finish];
-        self.call = nil;
-    }
+    [self stopVideoExample];
 }
 
 - (void)startVideoExample {
@@ -67,17 +64,16 @@
     }
     [self setupCameraPreview];
 
-    // Create the configuration object for vision enrollment
+    // Create the configuration object for liveness validation
     // Available models can be received from the [videoService getModels:] call
     // User ID is a device generated identifier (usually a UUID) that should remain constant for all calls made by the same user
-    SENGVCreateEnrollmentConfig* config = [SENGVCreateEnrollmentConfig message];
-    config.modelName = @"face_recognition";
+    SENGVValidateRecognitionConfig* config = [SENGVValidateRecognitionConfig message];
+    config.modelName = @"face_liveness";
     config.userId = @"My-User-ID";
-    config.description_p = @"My vision enrollment";
-    config.isLivenessEnabled = false;
+    config.threshold = SENGVRecognitionThreshold_Medium;
 
-    // Open the GRPC stream for vision enrollment
-    GRPCStreamingProtoCall* call = [videoService createEnrollmentWithConfig:config handler:self];
+    // Open the GRPC stream for liveness validation
+    GRPCStreamingProtoCall* call = [videoService validateLivenessWithConfig:config handler:self];
     self.call = call;
 
     // Start the video recording
@@ -88,6 +84,14 @@
     }
     // Take an initial photo to upload to the server
     [interactor takePhoto];
+}
+
+// Remember to stop recording and close the GRPC stream once liveness processing is finished
+-(void)stopVideoExample {
+    if (self.call) {
+        [self.call finish];
+        self.call = nil;
+    }
 }
 
 // Sets up a UIView to show the camera preview
@@ -105,25 +109,19 @@
 
 // GRPCProtoResponseHandler protocol conformance, will be called with every response from the server
 - (void)didReceiveProtoMessage:(GPBMessage *)message {
-    SENGVCreateEnrollmentResponse* response = (SENGVCreateEnrollmentResponse*)message;
+    SENGVLivenessRecognitionResponse* response = (SENGVLivenessRecognitionResponse*)message;
     if (response == nil) {
         return;
     }
 
-    // The response contains info about the enrollment status
-    // - percentComplete
-    // - isAlive - (only when liveness is enabled) tells if the frame was determined to be live
-    NSLog(@"Percent enrollment complete: %lld", response.percentComplete);
-
-    // The response will include an enrollment ID once enrollment is complete
-    if (![response.enrollmentId isEqualToString:@""]) {
-        NSLog(@"Enrollment complete");
-
-        // The server will automatically close the GRPC stream once enrollment is complete
-    } else {
-        // Upload the next video frame until the enrollment is complete
-        [self.interactor takePhoto];
+    // response.isAlive tells if the frame was determined to be live
+    // response.score tells Sensory's confidence in the result
+    if (response.isAlive) {
+        NSLog(@"Frame is live");
     }
+
+    // Upload the next video frame
+    [self.interactor takePhoto];
 }
 
 // GRPCProtoResponseHandler protocol conformance, will be called once the stream is closed
@@ -149,7 +147,7 @@
     }
 
     // Send the video data to the server for processing
-    SENGVCreateEnrollmentRequest* request = [SENGVCreateEnrollmentRequest message];
+    SENGVValidateRecognitionRequest* request = [SENGVValidateRecognitionRequest message];
     request.imageContent = photo;
     [[self call] writeMessage:request];
 }

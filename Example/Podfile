@@ -1,11 +1,11 @@
 platform :ios, '13.0'
 use_frameworks!
 
-target 'objc-sdk-test-app' do
-  pod 'objc-sdk', :path => '../'
+target 'SensoryCloudExampleApp' do
+  pod 'SensoryCloud', :path => '../'
   pod '!ProtoCompiler-gRPCPlugin', '~> 1.0'
 end
 
-target 'objc-sdk_Tests' do
-  pod 'objc-sdk', :path => '../'
+target 'SensoryCloudTests' do
+  pod 'SensoryCloud', :path => '../'
 end

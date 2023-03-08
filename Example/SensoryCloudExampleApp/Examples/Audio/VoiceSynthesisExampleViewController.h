@@ -10,7 +10,7 @@
 #define VoiceSynthesisExampleViewController_h
 
 #import <UIKit/UIKit.h>
-#import <objc_sdk/AudioService.h>
+#import <SensoryCloud/AudioService.h>
 
 @interface VoiceSynthesisExampleViewController: UIViewController <GRPCProtoResponseHandler>
 

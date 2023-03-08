@@ -7,7 +7,7 @@
 //
 
 #import "GetModelsExampleViewController.h"
-#import <objc-sdk-umbrella.h>
+#import <SensoryCloud/SensoryCloud-umbrella.h>
 
 @interface GetModelsExampleViewController ()
 @property SENAudioService* audioService;
@@ -59,8 +59,6 @@
         // Audio models and vision models are requested sequentially here solely so that the NSLogs don't get intermingled
         [self getVisionModels];
     }];
-
-
 }
 
 - (void)getVisionModels {

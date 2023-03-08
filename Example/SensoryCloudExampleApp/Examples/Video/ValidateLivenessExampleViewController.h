@@ -10,8 +10,8 @@
 #define ValidateLivenessExampleViewController_h
 
 #import <UIKit/UIKit.h>
-#import <objc_sdk/VideoStreamInteractor.h>
-#import <objc_sdk/VideoService.h>
+#import <SensoryCloud/VideoStreamInteractor.h>
+#import <SensoryCloud/VideoService.h>
 
 @interface ValidateLivenessExampleViewController : UIViewController <SENVideoStreamDelegate, GRPCProtoResponseHandler>
 

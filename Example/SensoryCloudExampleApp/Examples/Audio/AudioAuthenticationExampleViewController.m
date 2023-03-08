@@ -1,21 +1,21 @@
 //
-//  ValidateTriggerExampleViewController.m
+//  AudioAuthenticationExampleViewController.m
 //  objc-sdk-test-app
 //
-//  Created by Niles Hacking on 3/2/23.
+//  Created by Niles Hacking on 3/7/23.
 //  Copyright © 2023 Niles Hacking. All rights reserved.
 //
 
-#import "ValidateTriggerExampleViewController.h"
-#import <objc-sdk-umbrella.h>
+#import "AudioAuthenticationExampleViewController.h"
+#import <SensoryCloud/SensoryCloud-umbrella.h>
 
-@interface ValidateTriggerExampleViewController ()
+@interface AudioAuthenticationExampleViewController ()
 @property GRPCStreamingProtoCall* call;
 @property SENAudioStreamInteractor* interactor;
 @property SENAudioService* audioService;
 @end
 
-@implementation ValidateTriggerExampleViewController
+@implementation AudioAuthenticationExampleViewController
 
 @synthesize dispatchQueue;
 
@@ -75,16 +75,15 @@
         return;
     }
 
-    // Create the configuration object for event validation
-    // Available models can be received from the [audioService getModels:] call
-    // User ID is a device generated identifier (usually a UUID) that should remain constant for all calls made by the same user
-    SENGAValidateEventConfig* config = [SENGAValidateEventConfig message];
-    config.modelName = @"wakeword-16kHz-open_sesame.trg";
-    config.userId = @"My-User-ID";
-    config.sensitivity = SENGAThresholdSensitivity_Medium;
+    // Create the configuration object for performing an audio authentication
+    // EnrollmentIds are returned when the enrollment is first created,
+    // enrollmentIds are also returned from the [managementService getEnrollments:] call.
+    SENGAAuthenticateConfig* config = [SENGAAuthenticateConfig message];
+    config.enrollmentId = @"Enrollment-ID-to-auth-against";
+    config.isLivenessEnabled = false;
 
-    // Open a GRPC stream for event validation
-    GRPCStreamingProtoCall* call = [audioService validateTriggerWithConfig:config handler:self];
+    // Open a GRPC stream for performing an audio authentication
+    GRPCStreamingProtoCall* call = [audioService authenticateWithConfig:config handler:self];
     self.call = call;
 
     // Start audio recording
@@ -98,23 +97,23 @@
 // GRPCProtoResponseHandler protocol conformance, will be called with every response from the server
 - (void)didReceiveProtoMessage:(GPBMessage *)message {
     // Cast the server response to the proper type
-    SENGAValidateEventResponse* response = (SENGAValidateEventResponse*)message;
+    SENGAAuthenticateResponse* response = (SENGAAuthenticateResponse*)message;
     if (response == nil) {
         return;
     }
 
-    // Audio energy is the energy of the last analyzed audio, may be used to display an audio graph to the user
-    NSLog(@"Response audio energy: %f", response.audioEnergy);
+    // The response contains info about the authentication status
+    // - audioEnergy
+    // For authentications with liveness, two additional fields are populated
+    // - modelPrompt - indicates what the user should say in order to proceed with the enrollment
+    // - sectionPercentComplete - percent completion of the current ModelPrompt that has been spoken
+    NSLog(@"Audio energy: %f", response.audioEnergy);
 
-    // response.success will be true when the trigger has been recognized
-    // response.resultId tells the name of the event that was recognized, useful for models with multiple triggers
-    // response.score tells Sensory's confidence in the result
+    // response.success will be true after a successful authentication
     if (response.success) {
-        NSLog(@"\'%@\' was recognized!", response.resultId);
+        NSLog(@"Successful Authentication");
 
-        // Close the GRPC stream once finished
-        [[self call] finish];
-        self.call = nil;
+        // The server will automatically close the GRPC stream once the authentication is complete
     }
 }
 
@@ -144,7 +143,7 @@
     }
 
     // Send the Audio data to the server for processing
-    SENGAValidateEventRequest* request = [SENGAValidateEventRequest message];
+    SENGAAuthenticateRequest* request = [SENGAAuthenticateRequest message];
     request.audioContent = data;
     [[self call] writeMessage:request];
 }

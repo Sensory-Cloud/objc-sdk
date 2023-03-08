@@ -7,7 +7,7 @@
 //
 
 #import "VoiceSynthesisExampleViewController.h"
-#import <objc-sdk-umbrella.h>
+#import <SensoryCloud/SensoryCloud-umbrella.h>
 
 @interface VoiceSynthesisExampleViewController ()
 @property SENAudioService* audioService;

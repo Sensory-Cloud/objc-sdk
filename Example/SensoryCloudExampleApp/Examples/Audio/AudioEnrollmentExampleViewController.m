@@ -7,7 +7,7 @@
 //
 
 #import "AudioEnrollmentExampleViewController.h"
-#import <objc-sdk-umbrella.h>
+#import <SensoryCloud/SensoryCloud-umbrella.h>
 
 @interface AudioEnrollmentExampleViewController ()
 @property GRPCStreamingProtoCall* call;

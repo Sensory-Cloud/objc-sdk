@@ -31,8 +31,8 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		C953927AA0841FB62084A9DD /* Pods_objc_sdk_test_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E2A93B3AE4CDC12D51E7CFB /* Pods_objc_sdk_test_app.framework */; };
-		E2613A86F91A02EB014D12CA /* Pods_objc_sdk_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E73257F56E5A6220106E1CC5 /* Pods_objc_sdk_Tests.framework */; };
+		948D39F4E02271D16D20F9BC /* Pods_SensoryCloudTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC645BF27FC2CBC2F1F6A2A6 /* Pods_SensoryCloudTests.framework */; };
+		AE0747D42BAD3E4429EDF1C7 /* Pods_SensoryCloudExampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6681677895BFF05F536CC268 /* Pods_SensoryCloudExampleApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01403F7075EEE8CA2F879DA2 /* objc-sdk.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "objc-sdk.podspec"; path = "../objc-sdk.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		01403F7075EEE8CA2F879DA2 /* SensoryCloud.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SensoryCloud.podspec; path = ../SensoryCloud.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		03648CFF29B134C300119E1B /* config.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.ini; sourceTree = "<group>"; };
 		03648D0229B154ED00119E1B /* ValidateTriggerExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ValidateTriggerExampleViewController.h; sourceTree = "<group>"; };
 		03648D0329B1550A00119E1B /* ValidateTriggerExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ValidateTriggerExampleViewController.m; sourceTree = "<group>"; };
@@ -71,7 +71,7 @@
 		0369131429A01B2000F99597 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		0369132729A0305100F99597 /* HealthServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HealthServiceTests.m; path = Services/HealthServiceTests.m; sourceTree = "<group>"; };
 		039683E629A55B4F00E909B8 /* KeychainManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainManagerTests.m; path = TokenManager/KeychainManagerTests.m; sourceTree = "<group>"; };
-		039683EC29A55E7600E909B8 /* objc-sdk-test-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "objc-sdk-test-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		039683EC29A55E7600E909B8 /* SensoryCloudExampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SensoryCloudExampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		039683EE29A55E7700E909B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		039683EF29A55E7700E909B8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		039683F129A55E7700E909B8 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
@@ -85,19 +85,23 @@
 		0396841C29B104C900E909B8 /* LoginExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginExampleViewController.h; sourceTree = "<group>"; };
 		0396841D29B1052C00E909B8 /* LoginExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginExampleViewController.m; sourceTree = "<group>"; };
 		0BC58BD170FC24615C356BAC /* Pods-objc-sdk_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objc-sdk_Tests.release.xcconfig"; path = "Target Support Files/Pods-objc-sdk_Tests/Pods-objc-sdk_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		3E2A93B3AE4CDC12D51E7CFB /* Pods_objc_sdk_test_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_objc_sdk_test_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		26281C4C8A3FB53EEBD83F14 /* Pods-SensoryCloudTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensoryCloudTests.release.xcconfig"; path = "Target Support Files/Pods-SensoryCloudTests/Pods-SensoryCloudTests.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6003F591195388D20070C39A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		6003F5AE195388D20070C39A /* objc-sdk_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "objc-sdk_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6003F5AE195388D20070C39A /* SensoryCloudTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SensoryCloudTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6681677895BFF05F536CC268 /* Pods_SensoryCloudExampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensoryCloudExampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8111F3F86C424078FE89AF3E /* Pods-SensoryCloudTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensoryCloudTests.debug.xcconfig"; path = "Target Support Files/Pods-SensoryCloudTests/Pods-SensoryCloudTests.debug.xcconfig"; sourceTree = "<group>"; };
 		874C39BE37EBF184CCFF4F28 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		8FF3918D8EB77C4903E3FCB6 /* Pods-SensoryCloudExampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensoryCloudExampleApp.debug.xcconfig"; path = "Target Support Files/Pods-SensoryCloudExampleApp/Pods-SensoryCloudExampleApp.debug.xcconfig"; sourceTree = "<group>"; };
+		AA0A2FBD76D6F92156C2EF3A /* Pods-SensoryCloudExampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensoryCloudExampleApp.release.xcconfig"; path = "Target Support Files/Pods-SensoryCloudExampleApp/Pods-SensoryCloudExampleApp.release.xcconfig"; sourceTree = "<group>"; };
 		ABE2C6783D2B0272DDDB149F /* Pods-objc-sdk-test-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objc-sdk-test-app.release.xcconfig"; path = "Target Support Files/Pods-objc-sdk-test-app/Pods-objc-sdk-test-app.release.xcconfig"; sourceTree = "<group>"; };
 		AC38F0B68E7A6637E4182A94 /* Pods-objc-sdk-test-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objc-sdk-test-app.debug.xcconfig"; path = "Target Support Files/Pods-objc-sdk-test-app/Pods-objc-sdk-test-app.debug.xcconfig"; sourceTree = "<group>"; };
 		E402CD8142C1AB1ED7727224 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		E73257F56E5A6220106E1CC5 /* Pods_objc_sdk_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_objc_sdk_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC645BF27FC2CBC2F1F6A2A6 /* Pods_SensoryCloudTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensoryCloudTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7C2313E3B396A58EB7100B1 /* Pods-objc-sdk_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objc-sdk_Tests.debug.xcconfig"; path = "Target Support Files/Pods-objc-sdk_Tests/Pods-objc-sdk_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,7 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C953927AA0841FB62084A9DD /* Pods_objc_sdk_test_app.framework in Frameworks */,
+				AE0747D42BAD3E4429EDF1C7 /* Pods_SensoryCloudExampleApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,7 +121,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				E2613A86F91A02EB014D12CA /* Pods_objc_sdk_Tests.framework in Frameworks */,
+				948D39F4E02271D16D20F9BC /* Pods_SensoryCloudTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,7 +185,7 @@
 			name = TokenManager;
 			sourceTree = "<group>";
 		};
-		039683ED29A55E7700E909B8 /* objc-sdk-test-app */ = {
+		039683ED29A55E7700E909B8 /* SensoryCloudExampleApp */ = {
 			isa = PBXGroup;
 			children = (
 				03648CFF29B134C300119E1B /* config.ini */,
@@ -197,7 +201,7 @@
 				039683FF29A55E7800E909B8 /* Info.plist */,
 				0396840029A55E7800E909B8 /* main.m */,
 			);
-			path = "objc-sdk-test-app";
+			path = SensoryCloudExampleApp;
 			sourceTree = "<group>";
 		};
 		0396841A29B1039F00E909B8 /* Examples */ = {
@@ -217,7 +221,7 @@
 			children = (
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F5B5195388D20070C39A /* Tests */,
-				039683ED29A55E7700E909B8 /* objc-sdk-test-app */,
+				039683ED29A55E7700E909B8 /* SensoryCloudExampleApp */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
 				ED01668F5A61569638F408EE /* Pods */,
@@ -227,8 +231,8 @@
 		6003F58B195388D20070C39A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6003F5AE195388D20070C39A /* objc-sdk_Tests.xctest */,
-				039683EC29A55E7600E909B8 /* objc-sdk-test-app.app */,
+				6003F5AE195388D20070C39A /* SensoryCloudTests.xctest */,
+				039683EC29A55E7600E909B8 /* SensoryCloudExampleApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -240,8 +244,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				3E2A93B3AE4CDC12D51E7CFB /* Pods_objc_sdk_test_app.framework */,
-				E73257F56E5A6220106E1CC5 /* Pods_objc_sdk_Tests.framework */,
+				6681677895BFF05F536CC268 /* Pods_SensoryCloudExampleApp.framework */,
+				EC645BF27FC2CBC2F1F6A2A6 /* Pods_SensoryCloudTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -269,7 +273,7 @@
 		60FF7A9C1954A5C5007DD14C /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				01403F7075EEE8CA2F879DA2 /* objc-sdk.podspec */,
+				01403F7075EEE8CA2F879DA2 /* SensoryCloud.podspec */,
 				874C39BE37EBF184CCFF4F28 /* README.md */,
 				E402CD8142C1AB1ED7727224 /* LICENSE */,
 			);
@@ -283,6 +287,10 @@
 				ABE2C6783D2B0272DDDB149F /* Pods-objc-sdk-test-app.release.xcconfig */,
 				F7C2313E3B396A58EB7100B1 /* Pods-objc-sdk_Tests.debug.xcconfig */,
 				0BC58BD170FC24615C356BAC /* Pods-objc-sdk_Tests.release.xcconfig */,
+				8FF3918D8EB77C4903E3FCB6 /* Pods-SensoryCloudExampleApp.debug.xcconfig */,
+				AA0A2FBD76D6F92156C2EF3A /* Pods-SensoryCloudExampleApp.release.xcconfig */,
+				8111F3F86C424078FE89AF3E /* Pods-SensoryCloudTests.debug.xcconfig */,
+				26281C4C8A3FB53EEBD83F14 /* Pods-SensoryCloudTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -290,9 +298,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		039683EB29A55E7600E909B8 /* objc-sdk-test-app */ = {
+		039683EB29A55E7600E909B8 /* SensoryCloudExampleApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0396840229A55E7800E909B8 /* Build configuration list for PBXNativeTarget "objc-sdk-test-app" */;
+			buildConfigurationList = 0396840229A55E7800E909B8 /* Build configuration list for PBXNativeTarget "SensoryCloudExampleApp" */;
 			buildPhases = (
 				6C456E535B722A8D8165CEF9 /* [CP] Check Pods Manifest.lock */,
 				039683E829A55E7600E909B8 /* Sources */,
@@ -304,14 +312,14 @@
 			);
 			dependencies = (
 			);
-			name = "objc-sdk-test-app";
+			name = SensoryCloudExampleApp;
 			productName = "objc-sdk-test-app";
-			productReference = 039683EC29A55E7600E909B8 /* objc-sdk-test-app.app */;
+			productReference = 039683EC29A55E7600E909B8 /* SensoryCloudExampleApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6003F5AD195388D20070C39A /* objc-sdk_Tests */ = {
+		6003F5AD195388D20070C39A /* SensoryCloudTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "objc-sdk_Tests" */;
+			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "SensoryCloudTests" */;
 			buildPhases = (
 				568F1E7F1A32DE60F4DD4E99 /* [CP] Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
@@ -324,9 +332,9 @@
 			dependencies = (
 				0396840629A55E9100E909B8 /* PBXTargetDependency */,
 			);
-			name = "objc-sdk_Tests";
+			name = SensoryCloudTests;
 			productName = "objc-sdkTests";
-			productReference = 6003F5AE195388D20070C39A /* objc-sdk_Tests.xctest */;
+			productReference = 6003F5AE195388D20070C39A /* SensoryCloudTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -345,6 +353,7 @@
 						ProvisioningStyle = Automatic;
 					};
 					6003F5AD195388D20070C39A = {
+						DevelopmentTeam = JG89NXSP49;
 						TestTargetID = 039683EB29A55E7600E909B8;
 					};
 				};
@@ -363,8 +372,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6003F5AD195388D20070C39A /* objc-sdk_Tests */,
-				039683EB29A55E7600E909B8 /* objc-sdk-test-app */,
+				6003F5AD195388D20070C39A /* SensoryCloudTests */,
+				039683EB29A55E7600E909B8 /* SensoryCloudExampleApp */,
 			);
 		};
 /* End PBXProject section */
@@ -398,30 +407,30 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-objc-sdk-test-app/Pods-objc-sdk-test-app-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-SensoryCloudExampleApp/Pods-SensoryCloudExampleApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SensoryCloud/SensoryCloud.framework",
 				"${BUILT_PRODUCTS_DIR}/abseil/absl.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
-				"${BUILT_PRODUCTS_DIR}/objc-sdk/objc_sdk.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SensoryCloud.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/absl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/objc_sdk.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-objc-sdk-test-app/Pods-objc-sdk-test-app-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SensoryCloudExampleApp/Pods-SensoryCloudExampleApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		568F1E7F1A32DE60F4DD4E99 /* [CP] Check Pods Manifest.lock */ = {
@@ -439,7 +448,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-objc-sdk_Tests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-SensoryCloudTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -461,7 +470,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-objc-sdk-test-app-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-SensoryCloudExampleApp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -474,30 +483,30 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-objc-sdk_Tests/Pods-objc-sdk_Tests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-SensoryCloudTests/Pods-SensoryCloudTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SensoryCloud/SensoryCloud.framework",
 				"${BUILT_PRODUCTS_DIR}/abseil/absl.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
-				"${BUILT_PRODUCTS_DIR}/objc-sdk/objc_sdk.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SensoryCloud.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/absl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/objc_sdk.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-objc-sdk_Tests/Pods-objc-sdk_Tests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SensoryCloudTests/Pods-SensoryCloudTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -538,7 +547,7 @@
 /* Begin PBXTargetDependency section */
 		0396840629A55E9100E909B8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 039683EB29A55E7600E909B8 /* objc-sdk-test-app */;
+			target = 039683EB29A55E7600E909B8 /* SensoryCloudExampleApp */;
 			targetProxy = 0396840529A55E9100E909B8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -573,7 +582,7 @@
 /* Begin XCBuildConfiguration section */
 		0396840329A55E7800E909B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC38F0B68E7A6637E4182A94 /* Pods-objc-sdk-test-app.debug.xcconfig */;
+			baseConfigurationReference = 8FF3918D8EB77C4903E3FCB6 /* Pods-SensoryCloudExampleApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -595,7 +604,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "objc-sdk-test-app/objc-sdk-test-app.entitlements";
+				CODE_SIGN_ENTITLEMENTS = SensoryCloudExampleApp/SensoryCloudExampleApp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -604,7 +614,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "objc-sdk-test-app/Info.plist";
+				INFOPLIST_FILE = SensoryCloudExampleApp/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires the camera for some examples";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app requires the microphone for some examples";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -617,8 +627,9 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "sensorycloud.ai.objc-sdk-test-app";
+				PRODUCT_BUNDLE_IDENTIFIER = sensorycloud.ai.SensoryCloudExampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -629,7 +640,7 @@
 		};
 		0396840429A55E7800E909B8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ABE2C6783D2B0272DDDB149F /* Pods-objc-sdk-test-app.release.xcconfig */;
+			baseConfigurationReference = AA0A2FBD76D6F92156C2EF3A /* Pods-SensoryCloudExampleApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -651,7 +662,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "objc-sdk-test-app/objc-sdk-test-app.entitlements";
+				CODE_SIGN_ENTITLEMENTS = SensoryCloudExampleApp/SensoryCloudExampleApp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -661,7 +673,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "objc-sdk-test-app/Info.plist";
+				INFOPLIST_FILE = SensoryCloudExampleApp/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires the camera for some examples";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app requires the microphone for some examples";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -674,8 +686,9 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "sensorycloud.ai.objc-sdk-test-app";
+				PRODUCT_BUNDLE_IDENTIFIER = sensorycloud.ai.SensoryCloudExampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -789,8 +802,9 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F7C2313E3B396A58EB7100B1 /* Pods-objc-sdk_Tests.debug.xcconfig */;
+			baseConfigurationReference = 8111F3F86C424078FE89AF3E /* Pods-SensoryCloudTests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = JG89NXSP49;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -807,15 +821,16 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/objc-sdk-test-app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/objc-sdk-test-app";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SensoryCloudExampleApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SensoryCloudExampleApp";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0BC58BD170FC24615C356BAC /* Pods-objc-sdk_Tests.release.xcconfig */;
+			baseConfigurationReference = 26281C4C8A3FB53EEBD83F14 /* Pods-SensoryCloudTests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = JG89NXSP49;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -828,7 +843,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/objc-sdk-test-app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/objc-sdk-test-app";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SensoryCloudExampleApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SensoryCloudExampleApp";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
@@ -836,7 +851,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0396840229A55E7800E909B8 /* Build configuration list for PBXNativeTarget "objc-sdk-test-app" */ = {
+		0396840229A55E7800E909B8 /* Build configuration list for PBXNativeTarget "SensoryCloudExampleApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0396840329A55E7800E909B8 /* Debug */,
@@ -854,7 +869,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "objc-sdk_Tests" */ = {
+		6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "SensoryCloudTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6003F5C3195388D20070C39A /* Debug */,

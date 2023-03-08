@@ -10,8 +10,8 @@
 #define ValidateTriggerExampleViewController_h
 
 #import <UIKit/UIKit.h>
-#import <objc_sdk/AudioStreamInteractor.h>
-#import <objc_sdk/AudioService.h>
+#import <SensoryCloud/AudioStreamInteractor.h>
+#import <SensoryCloud/AudioService.h>
 
 @interface ValidateTriggerExampleViewController : UIViewController <SENAudioStreamDelegate, GRPCProtoResponseHandler>
 
