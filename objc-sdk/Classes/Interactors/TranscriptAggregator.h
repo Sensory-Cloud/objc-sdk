@@ -19,6 +19,9 @@
 /// The current raw transcript and associated metadata
 @property NSMutableArray<SENGATranscribeWord*>* wordList;
 
+/// Initializes a new instance of `SENTranscriptAggregator`
+-(id)init;
+
 /// Processes a single sliding-window response from the server
 ///
 /// - Parameters:

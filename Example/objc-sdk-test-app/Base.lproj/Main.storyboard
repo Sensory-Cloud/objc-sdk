@@ -478,7 +478,7 @@
         <scene sceneID="gt9-TQ-jWw">
             <objects>
                 <viewController id="2VL-cl-aru" customClass="AudioTranscriptionExampleViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="U83-wg-Uqb" customClass="Voice">
+                    <view key="view" contentMode="scaleToFill" id="U83-wg-Uqb">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="QAU-Cr-R4b"/>

@@ -54,10 +54,18 @@
             NSLog(@"%@", model.name);
         }
         NSLog(@"\n");
+
+        // Now that all audio models have been requested, request the vision models
+        // Audio models and vision models are requested sequentially here solely so that the NSLogs don't get intermingled
+        [self getVisionModels];
     }];
 
+
+}
+
+- (void)getVisionModels {
     // Request a list of available vision models
-    [videoService getModels:^(SENGVGetModelsResponse *response, NSError *error) {
+    [self.videoService getModels:^(SENGVGetModelsResponse *response, NSError *error) {
         if (error) {
             NSLog(@"Error occurred while requesting vision models: %@", error.description);
             return;

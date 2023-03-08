@@ -85,7 +85,7 @@
     config.enablePunctuationCapitalization = false;
 
     // Initialize a transcript aggregator
-    [self setTranscriptAggregator: [SENTranscriptAggregator alloc]];
+    [self setTranscriptAggregator: [[SENTranscriptAggregator alloc] init]];
 
     // Open a GRPC stream for audio transcription
     GRPCStreamingProtoCall* call = [audioService transcribeAudioWithConfig:config handler:self];

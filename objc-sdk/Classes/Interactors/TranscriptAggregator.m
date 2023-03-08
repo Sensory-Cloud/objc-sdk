@@ -13,6 +13,11 @@ static NSString * const kErrorDomain = @"ai.SensoryCloud.TranscriptAggregator";
 
 @implementation SENTranscriptAggregator
 
+-(id)init {
+    [self setWordList: [NSMutableArray new]];
+    return self;
+}
+
 -(bool) processResponse: (SENGATranscribeWordResponse*) response errorPtr: (out NSError**)error {
     if([response wordsArray_Count] == 0) {
         return true;
