@@ -9,7 +9,7 @@
 #import "AudioStreamInteractor.h"
 #import <AVFoundation/AVFoundation.h>
 
-static NSString * const kErrorDomain = @"ai.SensoryCloudloud.AudioStreamInteractor";
+static NSString * const kErrorDomain = @"ai.SensoryCloud.AudioStreamInteractor";
 
 // Bus 1 is audio input
 AudioUnitElement bus1 = 1;

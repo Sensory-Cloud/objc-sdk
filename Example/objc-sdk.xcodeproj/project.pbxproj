@@ -10,6 +10,10 @@
 		03648D0029B134C300119E1B /* config.ini in Resources */ = {isa = PBXBuildFile; fileRef = 03648CFF29B134C300119E1B /* config.ini */; };
 		03648D0429B1550A00119E1B /* ValidateTriggerExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D0329B1550A00119E1B /* ValidateTriggerExampleViewController.m */; };
 		03648D1429B6A89C00119E1B /* ValidateLivenessExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D1329B6A89C00119E1B /* ValidateLivenessExampleViewController.m */; };
+		03648D1729B7D07800119E1B /* AudioEnrollmentExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D1629B7D07800119E1B /* AudioEnrollmentExampleViewController.m */; };
+		03648D1A29B7D81000119E1B /* AudioAuthenticationExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D1929B7D81000119E1B /* AudioAuthenticationExampleViewController.m */; };
+		03648D1D29B7DB1700119E1B /* AudioTranscriptionExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D1C29B7DB1700119E1B /* AudioTranscriptionExampleViewController.m */; };
+		03648D2429B8F05400119E1B /* VoiceSynthesisExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03648D2329B8F05400119E1B /* VoiceSynthesisExampleViewController.m */; };
 		0369132829A0305100F99597 /* HealthServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0369132729A0305100F99597 /* HealthServiceTests.m */; };
 		039683E729A55B4F00E909B8 /* KeychainManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 039683E629A55B4F00E909B8 /* KeychainManagerTests.m */; };
 		039683F029A55E7700E909B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 039683EF29A55E7700E909B8 /* AppDelegate.m */; };
@@ -44,6 +48,14 @@
 		03648D0329B1550A00119E1B /* ValidateTriggerExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ValidateTriggerExampleViewController.m; sourceTree = "<group>"; };
 		03648D1229B6A88200119E1B /* ValidateLivenessExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ValidateLivenessExampleViewController.h; sourceTree = "<group>"; };
 		03648D1329B6A89C00119E1B /* ValidateLivenessExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ValidateLivenessExampleViewController.m; sourceTree = "<group>"; };
+		03648D1529B7D04200119E1B /* AudioEnrollmentExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioEnrollmentExampleViewController.h; sourceTree = "<group>"; };
+		03648D1629B7D07800119E1B /* AudioEnrollmentExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioEnrollmentExampleViewController.m; sourceTree = "<group>"; };
+		03648D1829B7D7BA00119E1B /* AudioAuthenticationExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioAuthenticationExampleViewController.h; sourceTree = "<group>"; };
+		03648D1929B7D81000119E1B /* AudioAuthenticationExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioAuthenticationExampleViewController.m; sourceTree = "<group>"; };
+		03648D1B29B7DA9300119E1B /* AudioTranscriptionExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioTranscriptionExampleViewController.h; sourceTree = "<group>"; };
+		03648D1C29B7DB1700119E1B /* AudioTranscriptionExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioTranscriptionExampleViewController.m; sourceTree = "<group>"; };
+		03648D2229B8EFFE00119E1B /* VoiceSynthesisExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoiceSynthesisExampleViewController.h; sourceTree = "<group>"; };
+		03648D2329B8F05400119E1B /* VoiceSynthesisExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceSynthesisExampleViewController.m; sourceTree = "<group>"; };
 		0369131429A01B2000F99597 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		0369132729A0305100F99597 /* HealthServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HealthServiceTests.m; path = Services/HealthServiceTests.m; sourceTree = "<group>"; };
 		039683E629A55B4F00E909B8 /* KeychainManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainManagerTests.m; path = TokenManager/KeychainManagerTests.m; sourceTree = "<group>"; };
@@ -105,6 +117,14 @@
 			children = (
 				03648D0229B154ED00119E1B /* ValidateTriggerExampleViewController.h */,
 				03648D0329B1550A00119E1B /* ValidateTriggerExampleViewController.m */,
+				03648D1529B7D04200119E1B /* AudioEnrollmentExampleViewController.h */,
+				03648D1629B7D07800119E1B /* AudioEnrollmentExampleViewController.m */,
+				03648D1829B7D7BA00119E1B /* AudioAuthenticationExampleViewController.h */,
+				03648D1929B7D81000119E1B /* AudioAuthenticationExampleViewController.m */,
+				03648D1B29B7DA9300119E1B /* AudioTranscriptionExampleViewController.h */,
+				03648D1C29B7DB1700119E1B /* AudioTranscriptionExampleViewController.m */,
+				03648D2229B8EFFE00119E1B /* VoiceSynthesisExampleViewController.h */,
+				03648D2329B8F05400119E1B /* VoiceSynthesisExampleViewController.m */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -461,7 +481,11 @@
 			files = (
 				03648D1429B6A89C00119E1B /* ValidateLivenessExampleViewController.m in Sources */,
 				039683F029A55E7700E909B8 /* AppDelegate.m in Sources */,
+				03648D1A29B7D81000119E1B /* AudioAuthenticationExampleViewController.m in Sources */,
 				0396841E29B1052C00E909B8 /* LoginExampleViewController.m in Sources */,
+				03648D1D29B7DB1700119E1B /* AudioTranscriptionExampleViewController.m in Sources */,
+				03648D2429B8F05400119E1B /* VoiceSynthesisExampleViewController.m in Sources */,
+				03648D1729B7D07800119E1B /* AudioEnrollmentExampleViewController.m in Sources */,
 				03648D0429B1550A00119E1B /* ValidateTriggerExampleViewController.m in Sources */,
 				0396840129A55E7800E909B8 /* main.m in Sources */,
 				039683F329A55E7700E909B8 /* SceneDelegate.m in Sources */,
