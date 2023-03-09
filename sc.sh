@@ -96,7 +96,7 @@ release_version() {
   echo "Linting podspec file, this takes a few minutes..."
   pod spec lint SensoryCloud.podspec --allow-warnings
   echo "Releasing to Cocoapods, this also takes a few minutes..."
-  pod trunk push SensoryCloud.podspec
+  pod trunk push SensoryCloud.podspec --allow-warnings
 }
 
 # --- Body ---------------------------------------------------------
