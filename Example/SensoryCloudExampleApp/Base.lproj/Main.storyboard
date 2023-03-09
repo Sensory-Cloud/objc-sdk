@@ -18,17 +18,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2jQ-p4-PTq">
-                                <rect key="frame" x="135" y="408.66666666666669" width="123" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Initialize SDK"/>
+                                <rect key="frame" x="151.66666666666666" y="411" width="90" height="30"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Initialize SDK"/>
                                 <connections>
                                     <action selector="initSDK:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aac-C9-rVk"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9J0-AU-PEC">
-                                <rect key="frame" x="119" y="493.66666666666669" width="155" height="35.000000000000057"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Clear Credentials"/>
+                                <rect key="frame" x="137.66666666666666" y="491" width="118" height="30"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Clear Credentials"/>
                                 <connections>
                                     <action selector="clearCredentials:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E9k-ei-YVm"/>
                                 </connections>
