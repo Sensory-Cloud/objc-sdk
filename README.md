@@ -22,7 +22,7 @@ SensoryCloud is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'SensoryCloud'
+pod 'SensoryCloud', '~> 1.0'
 ```
 
 ## Naming Conventions

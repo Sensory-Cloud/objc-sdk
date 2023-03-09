@@ -9,6 +9,7 @@ USAGE="Usage: ./sc.sh [COMMAND]"
 COMMANDS="
     Commands:\n
     genproto | gp\t\t Generate Proto Files\n
+    release | rv [version]\t Releases and tags the SDK\n
     help | h\t\t Display This Help Message\n
 "
 
@@ -27,7 +28,7 @@ fi
 
 # --- Vars ---------------------------------------------------------
 PROTO_PATH='./proto'
-GEN_PATH='./objc-sdk/Generated'
+GEN_PATH='./SensoryCloud/Generated'
 PROTOC_PATH='./Example/Pods/!ProtoCompiler'
 PLUGIN='./Example/Pods/!ProtoCompiler-gRPCPlugin/grpc_objective_c_plugin'
 DESCRIPTOR_FILE="${PROTOC_PATH}/google/protobuf/descriptor.proto"
@@ -71,12 +72,56 @@ fix_proto() {
   find ${GEN_PATH} -type d -empty -delete
 }
 
+release_version() {
+  version=$1
+  regex_version='^[0-9]+\.[0-9]+\.[0-9]+$'
+
+  if [[ ! ${version} =~ ${regex_version} ]]; then
+    echo "Version string should be of the format {Major}.{Minor}.{Trivial} ex: 1.2.3"
+    exit 1
+  fi
+
+  # Check if version exists
+  git fetch --tags
+  if [ $(git tag -l "${version}") ]; then
+    echo "Version ${version} already exists. Exiting."
+    exit 1
+  fi
+
+  git add *
+  git commit -am "Release [${version}]"
+  git tag ${version}
+  git push --atomic origin HEAD ${version}
+
+  echo "Linting podspec file, this takes a few minutes..."
+  pod spec lint SensoryCloud.podspec --allow-warnings
+  echo "Releasing to Cocoapods, this also takes a few minutes..."
+  pod trunk push SensoryCloud.podspec
+}
+
 # --- Body ---------------------------------------------------------
 case "$1" in
 
   "genproto"|"gp")
     gen_proto
     fix_proto
+    exit 0;
+    ;;
+
+  "release"|"rv")
+    if [[ $# -ne 2 ]]; then
+        echo "Please supply a version string in the format {Major}.{Minor}.{Trivial} ex: 1.2.3"
+        exit 1;
+    fi
+
+    echo "Have you manually bumped the version numbers in \`SensoryCloud.podspec\` and \`README.md\`? "
+    select yn in "Yes" "No"; do
+        case $yn in
+            Yes ) release_version $2; break;;
+            No ) exit 1;;
+        esac
+    done
+
     exit 0;
     ;;
 
