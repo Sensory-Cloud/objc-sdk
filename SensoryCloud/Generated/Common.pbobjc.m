@@ -194,7 +194,7 @@ GPBEnumDescriptor *SENGModelType_EnumDescriptor(void) {
         "le\000SoundEventRevalidation\000SoundEventFixe"
         "d\000SoundSceneFixed\000FaceBiometric\000FaceReco"
         "gnition\000ObjectRecognition\000ImageTransform"
-        "\000";
+        "\000FaceEmbedding\000LlmGpt35\000";
     static const int32_t values[] = {
         SENGModelType_Unknown,
         SENGModelType_VoiceBiometricTextIndependent,
@@ -215,13 +215,17 @@ GPBEnumDescriptor *SENGModelType_EnumDescriptor(void) {
         SENGModelType_FaceRecognition,
         SENGModelType_ObjectRecognition,
         SENGModelType_ImageTransform,
+        SENGModelType_FaceEmbedding,
+        SENGModelType_LlmGpt35,
     };
+    static const char *extraTextFormatInfo = "\001\024c\343\201\201\000";
     GPBEnumDescriptor *worker =
         [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(SENGModelType)
                                        valueNames:valueNames
                                            values:values
                                             count:(uint32_t)(sizeof(values) / sizeof(int32_t))
-                                     enumVerifier:SENGModelType_IsValidValue];
+                                     enumVerifier:SENGModelType_IsValidValue
+                              extraTextFormatInfo:extraTextFormatInfo];
     GPBEnumDescriptor *expected = nil;
     if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
       [worker release];
@@ -251,6 +255,8 @@ BOOL SENGModelType_IsValidValue(int32_t value__) {
     case SENGModelType_FaceRecognition:
     case SENGModelType_ObjectRecognition:
     case SENGModelType_ImageTransform:
+    case SENGModelType_FaceEmbedding:
+    case SENGModelType_LlmGpt35:
       return YES;
     default:
       return NO;
@@ -263,7 +269,7 @@ GPBEnumDescriptor *SENGTechnologyType_EnumDescriptor(void) {
   static _Atomic(GPBEnumDescriptor*) descriptor = nil;
   if (!descriptor) {
     static const char *valueNames =
-        "NotSet\000Tssv\000Ts\000Tnl\000Stt\000Tts\000";
+        "NotSet\000Tssv\000Ts\000Tnl\000Stt\000Tts\000SoundId\000";
     static const int32_t values[] = {
         SENGTechnologyType_NotSet,
         SENGTechnologyType_Tssv,
@@ -271,6 +277,7 @@ GPBEnumDescriptor *SENGTechnologyType_EnumDescriptor(void) {
         SENGTechnologyType_Tnl,
         SENGTechnologyType_Stt,
         SENGTechnologyType_Tts,
+        SENGTechnologyType_SoundId,
     };
     GPBEnumDescriptor *worker =
         [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(SENGTechnologyType)
@@ -294,6 +301,7 @@ BOOL SENGTechnologyType_IsValidValue(int32_t value__) {
     case SENGTechnologyType_Tnl:
     case SENGTechnologyType_Stt:
     case SENGTechnologyType_Tts:
+    case SENGTechnologyType_SoundId:
       return YES;
     default:
       return NO;
@@ -388,13 +396,14 @@ GPBEnumDescriptor *SENGUsageEventType_EnumDescriptor(void) {
   if (!descriptor) {
     static const char *valueNames =
         "Authentication\000Recognition\000Enrollment\000Sy"
-        "nthesis\000Transcription\000";
+        "nthesis\000Transcription\000Llm\000";
     static const int32_t values[] = {
         SENGUsageEventType_Authentication,
         SENGUsageEventType_Recognition,
         SENGUsageEventType_Enrollment,
         SENGUsageEventType_Synthesis,
         SENGUsageEventType_Transcription,
+        SENGUsageEventType_Llm,
     };
     GPBEnumDescriptor *worker =
         [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(SENGUsageEventType)
@@ -417,6 +426,7 @@ BOOL SENGUsageEventType_IsValidValue(int32_t value__) {
     case SENGUsageEventType_Enrollment:
     case SENGUsageEventType_Synthesis:
     case SENGUsageEventType_Transcription:
+    case SENGUsageEventType_Llm:
       return YES;
     default:
       return NO;

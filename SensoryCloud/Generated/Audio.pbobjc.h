@@ -35,7 +35,9 @@ CF_EXTERN_C_BEGIN
 @class SENGACreateEnrollmentConfig;
 @class SENGACreateEnrollmentEventConfig;
 @class SENGACustomVocabularyWords;
+@class SENGASoundIdTopNResponse;
 @class SENGATranscribeConfig;
+@class SENGATranscribeEventConfig;
 @class SENGATranscribeWord;
 @class SENGATranscribeWordResponse;
 @class SENGAValidateEnrolledEventConfig;
@@ -833,6 +835,30 @@ GPB_FINAL @interface SENGAAuthenticateResponse : GPBMessage
 
 @end
 
+#pragma mark - SENGASoundIdTopNResponse
+
+typedef GPB_ENUM(SENGASoundIdTopNResponse_FieldNumber) {
+  SENGASoundIdTopNResponse_FieldNumber_ResultId = 1,
+  SENGASoundIdTopNResponse_FieldNumber_LogitScore = 2,
+  SENGASoundIdTopNResponse_FieldNumber_ProbabilityScore = 3,
+};
+
+GPB_FINAL @interface SENGASoundIdTopNResponse : GPBMessage
+
+/**
+ * Indicates the id of the particular sound that was recognized.
+ * Useful for combined models where multiple sound events can be recognized by the same model.
+ **/
+@property(nonatomic, readwrite, copy, null_resettable) NSString *resultId;
+
+/** Logit value for the given result */
+@property(nonatomic, readwrite) float logitScore;
+
+/** Probability value for the given result */
+@property(nonatomic, readwrite) float probabilityScore;
+
+@end
+
 #pragma mark - SENGAValidateEventResponse
 
 typedef GPB_ENUM(SENGAValidateEventResponse_FieldNumber) {
@@ -840,6 +866,9 @@ typedef GPB_ENUM(SENGAValidateEventResponse_FieldNumber) {
   SENGAValidateEventResponse_FieldNumber_Success = 2,
   SENGAValidateEventResponse_FieldNumber_ResultId = 3,
   SENGAValidateEventResponse_FieldNumber_Score = 4,
+  SENGAValidateEventResponse_FieldNumber_TopNresponseArray = 5,
+  SENGAValidateEventResponse_FieldNumber_ResultStartTime = 6,
+  SENGAValidateEventResponse_FieldNumber_ResultEndTime = 7,
   SENGAValidateEventResponse_FieldNumber_PostProcessingAction = 10,
 };
 
@@ -863,10 +892,19 @@ GPB_FINAL @interface SENGAValidateEventResponse : GPBMessage
 /** The score of the event between -100 to +100. Smaller values typically indicate an invalid sound while larger values would generally indicate a detected sound. */
 @property(nonatomic, readwrite) float score;
 
+/** Array of the top N most likely results */
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<SENGASoundIdTopNResponse*> *topNresponseArray;
+/** The number of items in @c topNresponseArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger topNresponseArray_Count;
+
 /**
  * If a post processing audio action was requested, this will be populated with the specific
  * action that was completed along with the actionId optionally set by the client.
  **/
+@property(nonatomic, readwrite) float resultStartTime;
+
+@property(nonatomic, readwrite) float resultEndTime;
+
 @property(nonatomic, readwrite, strong, null_resettable) SENGAAudioResponsePostProcessingAction *postProcessingAction;
 /** Test to see if @c postProcessingAction has been set. */
 @property(nonatomic, readwrite) BOOL hasPostProcessingAction;
@@ -1251,6 +1289,7 @@ typedef GPB_ENUM(SENGAValidateEventConfig_FieldNumber) {
   SENGAValidateEventConfig_FieldNumber_ModelName = 2,
   SENGAValidateEventConfig_FieldNumber_UserId = 3,
   SENGAValidateEventConfig_FieldNumber_Sensitivity = 4,
+  SENGAValidateEventConfig_FieldNumber_TopN = 5,
 };
 
 /**
@@ -1277,6 +1316,12 @@ GPB_FINAL @interface SENGAValidateEventConfig : GPBMessage
 
 /** The model sensitivity */
 @property(nonatomic, readwrite) SENGAThresholdSensitivity sensitivity;
+
+/**
+ * TopN is for the sound_id_topn model and dictates the top N most likely
+ * results to return
+ **/
+@property(nonatomic, readwrite) int32_t topN;
 
 @end
 
@@ -1446,6 +1491,41 @@ GPB_FINAL @interface SENGACustomVocabularyWords : GPBMessage
 
 @end
 
+#pragma mark - SENGATranscribeEventConfig
+
+typedef GPB_ENUM(SENGATranscribeEventConfig_FieldNumber) {
+  SENGATranscribeEventConfig_FieldNumber_ModelName = 1,
+  SENGATranscribeEventConfig_FieldNumber_Sensitivity = 2,
+};
+
+/**
+ * Provides information for an audio-based event recognition
+ **/
+GPB_FINAL @interface SENGATranscribeEventConfig : GPBMessage
+
+/**
+ * Name of model to validate against
+ * Models can be retrieved from the GetModels() gRPC call
+ **/
+@property(nonatomic, readwrite, copy, null_resettable) NSString *modelName;
+
+/** The model sensitivity */
+@property(nonatomic, readwrite) SENGAThresholdSensitivity sensitivity;
+
+@end
+
+/**
+ * Fetches the raw value of a @c SENGATranscribeEventConfig's @c sensitivity property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t SENGATranscribeEventConfig_Sensitivity_RawValue(SENGATranscribeEventConfig *message);
+/**
+ * Sets the raw value of an @c SENGATranscribeEventConfig's @c sensitivity property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetSENGATranscribeEventConfig_Sensitivity_RawValue(SENGATranscribeEventConfig *message, int32_t value);
+
 #pragma mark - SENGATranscribeConfig
 
 typedef GPB_ENUM(SENGATranscribeConfig_FieldNumber) {
@@ -1459,6 +1539,8 @@ typedef GPB_ENUM(SENGATranscribeConfig_FieldNumber) {
   SENGATranscribeConfig_FieldNumber_CustomVocabRewardThreshold = 8,
   SENGATranscribeConfig_FieldNumber_CustomVocabularyId = 9,
   SENGATranscribeConfig_FieldNumber_CustomWordList = 10,
+  SENGATranscribeConfig_FieldNumber_DoOfflineMode = 11,
+  SENGATranscribeConfig_FieldNumber_WakeWordConfig = 12,
 };
 
 /**
@@ -1511,6 +1593,17 @@ GPB_FINAL @interface SENGATranscribeConfig : GPBMessage
 @property(nonatomic, readwrite, strong, null_resettable) SENGACustomVocabularyWords *customWordList;
 /** Test to see if @c customWordList has been set. */
 @property(nonatomic, readwrite) BOOL hasCustomWordList;
+
+/**
+ * Offline mode is faster at processing large transcripts, but increases the latency in individual transcription responses.
+ * This mode is not recommended when streaming audio from a microphone, and should only be used for processing audio files.
+ **/
+@property(nonatomic, readwrite) BOOL doOfflineMode;
+
+/** A wakeword that must be recognized before transcription will be returned. */
+@property(nonatomic, readwrite, strong, null_resettable) SENGATranscribeEventConfig *wakeWordConfig;
+/** Test to see if @c wakeWordConfig has been set. */
+@property(nonatomic, readwrite) BOOL hasWakeWordConfig;
 
 @end
 

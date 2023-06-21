@@ -128,6 +128,7 @@ typedef struct SENGPublishUsageEventsRequest__storage_ {
 @dynamic videoFrameCount;
 @dynamic tenantId;
 @dynamic billableFunction;
+@dynamic tokenCount;
 
 typedef struct SENGUsageEvent__storage_ {
   uint32_t _has_storage_[1];
@@ -143,6 +144,7 @@ typedef struct SENGUsageEvent__storage_ {
   int64_t duration;
   int64_t audioDurationMs;
   int64_t videoFrameCount;
+  int64_t tokenCount;
 } SENGUsageEvent__storage_;
 
 // This method is threadsafe because it is initially called
@@ -259,6 +261,15 @@ typedef struct SENGUsageEvent__storage_ {
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldHasEnumDescriptor | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeEnum,
       },
+      {
+        .name = "tokenCount",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGUsageEvent_FieldNumber_TokenCount,
+        .hasIndex = 10,
+        .offset = (uint32_t)offsetof(SENGUsageEvent__storage_, tokenCount),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeInt64,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[SENGUsageEvent class]
@@ -270,7 +281,7 @@ typedef struct SENGUsageEvent__storage_ {
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
-        "\005\004\010\000\t\017\000\n\017\000\013\010\000\014\020\000";
+        "\006\004\010\000\t\017\000\n\017\000\013\010\000\014\020\000\r\n\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG

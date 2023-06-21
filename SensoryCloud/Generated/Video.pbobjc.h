@@ -307,6 +307,9 @@ typedef GPB_ENUM(SENGVCreateEnrollmentResponse_FieldNumber) {
   SENGVCreateEnrollmentResponse_FieldNumber_ModelVersion = 5,
   SENGVCreateEnrollmentResponse_FieldNumber_Score = 6,
   SENGVCreateEnrollmentResponse_FieldNumber_EnrollmentToken = 7,
+  SENGVCreateEnrollmentResponse_FieldNumber_DidFindFace = 8,
+  SENGVCreateEnrollmentResponse_FieldNumber_BoundingBoxArray = 9,
+  SENGVCreateEnrollmentResponse_FieldNumber_ProbabilityFace = 10,
 };
 
 /**
@@ -340,6 +343,17 @@ GPB_FINAL @interface SENGVCreateEnrollmentResponse : GPBMessage
 /** Test to see if @c enrollmentToken has been set. */
 @property(nonatomic, readwrite) BOOL hasEnrollmentToken;
 
+/** Indicates if a face was found in the uploaded image */
+@property(nonatomic, readwrite) BOOL didFindFace;
+
+/** The bounding box of the face */
+@property(nonatomic, readwrite, strong, null_resettable) GPBInt64Array *boundingBoxArray;
+/** The number of items in @c boundingBoxArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger boundingBoxArray_Count;
+
+/** The model's confidence in its face detection */
+@property(nonatomic, readwrite) float probabilityFace;
+
 @end
 
 #pragma mark - SENGVAuthenticateResponse
@@ -351,6 +365,9 @@ typedef GPB_ENUM(SENGVAuthenticateResponse_FieldNumber) {
   SENGVAuthenticateResponse_FieldNumber_Token = 4,
   SENGVAuthenticateResponse_FieldNumber_UserId = 5,
   SENGVAuthenticateResponse_FieldNumber_EnrollmentId = 6,
+  SENGVAuthenticateResponse_FieldNumber_DidFindFace = 7,
+  SENGVAuthenticateResponse_FieldNumber_BoundingBoxArray = 8,
+  SENGVAuthenticateResponse_FieldNumber_ProbabilityFace = 9,
 };
 
 /**
@@ -384,6 +401,17 @@ GPB_FINAL @interface SENGVAuthenticateResponse : GPBMessage
  **/
 @property(nonatomic, readwrite, copy, null_resettable) NSString *enrollmentId;
 
+/** Indicates if a face was found in the uploaded image */
+@property(nonatomic, readwrite) BOOL didFindFace;
+
+/** The bounding box of the face */
+@property(nonatomic, readwrite, strong, null_resettable) GPBInt64Array *boundingBoxArray;
+/** The number of items in @c boundingBoxArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger boundingBoxArray_Count;
+
+/** The model's confidence in its face detection */
+@property(nonatomic, readwrite) float probabilityFace;
+
 @end
 
 #pragma mark - SENGVLivenessRecognitionResponse
@@ -391,6 +419,9 @@ GPB_FINAL @interface SENGVAuthenticateResponse : GPBMessage
 typedef GPB_ENUM(SENGVLivenessRecognitionResponse_FieldNumber) {
   SENGVLivenessRecognitionResponse_FieldNumber_IsAlive = 1,
   SENGVLivenessRecognitionResponse_FieldNumber_Score = 2,
+  SENGVLivenessRecognitionResponse_FieldNumber_DidFindFace = 3,
+  SENGVLivenessRecognitionResponse_FieldNumber_BoundingBoxArray = 4,
+  SENGVLivenessRecognitionResponse_FieldNumber_ProbabilityFace = 5,
 };
 
 /**
@@ -403,6 +434,17 @@ GPB_FINAL @interface SENGVLivenessRecognitionResponse : GPBMessage
 
 /** Score of the liveness (lower is better) */
 @property(nonatomic, readwrite) float score;
+
+/** Indicates if a face was found in the uploaded image */
+@property(nonatomic, readwrite) BOOL didFindFace;
+
+/** The bounding box of the face */
+@property(nonatomic, readwrite, strong, null_resettable) GPBInt64Array *boundingBoxArray;
+/** The number of items in @c boundingBoxArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger boundingBoxArray_Count;
+
+/** The model's confidence in its face detection */
+@property(nonatomic, readwrite) float probabilityFace;
 
 @end
 

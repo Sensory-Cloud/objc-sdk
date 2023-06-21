@@ -85,6 +85,7 @@ typedef GPB_ENUM(SENGUsageEvent_FieldNumber) {
   SENGUsageEvent_FieldNumber_VideoFrameCount = 10,
   SENGUsageEvent_FieldNumber_TenantId = 11,
   SENGUsageEvent_FieldNumber_BillableFunction = 12,
+  SENGUsageEvent_FieldNumber_TokenCount = 13,
 };
 
 GPB_FINAL @interface SENGUsageEvent : GPBMessage
@@ -131,6 +132,9 @@ GPB_FINAL @interface SENGUsageEvent : GPBMessage
 
 /** Billable function, if applicable */
 @property(nonatomic, readwrite) enum SENGModelType billableFunction;
+
+/** The number of tokens processed */
+@property(nonatomic, readwrite) int64_t tokenCount;
 
 @end
 

@@ -192,6 +192,12 @@ typedef GPB_ENUM(SENGModelType) {
 
   /** Image Transformation */
   SENGModelType_ImageTransform = 204,
+
+  /** Face Embedding */
+  SENGModelType_FaceEmbedding = 205,
+
+  /** Large Language Model */
+  SENGModelType_LlmGpt35 = 301,
 };
 
 GPBEnumDescriptor *SENGModelType_EnumDescriptor(void);
@@ -229,6 +235,9 @@ typedef GPB_ENUM(SENGTechnologyType) {
 
   /** Text to Speech, a voice synthesis tool */
   SENGTechnologyType_Tts = 5,
+
+  /** Sound Id, a sound identification tool */
+  SENGTechnologyType_SoundId = 6,
 };
 
 GPBEnumDescriptor *SENGTechnologyType_EnumDescriptor(void);
@@ -334,6 +343,9 @@ typedef GPB_ENUM(SENGUsageEventType) {
 
   /** Speech to text usage event */
   SENGUsageEventType_Transcription = 4,
+
+  /** Large Language Model */
+  SENGUsageEventType_Llm = 5,
 };
 
 GPBEnumDescriptor *SENGUsageEventType_EnumDescriptor(void);

@@ -555,14 +555,19 @@ void SENGVValidateRecognitionRequest_ClearStreamingRequestOneOfCase(SENGVValidat
 @dynamic modelVersion;
 @dynamic score;
 @dynamic hasEnrollmentToken, enrollmentToken;
+@dynamic didFindFace;
+@dynamic boundingBoxArray, boundingBoxArray_Count;
+@dynamic probabilityFace;
 
 typedef struct SENGVCreateEnrollmentResponse__storage_ {
   uint32_t _has_storage_[1];
   float score;
+  float probabilityFace;
   NSString *enrollmentId;
   NSString *modelName;
   NSString *modelVersion;
   SENGEnrollmentToken *enrollmentToken;
+  GPBInt64Array *boundingBoxArray;
   int64_t percentComplete;
 } SENGVCreateEnrollmentResponse__storage_;
 
@@ -635,6 +640,33 @@ typedef struct SENGVCreateEnrollmentResponse__storage_ {
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeMessage,
       },
+      {
+        .name = "didFindFace",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGVCreateEnrollmentResponse_FieldNumber_DidFindFace,
+        .hasIndex = 8,
+        .offset = 9,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "boundingBoxArray",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGVCreateEnrollmentResponse_FieldNumber_BoundingBoxArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(SENGVCreateEnrollmentResponse__storage_, boundingBoxArray),
+        .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldPacked | GPBFieldTextFormatNameCustom),
+        .dataType = GPBDataTypeInt64,
+      },
+      {
+        .name = "probabilityFace",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGVCreateEnrollmentResponse_FieldNumber_ProbabilityFace,
+        .hasIndex = 10,
+        .offset = (uint32_t)offsetof(SENGVCreateEnrollmentResponse__storage_, probabilityFace),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeFloat,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[SENGVCreateEnrollmentResponse class]
@@ -646,7 +678,7 @@ typedef struct SENGVCreateEnrollmentResponse__storage_ {
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
-        "\006\001\017\000\002\007\000\003\014\000\004\t\000\005\014\000\007\017\000";
+        "\t\001\017\000\002\007\000\003\014\000\004\t\000\005\014\000\007\017\000\010\013\000\t\000boundingBox\000\n\017\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG
@@ -669,13 +701,18 @@ typedef struct SENGVCreateEnrollmentResponse__storage_ {
 @dynamic hasToken, token;
 @dynamic userId;
 @dynamic enrollmentId;
+@dynamic didFindFace;
+@dynamic boundingBoxArray, boundingBoxArray_Count;
+@dynamic probabilityFace;
 
 typedef struct SENGVAuthenticateResponse__storage_ {
   uint32_t _has_storage_[1];
   float score;
+  float probabilityFace;
   SENGTokenResponse *token;
   NSString *userId;
   NSString *enrollmentId;
+  GPBInt64Array *boundingBoxArray;
 } SENGVAuthenticateResponse__storage_;
 
 // This method is threadsafe because it is initially called
@@ -738,6 +775,33 @@ typedef struct SENGVAuthenticateResponse__storage_ {
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeString,
       },
+      {
+        .name = "didFindFace",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGVAuthenticateResponse_FieldNumber_DidFindFace,
+        .hasIndex = 8,
+        .offset = 9,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "boundingBoxArray",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGVAuthenticateResponse_FieldNumber_BoundingBoxArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(SENGVAuthenticateResponse__storage_, boundingBoxArray),
+        .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldPacked | GPBFieldTextFormatNameCustom),
+        .dataType = GPBDataTypeInt64,
+      },
+      {
+        .name = "probabilityFace",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGVAuthenticateResponse_FieldNumber_ProbabilityFace,
+        .hasIndex = 10,
+        .offset = (uint32_t)offsetof(SENGVAuthenticateResponse__storage_, probabilityFace),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeFloat,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[SENGVAuthenticateResponse class]
@@ -749,7 +813,7 @@ typedef struct SENGVAuthenticateResponse__storage_ {
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
-        "\003\003\007\000\005\006\000\006\014\000";
+        "\006\003\007\000\005\006\000\006\014\000\007\013\000\010\000boundingBox\000\t\017\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG
@@ -768,10 +832,15 @@ typedef struct SENGVAuthenticateResponse__storage_ {
 
 @dynamic isAlive;
 @dynamic score;
+@dynamic didFindFace;
+@dynamic boundingBoxArray, boundingBoxArray_Count;
+@dynamic probabilityFace;
 
 typedef struct SENGVLivenessRecognitionResponse__storage_ {
   uint32_t _has_storage_[1];
   float score;
+  float probabilityFace;
+  GPBInt64Array *boundingBoxArray;
 } SENGVLivenessRecognitionResponse__storage_;
 
 // This method is threadsafe because it is initially called
@@ -798,6 +867,33 @@ typedef struct SENGVLivenessRecognitionResponse__storage_ {
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeFloat,
       },
+      {
+        .name = "didFindFace",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGVLivenessRecognitionResponse_FieldNumber_DidFindFace,
+        .hasIndex = 3,
+        .offset = 4,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "boundingBoxArray",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGVLivenessRecognitionResponse_FieldNumber_BoundingBoxArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(SENGVLivenessRecognitionResponse__storage_, boundingBoxArray),
+        .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldPacked | GPBFieldTextFormatNameCustom),
+        .dataType = GPBDataTypeInt64,
+      },
+      {
+        .name = "probabilityFace",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGVLivenessRecognitionResponse_FieldNumber_ProbabilityFace,
+        .hasIndex = 5,
+        .offset = (uint32_t)offsetof(SENGVLivenessRecognitionResponse__storage_, probabilityFace),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeFloat,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[SENGVLivenessRecognitionResponse class]
@@ -809,7 +905,7 @@ typedef struct SENGVLivenessRecognitionResponse__storage_ {
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
-        "\001\001\007\000";
+        "\004\001\007\000\003\013\000\004\000boundingBox\000\005\017\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG

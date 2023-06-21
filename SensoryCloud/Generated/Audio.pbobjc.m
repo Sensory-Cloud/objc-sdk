@@ -37,7 +37,9 @@ GPBObjCClassDeclaration(SENGAAuthenticateConfig);
 GPBObjCClassDeclaration(SENGACreateEnrollmentConfig);
 GPBObjCClassDeclaration(SENGACreateEnrollmentEventConfig);
 GPBObjCClassDeclaration(SENGACustomVocabularyWords);
+GPBObjCClassDeclaration(SENGASoundIdTopNResponse);
 GPBObjCClassDeclaration(SENGATranscribeConfig);
+GPBObjCClassDeclaration(SENGATranscribeEventConfig);
 GPBObjCClassDeclaration(SENGATranscribeWord);
 GPBObjCClassDeclaration(SENGATranscribeWordResponse);
 GPBObjCClassDeclaration(SENGAValidateEnrolledEventConfig);
@@ -1325,6 +1327,78 @@ typedef struct SENGAAuthenticateResponse__storage_ {
 
 @end
 
+#pragma mark - SENGASoundIdTopNResponse
+
+@implementation SENGASoundIdTopNResponse
+
+@dynamic resultId;
+@dynamic logitScore;
+@dynamic probabilityScore;
+
+typedef struct SENGASoundIdTopNResponse__storage_ {
+  uint32_t _has_storage_[1];
+  float logitScore;
+  float probabilityScore;
+  NSString *resultId;
+} SENGASoundIdTopNResponse__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "resultId",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGASoundIdTopNResponse_FieldNumber_ResultId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(SENGASoundIdTopNResponse__storage_, resultId),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "logitScore",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGASoundIdTopNResponse_FieldNumber_LogitScore,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(SENGASoundIdTopNResponse__storage_, logitScore),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeFloat,
+      },
+      {
+        .name = "probabilityScore",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGASoundIdTopNResponse_FieldNumber_ProbabilityScore,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(SENGASoundIdTopNResponse__storage_, probabilityScore),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeFloat,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[SENGASoundIdTopNResponse class]
+                                     rootClass:[SENGAAudioRoot class]
+                                          file:SENGAAudioRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(SENGASoundIdTopNResponse__storage_)
+                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+#if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    static const char *extraTextFormatInfo =
+        "\003\001\010\000\002\n\000\003\020\000";
+    [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
+#endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
 #pragma mark - SENGAValidateEventResponse
 
 @implementation SENGAValidateEventResponse
@@ -1333,13 +1407,19 @@ typedef struct SENGAAuthenticateResponse__storage_ {
 @dynamic success;
 @dynamic resultId;
 @dynamic score;
+@dynamic topNresponseArray, topNresponseArray_Count;
+@dynamic resultStartTime;
+@dynamic resultEndTime;
 @dynamic hasPostProcessingAction, postProcessingAction;
 
 typedef struct SENGAValidateEventResponse__storage_ {
   uint32_t _has_storage_[1];
   float audioEnergy;
   float score;
+  float resultStartTime;
+  float resultEndTime;
   NSString *resultId;
+  NSMutableArray *topNresponseArray;
   SENGAAudioResponsePostProcessingAction *postProcessingAction;
 } SENGAValidateEventResponse__storage_;
 
@@ -1386,10 +1466,37 @@ typedef struct SENGAValidateEventResponse__storage_ {
         .dataType = GPBDataTypeFloat,
       },
       {
+        .name = "topNresponseArray",
+        .dataTypeSpecific.clazz = GPBObjCClass(SENGASoundIdTopNResponse),
+        .number = SENGAValidateEventResponse_FieldNumber_TopNresponseArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(SENGAValidateEventResponse__storage_, topNresponseArray),
+        .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldTextFormatNameCustom),
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "resultStartTime",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGAValidateEventResponse_FieldNumber_ResultStartTime,
+        .hasIndex = 5,
+        .offset = (uint32_t)offsetof(SENGAValidateEventResponse__storage_, resultStartTime),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeFloat,
+      },
+      {
+        .name = "resultEndTime",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGAValidateEventResponse_FieldNumber_ResultEndTime,
+        .hasIndex = 6,
+        .offset = (uint32_t)offsetof(SENGAValidateEventResponse__storage_, resultEndTime),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeFloat,
+      },
+      {
         .name = "postProcessingAction",
         .dataTypeSpecific.clazz = GPBObjCClass(SENGAAudioResponsePostProcessingAction),
         .number = SENGAValidateEventResponse_FieldNumber_PostProcessingAction,
-        .hasIndex = 5,
+        .hasIndex = 7,
         .offset = (uint32_t)offsetof(SENGAValidateEventResponse__storage_, postProcessingAction),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeMessage,
@@ -1405,7 +1512,7 @@ typedef struct SENGAValidateEventResponse__storage_ {
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
-        "\003\001\013\000\003\010\000\n\024\000";
+        "\006\001\013\000\003\010\000\005\000topNResponse\000\006O\000\007M\000\n\024\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG
@@ -2218,10 +2325,12 @@ BOOL SENGAAuthenticateConfig_ThresholdSecurity_IsValidValue(int32_t value__) {
 @dynamic modelName;
 @dynamic userId;
 @dynamic sensitivity;
+@dynamic topN;
 
 typedef struct SENGAValidateEventConfig__storage_ {
   uint32_t _has_storage_[1];
   SENGAThresholdSensitivity sensitivity;
+  int32_t topN;
   SENGAAudioConfig *audio;
   NSString *modelName;
   NSString *userId;
@@ -2269,6 +2378,15 @@ typedef struct SENGAValidateEventConfig__storage_ {
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeEnum,
       },
+      {
+        .name = "topN",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGAValidateEventConfig_FieldNumber_TopN,
+        .hasIndex = 4,
+        .offset = (uint32_t)offsetof(SENGAValidateEventConfig__storage_, topN),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeInt32,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[SENGAValidateEventConfig class]
@@ -2280,7 +2398,7 @@ typedef struct SENGAValidateEventConfig__storage_ {
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
-        "\002\002\t\000\003\006\000";
+        "\003\002\t\000\003\006\000\005\004\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG
@@ -2596,6 +2714,79 @@ typedef struct SENGACustomVocabularyWords__storage_ {
 
 @end
 
+#pragma mark - SENGATranscribeEventConfig
+
+@implementation SENGATranscribeEventConfig
+
+@dynamic modelName;
+@dynamic sensitivity;
+
+typedef struct SENGATranscribeEventConfig__storage_ {
+  uint32_t _has_storage_[1];
+  SENGAThresholdSensitivity sensitivity;
+  NSString *modelName;
+} SENGATranscribeEventConfig__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "modelName",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGATranscribeEventConfig_FieldNumber_ModelName,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(SENGATranscribeEventConfig__storage_, modelName),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "sensitivity",
+        .dataTypeSpecific.enumDescFunc = SENGAThresholdSensitivity_EnumDescriptor,
+        .number = SENGATranscribeEventConfig_FieldNumber_Sensitivity,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(SENGATranscribeEventConfig__storage_, sensitivity),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeEnum,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[SENGATranscribeEventConfig class]
+                                     rootClass:[SENGAAudioRoot class]
+                                          file:SENGAAudioRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(SENGATranscribeEventConfig__storage_)
+                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+#if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    static const char *extraTextFormatInfo =
+        "\001\001\t\000";
+    [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
+#endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+int32_t SENGATranscribeEventConfig_Sensitivity_RawValue(SENGATranscribeEventConfig *message) {
+  GPBDescriptor *descriptor = [SENGATranscribeEventConfig descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:SENGATranscribeEventConfig_FieldNumber_Sensitivity];
+  return GPBGetMessageRawEnumField(message, field);
+}
+
+void SetSENGATranscribeEventConfig_Sensitivity_RawValue(SENGATranscribeEventConfig *message, int32_t value) {
+  GPBDescriptor *descriptor = [SENGATranscribeEventConfig descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:SENGATranscribeEventConfig_FieldNumber_Sensitivity];
+  GPBSetMessageRawEnumField(message, field, value);
+}
+
 #pragma mark - SENGATranscribeConfig
 
 @implementation SENGATranscribeConfig
@@ -2610,6 +2801,8 @@ typedef struct SENGACustomVocabularyWords__storage_ {
 @dynamic customVocabRewardThreshold;
 @dynamic customVocabularyId;
 @dynamic hasCustomWordList, customWordList;
+@dynamic doOfflineMode;
+@dynamic hasWakeWordConfig, wakeWordConfig;
 
 typedef struct SENGATranscribeConfig__storage_ {
   uint32_t _has_storage_[1];
@@ -2621,6 +2814,7 @@ typedef struct SENGATranscribeConfig__storage_ {
   NSString *userId;
   NSString *customVocabularyId;
   SENGACustomVocabularyWords *customWordList;
+  SENGATranscribeEventConfig *wakeWordConfig;
 } SENGATranscribeConfig__storage_;
 
 // This method is threadsafe because it is initially called
@@ -2719,6 +2913,24 @@ typedef struct SENGATranscribeConfig__storage_ {
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeMessage,
       },
+      {
+        .name = "doOfflineMode",
+        .dataTypeSpecific.clazz = Nil,
+        .number = SENGATranscribeConfig_FieldNumber_DoOfflineMode,
+        .hasIndex = 12,
+        .offset = 13,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "wakeWordConfig",
+        .dataTypeSpecific.clazz = GPBObjCClass(SENGATranscribeEventConfig),
+        .number = SENGATranscribeConfig_FieldNumber_WakeWordConfig,
+        .hasIndex = 14,
+        .offset = (uint32_t)offsetof(SENGATranscribeConfig__storage_, wakeWordConfig),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
+        .dataType = GPBDataTypeMessage,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[SENGATranscribeConfig class]
@@ -2730,7 +2942,7 @@ typedef struct SENGATranscribeConfig__storage_ {
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
-        "\t\002\t\000\003\006\000\004\037\000\005\021\000\006\016\000\007\013\000\010\032\000\t\022\000\n\016\000";
+        "\013\002\t\000\003\006\000\004\037\000\005\021\000\006\016\000\007\013\000\010\032\000\t\022\000\n\016\000\013\r\000\014\016\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG
