@@ -86,6 +86,7 @@
 ///  * modelName\*: Name of the model to validate against
 ///  * userId\*: Unique user identifier
 ///  * sensitivity\*: How sensitive the model should be to false accepts
+///  * topN: When validating against a topN model, this tells how many results should be returned
 ///  * audio: Audio configuration object that tells how the audio stream will be formatted
 ///    * If empty, `self.audioConfig` will be used automatically
 /// - Parameters:
@@ -144,6 +145,8 @@
 /// * doSingleUtterance: If true, the server will automatically end the stream once the user stops talking
 /// * vadSensitivity: The sensitivity of the voice activity detection. `Low` should be used in most cases
 /// * vadDuration: The duration of silence to detect before automatically closing the stream as a number of seconds
+/// * doOfflineMode: Enables offline transcriptions. This mode is optimized for uploading audio files instead of streaming from a microphone
+/// * wakeWordConfig: Configuration object for a wakeword model. If not null, the server will wait for the wakeword to be recognized before starting the transcription
 /// - Parameters:
 ///   - config: Stream configuration object
 ///   - handler: Handler callback that will be called with the server's responses
