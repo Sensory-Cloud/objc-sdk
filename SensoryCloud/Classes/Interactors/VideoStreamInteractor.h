@@ -48,6 +48,9 @@ typedef NS_ENUM(NSUInteger, SENCameraPosition) {
 /// The JPEG compression used on processed data, A value between 0 and 1 where 0 is most compressed and 1 is highest quality
 @property (nonatomic) double jpegCompression;
 
+/// The desired orientation for the video stream, defaults to portrait
+@property (nonatomic) AVCaptureVideoOrientation orientation;
+
 /// Requests permission to use the system camera
 ///
 /// The app must contain a purpose string in the `Info.plist` file with the key `NSCameraUsageDescription` for the system to allow camera permissions

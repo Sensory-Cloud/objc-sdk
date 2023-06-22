@@ -27,7 +27,8 @@ int targetHeight = 720;
     if (!instance) {
         instance = [self alloc];
         instance.session = [[AVCaptureSession alloc] init];
-        instance.jpegCompression = 0.9;
+        instance.jpegCompression = 0.95;
+        instance.orientation = AVCaptureVideoOrientationPortrait;
         dispatch_queue_attr_t qos = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_USER_INTERACTIVE, -1);
         instance.videoQueue = dispatch_queue_create("videoInteractorQueue", qos);
         instance.configured = false;
@@ -78,6 +79,11 @@ int targetHeight = 720;
     // Video output
     AVCaptureVideoDataOutput* output = [[AVCaptureVideoDataOutput alloc] init];
     output.videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInt:kCVPixelFormatType_32BGRA], (id)kCVPixelBufferPixelFormatTypeKey, nil];
+    AVCaptureConnection* connection = [output connectionWithMediaType:AVMediaTypeVideo];
+    if (connection != nil) {
+        connection.automaticallyAdjustsVideoMirroring = false;
+        connection.videoOrientation = self.orientation;
+    }
     [output setSampleBufferDelegate:self queue:self.videoQueue];
     if ([self.session canAddOutput:output]) {
         [self.session addOutput:output];
@@ -178,6 +184,12 @@ int targetHeight = 720;
 
 // AVCaptureVideoDataOutputSampleBufferDelegate conformance
 -(void) captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{
+
+    // Make sure that the connection is using the correct orientation
+    if (connection.videoOrientation != [self orientation]) {
+        connection.videoOrientation = [self orientation];
+    }
+
     if (!self.photoRequested) {
         return;
     }
