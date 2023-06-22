@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SensoryCloud'
-  s.version          = '1.0.1'
+  s.version          = '1.2.0'
   s.summary          = 'Objective C version of the Sensory Cloud SDK'
   s.description      = <<-DESC
 Sensory Cloud Objective C SDK. Created to make communicating with Sensory Cloud easy on an iOS app!
